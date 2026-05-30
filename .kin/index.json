@@ -1,0 +1,2543 @@
+{
+  "domains": [
+    "code",
+    "python",
+    "sh"
+  ],
+  "node_count": 230,
+  "nodes": [
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-033d490ddbba",
+      "title": "src/pact/resolution.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-07187d296808",
+      "title": "src/pact/auditor.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-07b1202ea459",
+      "title": "src/pact/backends/gemini.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-08ef6d349cf5",
+      "title": "src/pact/__init__.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:42",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-1034df32b48c",
+      "title": "src/pact/codebase_analyzer.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-1da19a62b57a",
+      "title": "src/pact/interface_stub.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-260b565295f1",
+      "title": "src/pact/test_harness.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-26e985d1be30",
+      "title": "src/pact/design_doc.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:42",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-2ad6f90e7afc",
+      "title": "src/pact/backends/openai.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-320ca6af9d2e",
+      "title": "src/pact/schemas_shaping.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-387b4f2559f5",
+      "title": "src/pact/events.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-3a4698aea265",
+      "title": "src/pact/adopt.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-4003bc640e4f",
+      "title": "src/pact/retrospective.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-428626b90b9c",
+      "title": "src/pact/agents/trace_analyst.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-4964ee5c8902",
+      "title": "src/pact/kindex_integration.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:42",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-49e7f81fc34f",
+      "title": "src/pact/ledger.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:42",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-49f078e2c789",
+      "title": "src/pact/backends/__init__.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-4a91d13d493e",
+      "title": "src/pact/backends/claude_code.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-4f6b28611ac6",
+      "title": "src/pact/backends/anthropic.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-5921a8c819fc",
+      "title": "src/pact/decomposer.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-64aed5a5429a",
+      "title": "src/pact/analyzer.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-66ddcd71dea3",
+      "title": "src/pact/schemas_tasks.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-66e2260b74dc",
+      "title": "src/pact/agents/base.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-6d8e62424eb9",
+      "title": "src/pact/human/context.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-726caf113a1f",
+      "title": "src/pact/sync.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:42",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-7353584a3309",
+      "title": "src/pact/implementer.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:42",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-73d2f0c564a9",
+      "title": "src/pact/access_graph.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:42",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-73dc8657bc5e",
+      "title": "src/pact/daemon.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-794dc5b1cccf",
+      "title": "src/pact/backends/claude_code_team.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-7fcd80e50780",
+      "title": "src/pact/human/slack.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-815164bd4fa4",
+      "title": "src/pact/quality.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-835ac19c0cbc",
+      "title": "src/pact/human/git.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-8586214fa668",
+      "title": "src/pact/agents/shaper.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-86337b8949c0",
+      "title": "src/pact/diagnoser.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:42",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-8848bb8d3acb",
+      "title": "src/pact/deploy.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-894acab7a42b",
+      "title": "src/pact/agents/code_author.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-8a4e07883280",
+      "title": "src/pact/checklist_gen.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:42",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-8bb87064afa7",
+      "title": "src/pact/budget.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-8c024db186c1",
+      "title": "src/pact/standards.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-907b2f35b05b",
+      "title": "src/pact/test_gen.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-93ecc28abe59",
+      "title": "src/pact/agents/test_author.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-9678c8dad3b6",
+      "title": "src/pact/cli.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-97bc099e4351",
+      "title": "src/pact/arbiter.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-9fa5de810794",
+      "title": "src/pact/constrain.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:42",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-a38b32f7916c",
+      "title": "src/pact/agents/research.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "sh"
+      ],
+      "id": "code-mod-pact-a8704a67be93",
+      "title": "monitor-pact.sh",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-a98508a4c2c3",
+      "title": "src/pact/schemas.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-ab06f5642332",
+      "title": "src/pact/mcp_server.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-ae33d642e65f",
+      "title": "src/pact/schemas_assess.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-aef5404e7b18",
+      "title": "src/pact/lifecycle.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-afee76cdb64a",
+      "title": "src/pact/archive.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:42",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-b69dda9dca74",
+      "title": "src/pact/ci.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:42",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-b9087a29931c",
+      "title": "src/pact/task_list.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-be6cd8f062f0",
+      "title": "src/pact/health.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-c23fabd0f558",
+      "title": "src/pact/wavefront.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-c333917ce01b",
+      "title": "src/pact/project.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-c624f6ed3998",
+      "title": "src/pact/assessor.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-cac3ecd752f9",
+      "title": "src/pact/tool_index.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-d00b483362b2",
+      "title": "src/pact/contracts.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-d1e8b0edf041",
+      "title": "src/pact/pitch_utils.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-d231cd5553be",
+      "title": "src/pact/human/linear.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-d2dec5ae3a06",
+      "title": "src/pact/agents/contract_author.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-d7aaf24c1256",
+      "title": "src/pact/certification.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:42",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-dd5070bdd389",
+      "title": "src/pact/wizard.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-e0782a921375",
+      "title": "src/pact/scheduler.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-e2a7519a54e6",
+      "title": "src/pact/integrator.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-e577f268671e",
+      "title": "src/pact/register.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-f6d2d8ca7847",
+      "title": "src/pact/schemas_testgen.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-fa2c8961ce6c",
+      "title": "src/pact/research_cache.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-fa5d46850460",
+      "title": "src/pact/drift.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-fb6e7f10cd51",
+      "title": "src/pact/config.py",
+      "type": "artifact",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-0502e6fd4711",
+      "title": "SecurityAuditReport",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-084be8bdcb87",
+      "title": "CoverageMap",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-08a7a2f07e78",
+      "title": "ProjectManager",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-0fd2b7fe54ff",
+      "title": "TaskStatus",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-140d3d2f24e7",
+      "title": "FunctionContract",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-14ab4f915990",
+      "title": "ShapingPitch",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-160bcf56df37",
+      "title": "TestGenResult",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-17aa04e07cfa",
+      "title": "TimeoutConfig",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-1954aacc337b",
+      "title": "PactEvent",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-19bbb0e2d226",
+      "title": "ExtractedParameter",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-1d7d2fd23613",
+      "title": "GitManager",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-1d9b61d9a143",
+      "title": "CallGraphEntry",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-1fb1baf11477",
+      "title": "PitchSummary",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-22c490f1c79b",
+      "title": "SlackNotifier",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-265bc566ef0b",
+      "title": "FieldSpec",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-272ca94746d7",
+      "title": "ActivityTracker",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-28dcac128e35",
+      "title": "EnvironmentCheck",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-2b6cb0bcdfd0",
+      "title": "ModuleMetrics",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-2e2685cb307b",
+      "title": "DecompositionTree",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-301c1100e0b5",
+      "title": "Daemon",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-30882d54bf46",
+      "title": "TestCase",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-33550f0136d3",
+      "title": "FindingCategory",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-3428b107a229",
+      "title": "Place",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-3674630240e8",
+      "title": "IOTrace",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-388311a64c92",
+      "title": "ConstrainContext",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-3b1bb09dcaab",
+      "title": "CtagsSymbol",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-3b3efd12aef7",
+      "title": "SpecAuditResult",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-3bcce15327bc",
+      "title": "HealthReport",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-3e04594863c6",
+      "title": "ContractTestSuite",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-405eb134fe09",
+      "title": "CoverageEntry",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-40b40af3cab5",
+      "title": "TestSubprocessError",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-40d54e89c9cf",
+      "title": "ShapingStatus",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-4507c355079b",
+      "title": "ShapingLLMError",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-4667e10062cf",
+      "title": "TestGenPlan",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-4ad238097833",
+      "title": "TypeSpec",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-4bba251dfee3",
+      "title": "Shaper",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-5532f17920b6",
+      "title": "QuestionType",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-554100caca48",
+      "title": "ComponentState",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-5637233c31fc",
+      "title": "SecurityFinding",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-593ef12e4eff",
+      "title": "TypeRegistry",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-5b23a235b6a6",
+      "title": "ArtifactBaseline",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-5b25c897c61c",
+      "title": "InterviewQuestion",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-5b52dc010221",
+      "title": "Scheduler",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-5b54917dea87",
+      "title": "ArtifactMetadata",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-5d18a698a903",
+      "title": "ComponentTask",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-6323a2b26972",
+      "title": "EventBus",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-64cd711ae8b0",
+      "title": "IntegrationContext",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-66a983e8b8bd",
+      "title": "HealthCondition",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-6746962f7365",
+      "title": "InterviewResult",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-6ac0ecfd5a53",
+      "title": "GlobalConfig",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-6b1f143a26af",
+      "title": "FindingSeverity",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-6e633b940a45",
+      "title": "TestGenPlanEntry",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-6f9aa3952e5f",
+      "title": "ScoredAttempt",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-73dd1badbca1",
+      "title": "author_code.CodeResponse",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-74a320f08c4c",
+      "title": "PerformanceBudget",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-75eb4e3d7b30",
+      "title": "PlanEvaluation",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-77d57f8fbe23",
+      "title": "FailureRecord",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-7965a19ab611",
+      "title": "BudgetTracker",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-7a04607f3dba",
+      "title": "Affordance",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-7a9434f30997",
+      "title": "AgentBase",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-7abd810622ad",
+      "title": "ExternalContext",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-7b7369f76eba",
+      "title": "CodebaseAnalysis",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-7d69acc6e926",
+      "title": "integrate_component.GlueResponse",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-7e351cd86925",
+      "title": "StalenessCheck",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-810a73198811",
+      "title": "AgentTask",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-824a6b39b446",
+      "title": "AnthropicBackend",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-83abe8516ab8",
+      "title": "RabbitHoleStatus",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-8468906b161a",
+      "title": "GeminiBackend",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-872befd793c5",
+      "title": "AssessmentCategory",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-8751a8485cfe",
+      "title": "ChecklistCategory",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-87d54dae2b0a",
+      "title": "ImpatienceLevel",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-87ed207c5ff7",
+      "title": "RunRetrospective",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-88fdd521a984",
+      "title": "AdoptionResult",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-8a80f763f15d",
+      "title": "ImplementationResult",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-8f7003217ad3",
+      "title": "AnalysisReport",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-908c77047d9e",
+      "title": "TaskPhase",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-90f696ef1a3c",
+      "title": "SystemicPattern",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-923f304dbfb1",
+      "title": "RequirementCoverage",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-92a63b9567a1",
+      "title": "ToolIndex",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-92bf0d801eef",
+      "title": "PhaseCheckpoint",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-937db436f675",
+      "title": "AuditedAnswer",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-9677026b12d3",
+      "title": "ParallelConfig",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-978f435fff15",
+      "title": "Remedy",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-9899ce68ac02",
+      "title": "ErrorCase",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-99fc8a2e7c33",
+      "title": "TreeSitterSymbol",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-9c9a8b4a2bf8",
+      "title": "CertificationArtifact",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-9cd1540d754d",
+      "title": "DataAccessSideEffect",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-9cd94da583d6",
+      "title": "HealthMetrics",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-9d0f3c0682f0",
+      "title": "SideEffectKind",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-a07aac6d960d",
+      "title": "DataAccessDeclaration",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-a09958681ee8",
+      "title": "OpenAIBackend",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-a2281384a9dc",
+      "title": "FitCheck",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-a364e120b774",
+      "title": "BudgetExceededError",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-a408b2322123",
+      "title": "DecompositionNode",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-a51989c158ce",
+      "title": "AuthorityDeclaration",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-a68d3a4f8d26",
+      "title": "AnswerSource",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-a892149525d3",
+      "title": "TaskItem",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-aaf475b7d168",
+      "title": "PreflightPlan",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-aeef71a5bc26",
+      "title": "LinearClient",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-b1a05df1c9aa",
+      "title": "BudgetExceeded",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-b3086722b876",
+      "title": "CscopeRef",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-b534acef38f3",
+      "title": "RegionMap",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-b8142a736db6",
+      "title": "AssessmentFinding",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-b8bbad9a9ac4",
+      "title": "SideEffect",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-b9ab9975ad33",
+      "title": "Backend",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-bde0ac749c65",
+      "title": "Appetite",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-be371ed97dd7",
+      "title": "Breadboard",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-bf68febb818b",
+      "title": "TestFailure",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-c040e54f3e5d",
+      "title": "HealthFinding",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-c08e780b0988",
+      "title": "EngineeringDecision",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-c22a932fe5d1",
+      "title": "ArbiterResponse",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-c24e3c0a4cb9",
+      "title": "ErrorClassification",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-c7f61db09e0f",
+      "title": "ToolAvailability",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-c852fe2a3d37",
+      "title": "PactMCPServer",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-c92478e57342",
+      "title": "AnalysisFinding",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-ca90be898752",
+      "title": "RequirementsChecklist",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-caece21eb0fa",
+      "title": "HealthStatus",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-cb8f22db6f7c",
+      "title": "ComponentContract",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-ccda2a7f5233",
+      "title": "PhaseBudget",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-cfa831ce2871",
+      "title": "RunState",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-d1f35c1bb69a",
+      "title": "TaskCategory",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-d37dc1b3b3d7",
+      "title": "PhaseTokens",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-d4c9a9a54454",
+      "title": "ResearchFinding",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-d61b338e90c2",
+      "title": "AgentResult",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-d689783433c2",
+      "title": "WizardConfig",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-d6b8e739250f",
+      "title": "HealthPolicyDecision",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-d7b3c772336a",
+      "title": "AssessmentReport",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-d8a1bb1f734a",
+      "title": "ComponentPhase",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-da5601047919",
+      "title": "ResearchReport",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-dd4144f97572",
+      "title": "WavefrontScheduler",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-de0b22a59022",
+      "title": "EvalTier",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-de54c8fff662",
+      "title": "TaskList",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-de8f6905aff8",
+      "title": "TraceDiagnosis",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-df9b164f0c11",
+      "title": "LearningEntry",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-dfcca6bab1e2",
+      "title": "Connection",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-e0459cb9e0e7",
+      "title": "DecompositionResult",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-e093c27db363",
+      "title": "ExtractedFunction",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-e41d50b72e68",
+      "title": "ClaudeCodeTeamBackend",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-e78aeaeef4b8",
+      "title": "ModelTierConfig",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-e9d4a04de064",
+      "title": "GlobalStandards",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-eaf15125dab2",
+      "title": "GateResult",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-ed12d860bac8",
+      "title": "RedLine",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-ee751d894293",
+      "title": "ProjectConfig",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-efa87c8eb3ef",
+      "title": "ResumeStrategy",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-f236d7c553ec",
+      "title": "run_decomposition.DecomposeResponse",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-f23fa321e048",
+      "title": "SecurityRiskLevel",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-f3cf7a2df38f",
+      "title": "DesignDocument",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-f4d5f7123208",
+      "title": "ValidatorSpec",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-f59ba2e3c34e",
+      "title": "SourceFile",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-f7faad21e118",
+      "title": "ResolvedConfig",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-f802b76d3b8b",
+      "title": "ChecklistItem",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-f816368a850a",
+      "title": "TestResults",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-f9cea70e53e3",
+      "title": "EnvironmentSpec",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-f9e26a71f864",
+      "title": "Contingency",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-faa1ef0a0300",
+      "title": "RabbitHole",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-fb3e8cb06f6c",
+      "title": "Directive",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-fc23bae11add",
+      "title": "ClaudeCodeBackend",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-fd2bcd8133f8",
+      "title": "TestFile",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-feea0978b5db",
+      "title": "BuildMode",
+      "type": "concept",
+      "updated_at": "2026-05-30T14:49:41",
+      "weight": 0.5
+    }
+  ],
+  "repo": "pact",
+  "source_updated_at": "2026-05-30T14:49:42",
+  "version": 1
+}
