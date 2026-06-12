@@ -8,7 +8,8 @@
   <meta property="og:title" content="Pact - Contracts Before Code">
   <meta property="og:description" content="Multi-agent software engineering where architecture is decided before a single line of implementation is written.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://jmcentire.github.io/pact/">
+  <meta property="og:url" content="https://pact.tools/docs/">
+  <link rel="canonical" href="https://pact.tools/docs/">
   <style>
     :root {
       --bg: #0d1117;
@@ -402,6 +403,7 @@
       <a href="#features">Features</a>
       <a href="#stack">Stack</a>
       <a href="#quickstart">Quick Start</a>
+      <a href="https://pact.tools" target="_blank" rel="noopener noreferrer">pact.tools</a>
       <a href="https://github.com/jmcentire/pact" class="btn btn-outline">GitHub</a>
     </div>
   </div>
@@ -539,7 +541,7 @@
       <div class="feature-card">
         <span class="feature-icon">&#x1f916;</span>
         <h3>Claude + Codex Native</h3>
-        <p>Shared coding-agent envelopes preserve Kindex context, session identity, structured outputs, and contract reconciliation across Claude Code and Codex.</p>
+        <p>Shared coding-agent envelopes preserve Kindex context, durable task state, session identity, structured outputs, and contract reconciliation across Claude Code and Codex.</p>
       </div>
       <div class="feature-card">
         <span class="feature-icon">&#x1f9ed;</span>
@@ -639,7 +641,7 @@
       <div class="feature-card">
         <span class="feature-icon">&#x1f50e;</span>
         <h3>Tool Index</h3>
-        <p>Optional enrichment from <strong>ctags</strong> (symbol index), <strong>cscope</strong> (call graph), <strong>tree-sitter</strong> (full CST, error-tolerant, cross-language), and <strong>kindex</strong> (knowledge graph). Agents get richer context about class hierarchies, callers, and existing project knowledge. All tools optional &mdash; graceful degradation. <code>pip install pact-agents[analysis]</code></p>
+        <p>Optional enrichment from <strong>ctags</strong> (symbol index), <strong>cscope</strong> (call graph), <strong>tree-sitter</strong> (full CST, error-tolerant, cross-language), and <strong>kindex</strong> (knowledge graph). Agents get richer context about class hierarchies, callers, existing project knowledge, and durable task state. All tools optional &mdash; graceful degradation. <code>pip install pact-agents[analysis]</code></p>
       </div>
     </div>
   </div>
@@ -712,7 +714,7 @@
           <strong>Arbiter</strong> gates deployments with blast radius analysis and trust scoring.
           <strong>Ledger</strong> injects field-level audit assertions into test suites.
           <strong>Sentinel</strong> watches production, attributes errors via PACT keys, and pushes
-          tightened contracts back. <strong>Kindex</strong> carries durable agent context.
+          tightened contracts back. <strong>Kindex</strong> carries durable agent context, task state, and tracked project graph snapshots.
           <strong>Advocate</strong> and the packaged <strong>Simulacrum</strong> stress-test
           implementations and claims before the done gate.
         </p>
@@ -748,7 +750,26 @@
         <p>
           Describe your task in <code>task.md</code>, set your standards in <code>sops.md</code>,
           and let Pact decompose, contract, and test. The active Claude or Codex agent
-          implements by default; add <code>--implement</code> for a Pact-managed build.
+          implements after the plan-only handoff; add <code>--implement</code> for a Pact-managed build.
+        </p>
+        <p>
+          The interview now confirms operational maturity, security, privacy,
+          compliance, gating, testing, and monitoring up front. An AI can provide
+          the same choices in <code>build_spec.yaml</code> or via
+          <code>pact init --spec</code>. Build specs are tracked planning input,
+          not a place for secrets or machine-local paths. If scope materially
+          changes after interview, update the spec and rerun interview before
+          regenerating contracts.
+        </p>
+        <p>
+          For higher-bar production work, add the optional <code>production/</code> pack.
+          It keeps trust assertions, control mapping, threat model, live validation,
+          N/A, and done-gate evidence file-backed and machine-checkable without changing
+          ordinary Pact runs. Its static layer checks secrets, dependency inventory,
+          SBOM, and OpenAPI shape without invoking live browser or LLM probes. Set
+          <code>production_artifact_dir</code> when the tracked pack should live elsewhere.
+          The manifest fingerprint and validation age keep stale evidence from passing.
+          Live validation remains required because the pack is a deployment gate, not a runtime substitute.
         </p>
         <p style="margin-top: 24px;">
           <a href="https://github.com/jmcentire/pact" class="btn btn-primary">View on GitHub</a>
@@ -769,11 +790,18 @@
 
 <span class="code-comment"># Create a project</span>
 <span class="code-cmd">pact init</span> my-project
+<span class="code-comment"># Or initialize from an AI-authored build spec</span>
+<span class="code-cmd">pact init</span> my-project <span class="code-flag">--spec</span> ai-build-spec.yaml
 <span class="code-comment"># Edit my-project/task.md with your task</span>
 <span class="code-comment"># Edit my-project/sops.md with your standards</span>
 
 <span class="code-comment"># Plan-first default: contracts + tests, then agent handoff</span>
 <span class="code-cmd">pact run</span> my-project
+
+<span class="code-comment"># Optional production-readiness pack</span>
+<span class="code-cmd">pact production init</span> my-project
+<span class="code-cmd">pact production fingerprint</span> my-project
+<span class="code-cmd">pact production validate</span> my-project
 
 <span class="code-comment"># Opt into Pact-managed implementation</span>
 <span class="code-cmd">pact run</span> my-project <span class="code-flag">--implement</span>

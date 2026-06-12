@@ -2,6 +2,8 @@
 
 **Contracts before code. Tests as law. Agents that can't cheat.**
 
+Website: [pact.tools](https://pact.tools) · Docs: [pact.tools/docs](https://pact.tools/docs/) · Repository: [github.com/jmcentire/pact](https://github.com/jmcentire/pact)
+
 Pact is a multi-agent software engineering framework where the architecture is decided before a single line of implementation is written. Tasks are decomposed into components, each component gets a typed interface contract, and each contract gets executable tests. Only then do agents implement -- independently, in parallel, even competitively -- with no way to ship code that doesn't honor its contract. Generates Python, TypeScript, or JavaScript.
 
 > **Breaking change in v1:** `pact run` now stops after decomposition,
@@ -78,6 +80,32 @@ For a complete plan-first agent workflow, load the cross-agent skill at
 `skills/pact-engineer/SKILL.md`. The repository is also a Claude Code plugin:
 `claude --plugin-dir ./pact`. The plugin includes the Pact engineering workflow
 and a Simulacrum skill; Codex can invoke the same review path through Pact.
+
+For a production-readiness build, scaffold the optional artifact pack first:
+
+```bash
+pact production init my-project
+pact run my-project --constrain-dir my-project/production --plan-only
+pact production fingerprint my-project
+pact production status my-project
+```
+
+The pack is intentionally opt-in. It adds file-backed trust assertions, control
+mapping, threat model, architecture laws, preflight, live-validation, N/A, and
+done-gate artifacts under `production/`; it does not change ordinary Pact runs.
+`pact production validate` blocks until derived evidence, external evidence,
+and justified N/A records are all present and non-placeholder.
+
+Pact now starts every new project with a typed readiness profile in
+`pact.yaml` and an AI-editable `build_spec.yaml`. The interview phase confirms
+operational maturity, security, privacy, compliance, gating, testing, and
+monitoring before decomposition. An AI can provide the same inputs directly:
+
+```bash
+pact init my-project --spec ai-build-spec.yaml
+# or apply one to an existing project
+pact spec apply my-project ai-build-spec.yaml
+```
 
 ## How It Works
 
@@ -256,6 +284,12 @@ Either, neither, or both. Defaults: both off (sequential, single-attempt).
 | `pact handoff <project> <id>` | Render/validate handoff brief |
 | `pact review <target> --claim <text>` | Run Advocate + Simulacrum review |
 | `pact-sim <claim>` | Run Pact's packaged Simulacrum directly |
+| `pact production init <project>` | Scaffold optional production-readiness artifacts |
+| `pact production status <project>` | Show production-readiness status without blocking |
+| `pact production fingerprint <project>` | Print the current source fingerprint for production evidence |
+| `pact production validate <project>` | Validate the production gate and exit non-zero on blockers |
+| `pact spec apply <project> <file>` | Apply an AI-authored JSON/YAML build spec |
+| `pact spec show <file>` | Normalize and inspect an AI-authored build spec |
 | `pact adopt <project>` | Adopt existing codebase under pact governance |
 | `pact assess <directory>` | Architectural assessment — shallow modules, hub dependencies, coupling |
 | `pact mcp-server` | Run MCP server (stdio transport) |
@@ -354,7 +388,110 @@ shaping_depth: standard
 health_thresholds:
   output_planning_ratio_warning: 0.3
   rejection_rate_critical: 0.9
+
+# Optional production-readiness artifact pack
+production_profile: true
+production_artifact_dir: production
+
+# Up-front readiness profile
+readiness:
+  operational_maturity:
+    level: standard
+    controls: []
+  security:
+    level: standard
+    controls: []
+  privacy:
+    level: basic
+    controls: []
+  compliance:
+    level: none
+    controls: []
+  gating:
+    level: standard
+    controls: []
+  testing:
+    level: standard
+    controls: []
+  monitoring:
+    level: basic
+    controls: []
+  notes: ""
 ```
+
+### AI Build Spec
+
+`build_spec.yaml` is the handoff format for an AI-authored build request. It
+can carry the task, SOPs, readiness profile, and project config in one file:
+
+```yaml
+version: "1"
+task: |
+  Build a tenant-scoped booking API.
+sops: |
+  Use Python 3.12, pytest, and strict typing.
+readiness:
+  security: strict
+  privacy: standard
+  compliance: basic
+config:
+  build_mode: hierarchy
+  budget: 25
+```
+
+The readiness levels are `none`, `basic`, `standard`, `strict`, and
+`regulated`. They resolve to concrete baseline controls rather than acting as
+mere labels. Custom `controls` can be added per dimension.
+`build_spec.yaml` is a tracked planning artifact, so do not put secrets,
+tokens, credentials, or machine-local paths in it.
+If the task scope materially changes after interview, update the spec or
+`pact.yaml` and rerun interview before regenerating contracts.
+
+### Production-Readiness Pack
+
+The pack is a first-class observer over Pact's existing artifact model, not a
+replacement pipeline. `production/` remains user-edited, git-trackable source
+of truth. Pact validates it against existing contracts, tests, analysis,
+checklist, review, certification, and source-tree state.
+Set `production_artifact_dir` to use a different tracked artifact directory;
+the generated `constrain_dir` follows that setting when it was not already set.
+The production manifest also carries the project readiness profile, so the
+production pack cannot silently drift away from `pact.yaml`.
+
+The generated files are:
+
+```text
+production/
+  manifest.yaml
+  prompt.md
+  constraints.yaml
+  component_map.yaml
+  trust_policy.yaml
+  control_matrix.yaml
+  threat_model.yaml
+  architecture_laws.yaml
+  preflight.yaml
+  live_validation.yaml
+  done_gate.yaml
+  na_register.yaml
+  build_charter.md
+  reports/
+```
+
+Derived gate items are satisfied only from Pact-produced evidence such as
+contracts, contract tests, Goodhart tests, analysis, checklist, review,
+certification, stub scan results, and deterministic static checks. The static
+layer borrows webprobe's useful non-live audit discipline: typed pass/fail/not
+detected results, artifact-backed evidence, and no hidden fallback from missing
+artifacts to false failures. It currently checks likely hard-coded secrets,
+dependency manifest presence, SBOM presence, and OpenAPI validity/auth/error/
+rate-limit shape. External items require explicit evidence. Not-applicable
+items across the pack require a matching `na_register.yaml` record with a
+justification and review reference. `manifest.yaml` also carries a source
+fingerprint and bounded validation age, so stale evidence is rejected after the
+project snapshot changes or the evidence ages out.
+This is a deployment gate, not a runtime substitute: `live_validation.yaml`
+still has to prove the running environment matches the evidence being claimed.
 
 ### Multi-Provider Configuration
 
@@ -442,6 +579,7 @@ my-project/
   contracts/<cid>/     # Interface specs with data_access + authority
   src/<cid>/           # Implementation source + glue code
   tests/<cid>/         # Contract tests + Goodhart tests
+  production/          # Optional production-readiness pack
   certification/       # Tamper-evident certification proof
   .pact/               # Ephemeral run state (gitignored)
 ```
@@ -472,6 +610,45 @@ Tree-sitter is preferred over cscope for Python, TypeScript, and JavaScript code
 ```yaml
 # pact.yaml
 tool_index_enabled: true  # true | false | null (auto-detect)
+```
+
+### Kindex Work Contract
+
+Kindex is an optional knowledge graph for carrying agent decisions, tasks, and
+project context across sessions. When Kindex is available, workers should start
+or resume a tag, search before adding knowledge, use `task_add` /
+`task_list` / `task_done` for durable work, and prefer `edit` or `supersede`
+over duplicate nodes. Pact's own post-run publishing uses durable Kindex task
+nodes rather than concept-only stand-ins. Kindex remains optional: Pact keeps
+its own run state under `.pact/` and still runs when Kindex is unavailable.
+
+This closes three concrete failure modes: task-shaped concepts were not durable
+Kindex tasks, noninteractive `pact init` could block or EOF on the indexing
+prompt, and an approved interview could remain paused until a daemon-specific
+recovery path intervened. Existing automation should set `auto_index: true` or
+`auto_index: false` in `.kin/config`; `PACT_INTERACTIVE=true|false` overrides
+TTY detection when a shell's interactivity is ambiguous.
+
+Tracked `.kin/` files are shipped project state:
+
+- `.kin/config` contains project voice, domains, and work policy.
+- `.kin/index.json` contains the tracked graph snapshot.
+- `.kin/code-map.json` contains the repo-relative code map generated by
+  `kin export code-map`.
+- `.kin/.gitignore` ignores only local/private runtime state.
+
+Do not commit machine-local paths, local-only report pointers, secrets, or
+private scratch data into tracked `.kin` artifacts. Regenerate tracked
+snapshots from source rather than hand-editing generated JSON. In
+noninteractive shells, `pact init` skips the Kindex indexing prompt unless
+`.kin/config` explicitly sets `auto_index: true`.
+
+For an existing repository, refresh tracked Kindex artifacts with:
+
+```bash
+kin ingest code --directory . --project-path .
+kin index --project-path . --output-dir .
+kin export code-map --directory . --project-path . --output .kin/code-map.json
 ```
 
 ## Architectural Assessment

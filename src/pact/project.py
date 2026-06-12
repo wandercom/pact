@@ -254,7 +254,7 @@ class ProjectManager:
 
     # Files that pact writes during init (human inputs + generated metadata).
     _ARCHIVABLE_FILES = [
-        "task.md", "sops.md", "pact.yaml", "design.md",
+        "task.md", "sops.md", "pact.yaml", "build_spec.yaml", "design.md",
         "design.json", "tasks.json", "TASKS.md",
         "analysis.json", "checklist.json", "standards.json",
     ]
@@ -358,6 +358,17 @@ class ProjectManager:
 
         config = {
             "budget": budget,
+            "plan_only": True,
+            "readiness": {
+                "operational_maturity": {"level": "standard", "controls": []},
+                "security": {"level": "standard", "controls": []},
+                "privacy": {"level": "basic", "controls": []},
+                "compliance": {"level": "none", "controls": []},
+                "gating": {"level": "standard", "controls": []},
+                "testing": {"level": "standard", "controls": []},
+                "monitoring": {"level": "basic", "controls": []},
+                "notes": "",
+            },
         }
         with open(self.config_path, "w") as f:
             yaml.dump(config, f, default_flow_style=False, sort_keys=False)
@@ -366,6 +377,13 @@ class ProjectManager:
             "# Design Document\n\n"
             "*Auto-maintained by pact. Do not edit manually.*\n\n"
             "## Status: Not started\n"
+        )
+
+        from pact.readiness import default_build_spec, dump_build_spec
+
+        (self.project_dir / "build_spec.yaml").write_text(
+            dump_build_spec(default_build_spec()),
+            encoding="utf-8",
         )
 
         gitattributes = self.project_dir / ".gitattributes"

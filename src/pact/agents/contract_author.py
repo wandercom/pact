@@ -12,6 +12,7 @@ import logging
 from typing import TYPE_CHECKING
 
 from pact.agents.base import AgentBase
+from pact.readiness import ReadinessProfile
 from pact.agents.research import plan_and_evaluate, research_phase
 from pact.schemas import (
     ComponentContract,
@@ -60,6 +61,7 @@ async def author_contract(
     max_plan_revisions: int = 2,
     processing_register: str = "",
     type_registry: "TypeRegistry | None" = None,
+    readiness_profile: ReadinessProfile | None = None,
 ) -> tuple[ComponentContract, ResearchReport, PlanEvaluation]:
     """Generate a ComponentContract following the Research-First Protocol.
 
@@ -100,10 +102,15 @@ async def author_contract(
             "component-specific types, define them separately.\n"
         )
 
+    readiness_context = ""
+    if readiness_profile is not None:
+        readiness_context = f"\n{readiness_profile.render_for_prompt()}\n"
+
     task_desc = (
         f"Define the interface contract for component '{component_name}' "
         f"(id: {component_id}).\n"
         f"{register_context}"
+        f"{readiness_context}"
         f"Description: {component_description}\n"
         f"Parent context: {parent_description or 'root component'}\n"
         f"{dep_summary}{decisions_summary}{registry_context}"
@@ -159,6 +166,8 @@ async def author_contract(
     cache_parts = []
     if sops:
         cache_parts.append(f"Project Operating Procedures:\n{sops}")
+    if readiness_profile is not None:
+        cache_parts.append(readiness_profile.render_for_prompt())
     if dep_stubs:
         cache_parts.append(dep_stubs)
     if decisions_summary:

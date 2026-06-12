@@ -12,6 +12,7 @@ from pact.project import ProjectManager
 from pact.scheduler import Scheduler, _build_goodhart_hint
 from pact.schemas import (
     ContractTestSuite,
+    InterviewResult,
     RunState,
     TestCase,
     TestFailure,
@@ -138,6 +139,40 @@ class TestSchedulerRunState:
         import asyncio
         result = asyncio.run(scheduler.run_once())
         assert result.status == "budget_exceeded"
+
+    def test_approved_interview_unpauses_before_advancing(self, scheduler_setup):
+        pm, scheduler = scheduler_setup
+        state = pm.create_run()
+        state.pause("Interview questions pending")
+        pm.save_state(state)
+        pm.save_interview(
+            InterviewResult(
+                approved=True,
+                processing_register="rigorous-analytical",
+            )
+        )
+
+        import asyncio
+        result = asyncio.run(scheduler._phase_interview(state, ""))
+
+        assert result.status == "active"
+        assert result.pause_reason == ""
+        assert result.phase == "shape"
+        assert result.processing_register == "rigorous-analytical"
+
+    def test_approved_interview_keeps_unrelated_pause_reason(self, scheduler_setup):
+        pm, scheduler = scheduler_setup
+        state = pm.create_run()
+        state.pause("External dependency unavailable")
+        pm.save_state(state)
+        pm.save_interview(InterviewResult(approved=True))
+
+        import asyncio
+        result = asyncio.run(scheduler._phase_interview(state, ""))
+
+        assert result.status == "paused"
+        assert result.pause_reason == "External dependency unavailable"
+        assert result.phase == "shape"
 
 
 class TestSchedulerBackendRouting:

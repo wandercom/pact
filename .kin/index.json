@@ -1,10 +1,22 @@
 {
   "domains": [
     "code",
-    "python"
+    "python",
+    "sh"
   ],
-  "node_count": 225,
+  "node_count": 262,
   "nodes": [
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-00354a1f7047",
+      "title": "src/pact/production.py",
+      "type": "artifact",
+      "updated_at": "2026-06-12T13:41:32",
+      "weight": 0.5
+    },
     {
       "domains": [
         "code",
@@ -46,7 +58,7 @@
       "id": "code-mod-pact-08ef6d349cf5",
       "title": "src/pact/__init__.py",
       "type": "artifact",
-      "updated_at": "2026-05-24T15:01:10",
+      "updated_at": "2026-06-12T12:24:49",
       "weight": 0.5
     },
     {
@@ -79,7 +91,7 @@
       "id": "code-mod-pact-260b565295f1",
       "title": "src/pact/test_harness.py",
       "type": "artifact",
-      "updated_at": "2026-05-24T15:01:09",
+      "updated_at": "2026-06-12T12:24:48",
       "weight": 0.5
     },
     {
@@ -114,6 +126,17 @@
       "type": "artifact",
       "updated_at": "2026-03-27T22:16:51",
       "weight": 0.0109
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-37b06da9f133",
+      "title": "src/pact/vendor/simulacrum/runtime.py",
+      "type": "artifact",
+      "updated_at": "2026-06-12T12:24:48",
+      "weight": 0.5
     },
     {
       "domains": [
@@ -164,10 +187,21 @@
         "code",
         "python"
       ],
+      "id": "code-mod-pact-454bad6960d3",
+      "title": "src/pact/vendor/simulacrum/__init__.py",
+      "type": "artifact",
+      "updated_at": "2026-06-12T12:24:49",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
       "id": "code-mod-pact-4964ee5c8902",
       "title": "src/pact/kindex_integration.py",
       "type": "artifact",
-      "updated_at": "2026-05-24T15:01:10",
+      "updated_at": "2026-06-12T13:41:32",
       "weight": 0.5
     },
     {
@@ -222,7 +256,7 @@
       "id": "code-mod-pact-5921a8c819fc",
       "title": "src/pact/decomposer.py",
       "type": "artifact",
-      "updated_at": "2026-05-24T15:01:09",
+      "updated_at": "2026-06-12T13:41:32",
       "weight": 0.5
     },
     {
@@ -234,6 +268,17 @@
       "title": "src/pact/analyzer.py",
       "type": "artifact",
       "updated_at": "2026-05-24T15:01:09",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-669c71bb96b4",
+      "title": "src/pact/review.py",
+      "type": "artifact",
+      "updated_at": "2026-06-12T12:24:49",
       "weight": 0.5
     },
     {
@@ -288,7 +333,18 @@
       "id": "code-mod-pact-7353584a3309",
       "title": "src/pact/implementer.py",
       "type": "artifact",
-      "updated_at": "2026-05-24T15:01:10",
+      "updated_at": "2026-06-12T12:24:49",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-739b45139017",
+      "title": "src/pact/readiness.py",
+      "type": "artifact",
+      "updated_at": "2026-06-12T13:45:38",
       "weight": 0.5
     },
     {
@@ -321,7 +377,7 @@
       "id": "code-mod-pact-794dc5b1cccf",
       "title": "src/pact/backends/claude_code_team.py",
       "type": "artifact",
-      "updated_at": "2026-05-24T15:01:09",
+      "updated_at": "2026-06-12T12:24:48",
       "weight": 0.0109
     },
     {
@@ -387,7 +443,7 @@
       "id": "code-mod-pact-8848bb8d3acb",
       "title": "src/pact/deploy.py",
       "type": "artifact",
-      "updated_at": "2026-05-24T15:01:10",
+      "updated_at": "2026-06-12T12:24:49",
       "weight": 0.5
     },
     {
@@ -398,7 +454,7 @@
       "id": "code-mod-pact-894acab7a42b",
       "title": "src/pact/agents/code_author.py",
       "type": "artifact",
-      "updated_at": "2026-05-24T15:01:09",
+      "updated_at": "2026-06-12T12:24:48",
       "weight": 0.5
     },
     {
@@ -453,7 +509,7 @@
       "id": "code-mod-pact-93ecc28abe59",
       "title": "src/pact/agents/test_author.py",
       "type": "artifact",
-      "updated_at": "2026-05-24T15:01:09",
+      "updated_at": "2026-06-12T12:24:48",
       "weight": 0.5
     },
     {
@@ -464,7 +520,7 @@
       "id": "code-mod-pact-9678c8dad3b6",
       "title": "src/pact/cli.py",
       "type": "artifact",
-      "updated_at": "2026-05-24T15:01:10",
+      "updated_at": "2026-06-12T13:41:32",
       "weight": 0.5
     },
     {
@@ -503,12 +559,23 @@
     {
       "domains": [
         "code",
+        "sh"
+      ],
+      "id": "code-mod-pact-a8704a67be93",
+      "title": "monitor-pact.sh",
+      "type": "artifact",
+      "updated_at": "2026-06-12T12:24:48",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
         "python"
       ],
       "id": "code-mod-pact-a98508a4c2c3",
       "title": "src/pact/schemas.py",
       "type": "artifact",
-      "updated_at": "2026-05-24T15:01:09",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -563,7 +630,7 @@
       "id": "code-mod-pact-b4ff502a3a2a",
       "title": "src/pact/backends/agent_runtime.py",
       "type": "artifact",
-      "updated_at": "2026-05-24T15:01:09",
+      "updated_at": "2026-06-12T12:24:48",
       "weight": 0.5
     },
     {
@@ -593,10 +660,32 @@
         "code",
         "python"
       ],
+      "id": "code-mod-pact-b9a167a1b0af",
+      "title": "src/pact/schemas_production.py",
+      "type": "artifact",
+      "updated_at": "2026-06-12T13:41:31",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
       "id": "code-mod-pact-be6cd8f062f0",
       "title": "src/pact/health.py",
       "type": "artifact",
-      "updated_at": "2026-05-24T15:01:09",
+      "updated_at": "2026-06-12T12:24:48",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-c152f81c3442",
+      "title": "src/pact/production_static.py",
+      "type": "artifact",
+      "updated_at": "2026-06-12T13:41:32",
       "weight": 0.5
     },
     {
@@ -618,7 +707,7 @@
       "id": "code-mod-pact-c333917ce01b",
       "title": "src/pact/project.py",
       "type": "artifact",
-      "updated_at": "2026-05-24T15:01:09",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -630,6 +719,17 @@
       "title": "src/pact/assessor.py",
       "type": "artifact",
       "updated_at": "2026-05-24T15:01:09",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-caa9e7a3f6c2",
+      "title": "src/pact/production_validation.py",
+      "type": "artifact",
+      "updated_at": "2026-06-12T13:41:31",
       "weight": 0.5
     },
     {
@@ -684,7 +784,7 @@
       "id": "code-mod-pact-d2dec5ae3a06",
       "title": "src/pact/agents/contract_author.py",
       "type": "artifact",
-      "updated_at": "2026-05-24T15:01:09",
+      "updated_at": "2026-06-12T13:41:32",
       "weight": 0.5
     },
     {
@@ -706,7 +806,7 @@
       "id": "code-mod-pact-dbef1f35a21a",
       "title": "src/pact/backends/codex_code.py",
       "type": "artifact",
-      "updated_at": "2026-05-24T15:01:09",
+      "updated_at": "2026-06-12T12:24:48",
       "weight": 0.5
     },
     {
@@ -717,7 +817,18 @@
       "id": "code-mod-pact-dd5070bdd389",
       "title": "src/pact/wizard.py",
       "type": "artifact",
-      "updated_at": "2026-05-24T15:01:10",
+      "updated_at": "2026-06-12T13:41:32",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-mod-pact-e05c66d16f84",
+      "title": "src/pact/production_templates.py",
+      "type": "artifact",
+      "updated_at": "2026-06-12T13:41:32",
       "weight": 0.5
     },
     {
@@ -728,7 +839,7 @@
       "id": "code-mod-pact-e0782a921375",
       "title": "src/pact/scheduler.py",
       "type": "artifact",
-      "updated_at": "2026-05-24T15:01:09",
+      "updated_at": "2026-06-12T13:41:32",
       "weight": 0.5
     },
     {
@@ -794,7 +905,7 @@
       "id": "code-mod-pact-fb6e7f10cd51",
       "title": "src/pact/config.py",
       "type": "artifact",
-      "updated_at": "2026-05-24T15:01:09",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -806,6 +917,17 @@
       "title": "SecurityAuditReport",
       "type": "concept",
       "updated_at": "2026-05-24T15:00:47",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-05eab30f0121",
+      "title": "LiveValidationReport",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:41:26",
       "weight": 0.5
     },
     {
@@ -827,7 +949,7 @@
       "id": "code-sym-pact-08a7a2f07e78",
       "title": "ProjectManager",
       "type": "concept",
-      "updated_at": "2026-05-24T15:00:35",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -846,10 +968,21 @@
         "code",
         "python"
       ],
+      "id": "code-sym-pact-106eaf2b47ec",
+      "title": "BuildSpec",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:45:38",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
       "id": "code-sym-pact-140d3d2f24e7",
       "title": "FunctionContract",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -862,6 +995,17 @@
       "type": "concept",
       "updated_at": "2026-03-27T22:16:51",
       "weight": 0.0109
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-14ef01b21740",
+      "title": "ProductionManifest",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:41:27",
+      "weight": 0.5
     },
     {
       "domains": [
@@ -882,7 +1026,7 @@
       "id": "code-sym-pact-17aa04e07cfa",
       "title": "TimeoutConfig",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -905,6 +1049,17 @@
       "title": "ExtractedParameter",
       "type": "concept",
       "updated_at": "2026-05-24T15:00:47",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-1aaff9167b50",
+      "title": "ProductionPreflight",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:41:27",
       "weight": 0.5
     },
     {
@@ -959,7 +1114,7 @@
       "id": "code-sym-pact-265bc566ef0b",
       "title": "FieldSpec",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -981,7 +1136,7 @@
       "id": "code-sym-pact-28dcac128e35",
       "title": "EnvironmentCheck",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1003,7 +1158,7 @@
       "id": "code-sym-pact-2e2685cb307b",
       "title": "DecompositionTree",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1016,6 +1171,17 @@
       "type": "concept",
       "updated_at": "2026-05-24T15:00:35",
       "weight": 0.0109
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-30882d54bf46",
+      "title": "TestCase",
+      "type": "concept",
+      "updated_at": "2026-06-12T12:21:29",
+      "weight": 0.5
     },
     {
       "domains": [
@@ -1044,10 +1210,21 @@
         "code",
         "python"
       ],
+      "id": "code-sym-pact-350dee66beab",
+      "title": "ReadinessProfile",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:45:38",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
       "id": "code-sym-pact-3674630240e8",
       "title": "IOTrace",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1058,7 +1235,7 @@
       "id": "code-sym-pact-388311a64c92",
       "title": "ConstrainContext",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1077,10 +1254,43 @@
         "code",
         "python"
       ],
+      "id": "code-sym-pact-3b2bc1822430",
+      "title": "PreflightRule",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:41:26",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-3b3efd12aef7",
+      "title": "SpecAuditResult",
+      "type": "concept",
+      "updated_at": "2026-06-12T12:21:28",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
       "id": "code-sym-pact-3bcce15327bc",
       "title": "HealthReport",
       "type": "concept",
-      "updated_at": "2026-05-24T15:00:39",
+      "updated_at": "2026-06-12T12:24:47",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-3d3f662ba6c8",
+      "title": "BuildSpecError",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:45:38",
       "weight": 0.5
     },
     {
@@ -1091,7 +1301,7 @@
       "id": "code-sym-pact-3e04594863c6",
       "title": "ContractTestSuite",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1113,7 +1323,7 @@
       "id": "code-sym-pact-40b40af3cab5",
       "title": "TestSubprocessError",
       "type": "concept",
-      "updated_at": "2026-05-24T15:00:52",
+      "updated_at": "2026-06-12T12:24:48",
       "weight": 0.5
     },
     {
@@ -1165,10 +1375,54 @@
         "code",
         "python"
       ],
+      "id": "code-sym-pact-4bfdb32872bc",
+      "title": "ReadinessLevel",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:45:38",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-4d758eb8ff99",
+      "title": "NaRecord",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:41:26",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-51d435e61fe7",
+      "title": "NaRegister",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:41:26",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-5465cc21f46d",
+      "title": "ReadinessDimension",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:45:38",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
       "id": "code-sym-pact-5532f17920b6",
       "title": "QuestionType",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1212,7 +1466,7 @@
       "id": "code-sym-pact-5b25c897c61c",
       "title": "InterviewQuestion",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1223,7 +1477,7 @@
       "id": "code-sym-pact-5b52dc010221",
       "title": "Scheduler",
       "type": "concept",
-      "updated_at": "2026-05-24T15:00:55",
+      "updated_at": "2026-06-12T13:41:30",
       "weight": 0.5
     },
     {
@@ -1234,7 +1488,7 @@
       "id": "code-sym-pact-5b54917dea87",
       "title": "ArtifactMetadata",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1245,7 +1499,7 @@
       "id": "code-sym-pact-5d18a698a903",
       "title": "ComponentTask",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1278,7 +1532,7 @@
       "id": "code-sym-pact-66a983e8b8bd",
       "title": "HealthCondition",
       "type": "concept",
-      "updated_at": "2026-05-24T15:00:38",
+      "updated_at": "2026-06-12T12:24:47",
       "weight": 0.5
     },
     {
@@ -1289,8 +1543,19 @@
       "id": "code-sym-pact-6746962f7365",
       "title": "InterviewResult",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-678138f44ef9",
+      "title": "ThreatModel",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:41:28",
+      "weight": 0.5
     },
     {
       "domains": [
@@ -1300,7 +1565,7 @@
       "id": "code-sym-pact-6ac0ecfd5a53",
       "title": "GlobalConfig",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:53",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1313,6 +1578,17 @@
       "type": "concept",
       "updated_at": "2026-03-27T22:16:51",
       "weight": 0.0141
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-6d90d4528416",
+      "title": "ProductionFinding",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:41:26",
+      "weight": 0.5
     },
     {
       "domains": [
@@ -1341,10 +1617,21 @@
         "code",
         "python"
       ],
+      "id": "code-sym-pact-70324ecb42c5",
+      "title": "ArchitectureLaw",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:41:25",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
       "id": "code-sym-pact-73dd1badbca1",
       "title": "author_code.CodeResponse",
       "type": "concept",
-      "updated_at": "2026-05-24T15:00:43",
+      "updated_at": "2026-06-12T12:24:48",
       "weight": 0.5
     },
     {
@@ -1355,7 +1642,7 @@
       "id": "code-sym-pact-74a320f08c4c",
       "title": "PerformanceBudget",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1366,7 +1653,7 @@
       "id": "code-sym-pact-75eb4e3d7b30",
       "title": "PlanEvaluation",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1377,7 +1664,7 @@
       "id": "code-sym-pact-77d57f8fbe23",
       "title": "FailureRecord",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1440,6 +1727,17 @@
         "code",
         "python"
       ],
+      "id": "code-sym-pact-7c80bcda6b28",
+      "title": "StaticCheckResult",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:41:27",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
       "id": "code-sym-pact-7d69acc6e926",
       "title": "integrate_component.GlueResponse",
       "type": "concept",
@@ -1465,7 +1763,7 @@
       "id": "code-sym-pact-810a73198811",
       "title": "AgentTask",
       "type": "concept",
-      "updated_at": "2026-05-24T15:00:35",
+      "updated_at": "2026-06-12T12:24:47",
       "weight": 0.0109
     },
     {
@@ -1531,7 +1829,7 @@
       "id": "code-sym-pact-87d54dae2b0a",
       "title": "ImpatienceLevel",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:53",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1564,7 +1862,7 @@
       "id": "code-sym-pact-8a80f763f15d",
       "title": "ImplementationResult",
       "type": "concept",
-      "updated_at": "2026-05-24T15:00:43",
+      "updated_at": "2026-06-12T12:24:48",
       "weight": 0.5
     },
     {
@@ -1597,7 +1895,7 @@
       "id": "code-sym-pact-90f696ef1a3c",
       "title": "SystemicPattern",
       "type": "concept",
-      "updated_at": "2026-05-24T15:00:55",
+      "updated_at": "2026-06-12T13:41:30",
       "weight": 0.5
     },
     {
@@ -1608,7 +1906,7 @@
       "id": "code-sym-pact-923f304dbfb1",
       "title": "RequirementCoverage",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1641,7 +1939,7 @@
       "id": "code-sym-pact-937db436f675",
       "title": "AuditedAnswer",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1652,7 +1950,7 @@
       "id": "code-sym-pact-9677026b12d3",
       "title": "ParallelConfig",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:53",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1663,7 +1961,18 @@
       "id": "code-sym-pact-978f435fff15",
       "title": "Remedy",
       "type": "concept",
-      "updated_at": "2026-05-24T15:00:40",
+      "updated_at": "2026-06-12T12:24:47",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-97e85d0d6c48",
+      "title": "ArtifactReadError",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:41:29",
       "weight": 0.5
     },
     {
@@ -1674,7 +1983,7 @@
       "id": "code-sym-pact-9899ce68ac02",
       "title": "ErrorCase",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1685,7 +1994,7 @@
       "id": "code-sym-pact-99fbf5ee09c8",
       "title": "CodexCodeBackend",
       "type": "concept",
-      "updated_at": "2026-05-24T15:00:50",
+      "updated_at": "2026-06-12T12:24:48",
       "weight": 0.5
     },
     {
@@ -1707,7 +2016,7 @@
       "id": "code-sym-pact-9c9a8b4a2bf8",
       "title": "CertificationArtifact",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1718,7 +2027,7 @@
       "id": "code-sym-pact-9cd1540d754d",
       "title": "DataAccessSideEffect",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1729,7 +2038,7 @@
       "id": "code-sym-pact-9cd94da583d6",
       "title": "HealthMetrics",
       "type": "concept",
-      "updated_at": "2026-05-24T15:00:39",
+      "updated_at": "2026-06-12T12:24:47",
       "weight": 0.5
     },
     {
@@ -1740,7 +2049,7 @@
       "id": "code-sym-pact-9d0f3c0682f0",
       "title": "SideEffectKind",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1751,7 +2060,7 @@
       "id": "code-sym-pact-a07aac6d960d",
       "title": "DataAccessDeclaration",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1795,7 +2104,7 @@
       "id": "code-sym-pact-a408b2322123",
       "title": "DecompositionNode",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1806,7 +2115,7 @@
       "id": "code-sym-pact-a51989c158ce",
       "title": "AuthorityDeclaration",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1817,8 +2126,19 @@
       "id": "code-sym-pact-a68d3a4f8d26",
       "title": "AnswerSource",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-a6979af662b4",
+      "title": "ProductionValidationReport",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:41:27",
+      "weight": 0.5
     },
     {
       "domains": [
@@ -1839,8 +2159,19 @@
       "id": "code-sym-pact-aaf475b7d168",
       "title": "PreflightPlan",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-ab044f1b8a39",
+      "title": "ControlEntry",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:41:25",
+      "weight": 0.5
     },
     {
       "domains": [
@@ -1880,6 +2211,17 @@
         "code",
         "python"
       ],
+      "id": "code-sym-pact-b36ed3b88917",
+      "title": "ControlMatrix",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:41:25",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
       "id": "code-sym-pact-b534acef38f3",
       "title": "RegionMap",
       "type": "concept",
@@ -1905,7 +2247,7 @@
       "id": "code-sym-pact-b8bbad9a9ac4",
       "title": "SideEffect",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1917,6 +2259,17 @@
       "title": "Backend",
       "type": "concept",
       "updated_at": "2026-05-24T15:00:40",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-bb0b3e019bab",
+      "title": "ThreatEntry",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:41:28",
       "weight": 0.5
     },
     {
@@ -1949,7 +2302,7 @@
       "id": "code-sym-pact-c040e54f3e5d",
       "title": "HealthFinding",
       "type": "concept",
-      "updated_at": "2026-05-24T15:00:39",
+      "updated_at": "2026-06-12T12:24:47",
       "weight": 0.5
     },
     {
@@ -1960,7 +2313,7 @@
       "id": "code-sym-pact-c08e780b0988",
       "title": "EngineeringDecision",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -1983,6 +2336,17 @@
       "title": "ErrorClassification",
       "type": "concept",
       "updated_at": "2026-05-24T15:00:53",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-c340d6c50993",
+      "title": "ArchitectureLaws",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:41:25",
       "weight": 0.5
     },
     {
@@ -2037,7 +2401,7 @@
       "id": "code-sym-pact-caece21eb0fa",
       "title": "HealthStatus",
       "type": "concept",
-      "updated_at": "2026-05-24T15:00:40",
+      "updated_at": "2026-06-12T12:24:47",
       "weight": 0.5
     },
     {
@@ -2048,7 +2412,7 @@
       "id": "code-sym-pact-cb8f22db6f7c",
       "title": "ComponentContract",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -2070,7 +2434,7 @@
       "id": "code-sym-pact-cfa831ce2871",
       "title": "RunState",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -2081,7 +2445,7 @@
       "id": "code-sym-pact-d13d1a2c172e",
       "title": "AgentRuntimeSpec",
       "type": "concept",
-      "updated_at": "2026-05-24T15:00:35",
+      "updated_at": "2026-06-12T12:24:47",
       "weight": 0.5
     },
     {
@@ -2103,7 +2467,7 @@
       "id": "code-sym-pact-d37dc1b3b3d7",
       "title": "PhaseTokens",
       "type": "concept",
-      "updated_at": "2026-05-24T15:00:40",
+      "updated_at": "2026-06-12T12:24:47",
       "weight": 0.5
     },
     {
@@ -2114,7 +2478,7 @@
       "id": "code-sym-pact-d4c9a9a54454",
       "title": "ResearchFinding",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -2125,7 +2489,7 @@
       "id": "code-sym-pact-d61b338e90c2",
       "title": "AgentResult",
       "type": "concept",
-      "updated_at": "2026-05-24T15:00:35",
+      "updated_at": "2026-06-12T12:24:47",
       "weight": 0.0109
     },
     {
@@ -2136,7 +2500,7 @@
       "id": "code-sym-pact-d689783433c2",
       "title": "WizardConfig",
       "type": "concept",
-      "updated_at": "2026-05-24T15:01:04",
+      "updated_at": "2026-06-12T13:41:30",
       "weight": 0.5
     },
     {
@@ -2147,7 +2511,7 @@
       "id": "code-sym-pact-d6b8e739250f",
       "title": "HealthPolicyDecision",
       "type": "concept",
-      "updated_at": "2026-05-24T15:00:39",
+      "updated_at": "2026-06-12T12:24:47",
       "weight": 0.5
     },
     {
@@ -2180,7 +2544,7 @@
       "id": "code-sym-pact-da5601047919",
       "title": "ResearchReport",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -2202,7 +2566,7 @@
       "id": "code-sym-pact-de0b22a59022",
       "title": "EvalTier",
       "type": "concept",
-      "updated_at": "2026-05-24T15:00:52",
+      "updated_at": "2026-06-12T12:24:48",
       "weight": 0.5
     },
     {
@@ -2224,7 +2588,7 @@
       "id": "code-sym-pact-df9b164f0c11",
       "title": "LearningEntry",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -2246,7 +2610,7 @@
       "id": "code-sym-pact-e0459cb9e0e7",
       "title": "DecompositionResult",
       "type": "concept",
-      "updated_at": "2026-05-24T15:00:51",
+      "updated_at": "2026-06-12T13:41:30",
       "weight": 0.5
     },
     {
@@ -2265,10 +2629,21 @@
         "code",
         "python"
       ],
+      "id": "code-sym-pact-e348760ecf9a",
+      "title": "ProductionGate",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:41:27",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
       "id": "code-sym-pact-e41d50b72e68",
       "title": "ClaudeCodeTeamBackend",
       "type": "concept",
-      "updated_at": "2026-05-24T15:00:35",
+      "updated_at": "2026-06-12T12:24:47",
       "weight": 0.0109
     },
     {
@@ -2279,7 +2654,7 @@
       "id": "code-sym-pact-e78aeaeef4b8",
       "title": "ModelTierConfig",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:53",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -2301,8 +2676,19 @@
       "id": "code-sym-pact-eaf15125dab2",
       "title": "GateResult",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-ece8b27fee08",
+      "title": "GateItem",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:41:25",
+      "weight": 0.5
     },
     {
       "domains": [
@@ -2312,7 +2698,7 @@
       "id": "code-sym-pact-ed12d860bac8",
       "title": "RedLine",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -2323,7 +2709,7 @@
       "id": "code-sym-pact-ee751d894293",
       "title": "ProjectConfig",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:53",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -2345,7 +2731,7 @@
       "id": "code-sym-pact-f236d7c553ec",
       "title": "run_decomposition.DecomposeResponse",
       "type": "concept",
-      "updated_at": "2026-05-24T15:00:51",
+      "updated_at": "2026-06-12T13:41:30",
       "weight": 0.5
     },
     {
@@ -2367,7 +2753,7 @@
       "id": "code-sym-pact-f3cf7a2df38f",
       "title": "DesignDocument",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -2389,7 +2775,7 @@
       "id": "code-sym-pact-f7faad21e118",
       "title": "ResolvedConfig",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:53",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.5
     },
     {
@@ -2408,10 +2794,32 @@
         "code",
         "python"
       ],
+      "id": "code-sym-pact-f8c5d8d5a542",
+      "title": "TrustPolicy",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:41:28",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
+      "id": "code-sym-pact-f8dfc7afa6f9",
+      "title": "TrustAssertion",
+      "type": "concept",
+      "updated_at": "2026-06-12T13:41:28",
+      "weight": 0.5
+    },
+    {
+      "domains": [
+        "code",
+        "python"
+      ],
       "id": "code-sym-pact-f9cea70e53e3",
       "title": "EnvironmentSpec",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:53",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -2422,7 +2830,7 @@
       "id": "code-sym-pact-f9e26a71f864",
       "title": "Contingency",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:57",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     },
     {
@@ -2477,11 +2885,11 @@
       "id": "code-sym-pact-feea0978b5db",
       "title": "BuildMode",
       "type": "concept",
-      "updated_at": "2026-05-03T11:28:53",
+      "updated_at": "2026-06-12T13:34:41",
       "weight": 0.0109
     }
   ],
   "repo": "pact",
-  "source_updated_at": "2026-05-24T15:01:10",
+  "source_updated_at": "2026-06-12T13:45:38",
   "version": 1
 }

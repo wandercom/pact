@@ -59,6 +59,31 @@ class TestRunOverrides:
         assert config.plan_only is True
 
 
+class TestReadinessDefaults:
+    def test_match_answer_uses_explicit_question_default(self):
+        from pact.cli import match_answer_to_question
+
+        answer, confidence = match_answer_to_question(
+            "Readiness: What level of security is required? [default: strict]",
+            [],
+        )
+
+        assert answer == "strict"
+        assert confidence == 0.9
+
+    def test_match_answer_prefers_readiness_default_over_positional_assumption(self):
+        from pact.cli import match_answer_to_question
+
+        answer, confidence = match_answer_to_question(
+            "Readiness: What level of security is required? [default: strict]",
+            ["Use Python 3.12."],
+            question_index=0,
+        )
+
+        assert answer == "strict"
+        assert confidence == 0.9
+
+
 def _make_tree() -> DecompositionTree:
     """Create a simple test tree: root -> [child_a, child_b]."""
     return DecompositionTree(

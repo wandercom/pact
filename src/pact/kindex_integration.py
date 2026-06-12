@@ -124,9 +124,52 @@ def publish_node(
         return None
 
 
+def _publish_raw_task(title: str, content: str, tags: list[str] | None = None) -> str | None:
+    """Publish a task-shaped node for older or incompatible kindex helpers."""
+    if not is_available():
+        return None
+
+    return publish_node(
+        title,
+        content,
+        node_type="task",
+        tags=tags,
+        extra={
+            "task_status": "open",
+            "priority": 3,
+            "scope": "contextual",
+        },
+    )
+
+
 def publish_task(title: str, content: str, tags: list[str] | None = None) -> str | None:
-    """Publish a task description to the graph."""
-    return publish_node(title, content, node_type="concept", tags=tags)
+    """Publish a durable task description to the graph."""
+    if not is_available():
+        return None
+
+    try:
+        from kindex.tasks import create_task
+
+        return create_task(
+            _store,
+            title,
+            content=content,
+            domains=tags or [],
+        )
+    except ImportError:
+        logger.warning(
+            "Kindex task helper unavailable; publishing raw durable task node instead"
+        )
+        return _publish_raw_task(title, content, tags)
+    except (AttributeError, TypeError) as e:
+        logger.warning(
+            "Kindex task helper is incompatible; publishing raw durable task node instead: %s",
+            e,
+        )
+        return _publish_raw_task(title, content, tags)
+    except Exception as e:
+        logger.warning("Kindex task publish failed; no task was recorded: %s", e)
+        return None
 
 
 def publish_decision(title: str, rationale: str, tags: list[str] | None = None) -> str | None:
@@ -220,13 +263,36 @@ def index_codebase(directory: Path) -> bool:
 
     Returns True if indexing was performed.
     """
+    try:
+        directory = directory.resolve()
+    except (OSError, RuntimeError, ValueError) as e:
+        logger.debug(
+            "Kindex code indexing skipped; cannot resolve directory %s: %s",
+            directory,
+            e,
+        )
+        return False
+
+    if not directory.is_dir():
+        logger.debug("Kindex code indexing skipped; %s is not a directory", directory)
+        return False
+
     if _cli_available():
         try:
             result = subprocess.run(
-                ["kin", "ingest", "code", "--directory", str(directory)],
+                [
+                    "kin",
+                    "ingest",
+                    "code",
+                    "--directory",
+                    str(directory),
+                    "--project-path",
+                    str(directory),
+                ],
                 capture_output=True,
                 text=True,
                 timeout=120,
+                shell=False,
             )
             return result.returncode == 0
         except Exception as e:

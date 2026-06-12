@@ -4,13 +4,31 @@
     "name": "pact",
     "description": "Code map exported from Kindex for pact.",
     "languages": [
-      "Python"
+      "Python",
+      "Sh"
     ],
     "frameworks": [],
-    "analyzedAt": "2026-06-04T13:12:34-05:00",
-    "gitCommitHash": "867fe0b5a6026299a631a1d8a9467473dee530b2"
+    "analyzedAt": "2026-06-04T13:12:56-05:00",
+    "gitCommitHash": "0f9344d716657006d17acaf1c4ca0a459f97f70d"
   },
   "nodes": [
+    {
+      "id": "code-mod-pact-a8704a67be93",
+      "type": "file",
+      "name": "monitor-pact.sh",
+      "filePath": "monitor-pact.sh",
+      "summary": "Language: Sh | Path: monitor-pact.sh | ~116 lines ## Functions - cgrep()",
+      "tags": [
+        "code",
+        "sh"
+      ],
+      "complexity": 9,
+      "languageNotes": {
+        "language": "Sh",
+        "kindexType": "artifact",
+        "toolTier": "A"
+      }
+    },
     {
       "id": "code-mod-pact-08ef6d349cf5",
       "type": "file",
@@ -84,7 +102,7 @@
       "type": "class",
       "name": "author_code.CodeResponse",
       "filePath": "src/pact/agents/code_author.py",
-      "summary": "class CodeResponse(BaseModel) (src/pact/agents/code_author.py:439)",
+      "summary": "class CodeResponse(BaseModel) (src/pact/agents/code_author.py:440)",
       "tags": [
         "code",
         "python"
@@ -118,7 +136,7 @@
       "type": "file",
       "name": "src/pact/agents/code_author.py",
       "filePath": "src/pact/agents/code_author.py",
-      "summary": "Language: Python | Path: src/pact/agents/code_author.py | ~439 lines ## Classes - CodeResponse(BaseModel)",
+      "summary": "Language: Python | Path: src/pact/agents/code_author.py | ~446 lines ## Classes - CodeResponse(BaseModel)",
       "tags": [
         "code",
         "python"
@@ -135,7 +153,7 @@
       "type": "file",
       "name": "src/pact/agents/contract_author.py",
       "filePath": "src/pact/agents/contract_author.py",
-      "summary": "Language: Python | Path: src/pact/agents/contract_author.py | ~51 lines ## Functions - author_contract( agent: AgentBase, component_id: str, component_name: str, component_description: str, parent_description: str = \"\", dependency_contracts: dict[str, ComponentContract] | None = None, engineering_decisions: list[dict] | None = None, sops: str = \"\", max_plan_revisions: int = 2, processing_register: str = \"\", type_registry: \"TypeRegistry | None\" = None, ) -> tuple[ComponentContract,ResearchReport,PlanEvaluation]",
+      "summary": "Language: Python | Path: src/pact/agents/contract_author.py | ~52 lines ## Functions - author_contract( agent: AgentBase, component_id: str, component_name: str, component_description: str, parent_description: str = \"\", dependency_contracts: dict[str, ComponentContract] | None = None, engineering_decisions: list[dict] | None = None, sops: str = \"\", max_plan_revisions: int = 2, processing_register: str = \"\", type_registry: \"TypeRegistry | None\" = None, readiness_profile: ReadinessProfile | None = None, ) -> tuple[ComponentContract,ResearchReport,PlanEvaluation]",
       "tags": [
         "code",
         "python"
@@ -237,7 +255,7 @@
       "type": "file",
       "name": "src/pact/agents/test_author.py",
       "filePath": "src/pact/agents/test_author.py",
-      "summary": "Language: Python | Path: src/pact/agents/test_author.py | ~625 lines ## Functions - author_goodhart_tests( agent: AgentBase, contract: ComponentContract, visible_suite: ContractTestSuite, dependency_contracts: dict[str, ComponentContract] | None = None, language: str = \"python\", package_namespace: str = \"\", ) -> ContractTestSuite",
+      "summary": "Language: Python | Path: src/pact/agents/test_author.py | ~672 lines ## Functions - author_goodhart_tests( agent: AgentBase, contract: ComponentContract, visible_suite: ContractTestSuite, dependency_contracts: dict[str, ComponentContract] | None = None, language: str = \"python\", package_namespace: str = \"\", ) -> ContractTestSuite",
       "tags": [
         "code",
         "python"
@@ -407,7 +425,7 @@
       "type": "class",
       "name": "AgentRuntimeSpec",
       "filePath": "src/pact/backends/agent_runtime.py",
-      "summary": "class AgentRuntimeSpec (src/pact/backends/agent_runtime.py:61) ## Methods - env(self) -> dict[str,str]",
+      "summary": "class AgentRuntimeSpec (src/pact/backends/agent_runtime.py:89) ## Methods - env(self) -> dict[str,str]",
       "tags": [
         "code",
         "python"
@@ -424,12 +442,12 @@
       "type": "file",
       "name": "src/pact/backends/agent_runtime.py",
       "filePath": "src/pact/backends/agent_runtime.py",
-      "summary": "Language: Python | Path: src/pact/backends/agent_runtime.py | ~183 lines ## Classes - AgentRuntimeSpec",
+      "summary": "Language: Python | Path: src/pact/backends/agent_runtime.py | ~229 lines ## Classes - AgentRuntimeSpec",
       "tags": [
         "code",
         "python"
       ],
-      "complexity": 10,
+      "complexity": 13,
       "languageNotes": {
         "language": "Python",
         "kindexType": "artifact",
@@ -509,7 +527,7 @@
       "type": "class",
       "name": "AgentTask",
       "filePath": "src/pact/backends/claude_code_team.py",
-      "summary": "class AgentTask (src/pact/backends/claude_code_team.py:37)",
+      "summary": "class AgentTask (src/pact/backends/claude_code_team.py:41)",
       "tags": [
         "code",
         "python"
@@ -526,7 +544,7 @@
       "type": "class",
       "name": "AgentResult",
       "filePath": "src/pact/backends/claude_code_team.py",
-      "summary": "class AgentResult (src/pact/backends/claude_code_team.py:50)",
+      "summary": "class AgentResult (src/pact/backends/claude_code_team.py:54)",
       "tags": [
         "code",
         "python"
@@ -543,7 +561,7 @@
       "type": "class",
       "name": "ClaudeCodeTeamBackend",
       "filePath": "src/pact/backends/claude_code_team.py",
-      "summary": "class ClaudeCodeTeamBackend (src/pact/backends/claude_code_team.py:59) ## Methods - close(self) -> None",
+      "summary": "class ClaudeCodeTeamBackend (src/pact/backends/claude_code_team.py:63) ## Methods - close(self) -> None",
       "tags": [
         "code",
         "python"
@@ -560,7 +578,7 @@
       "type": "file",
       "name": "src/pact/backends/claude_code_team.py",
       "filePath": "src/pact/backends/claude_code_team.py",
-      "summary": "Language: Python | Path: src/pact/backends/claude_code_team.py | ~259 lines ## Classes - AgentResult",
+      "summary": "Language: Python | Path: src/pact/backends/claude_code_team.py | ~254 lines ## Classes - AgentResult",
       "tags": [
         "code",
         "python"
@@ -577,7 +595,7 @@
       "type": "class",
       "name": "CodexCodeBackend",
       "filePath": "src/pact/backends/codex_code.py",
-      "summary": "class CodexCodeBackend (src/pact/backends/codex_code.py:27) ## Methods - assess( self, schema: type[T], prompt: str, system: str, max_tokens: int = 32768, ) -> tuple[T,int,int]",
+      "summary": "class CodexCodeBackend (src/pact/backends/codex_code.py:43) ## Methods - assess( self, schema: type[T], prompt: str, system: str, max_tokens: int = 32768, ) -> tuple[T,int,int]",
       "tags": [
         "code",
         "python"
@@ -594,12 +612,12 @@
       "type": "file",
       "name": "src/pact/backends/codex_code.py",
       "filePath": "src/pact/backends/codex_code.py",
-      "summary": "Language: Python | Path: src/pact/backends/codex_code.py | ~242 lines ## Classes - CodexCodeBackend",
+      "summary": "Language: Python | Path: src/pact/backends/codex_code.py | ~269 lines ## Classes - CodexCodeBackend",
       "tags": [
         "code",
         "python"
       ],
-      "complexity": 1,
+      "complexity": 2,
       "languageNotes": {
         "language": "Python",
         "kindexType": "artifact",
@@ -798,12 +816,12 @@
       "type": "file",
       "name": "src/pact/cli.py",
       "filePath": "src/pact/cli.py",
-      "summary": "Language: Python | Path: src/pact/cli.py | ~2785 lines ## Functions - cmd_adopt(args: argparse.Namespace) -> None",
+      "summary": "Language: Python | Path: src/pact/cli.py | ~3018 lines ## Functions - cmd_adopt(args: argparse.Namespace) -> None",
       "tags": [
         "code",
         "python"
       ],
-      "complexity": 51,
+      "complexity": 56,
       "languageNotes": {
         "language": "Python",
         "kindexType": "artifact",
@@ -832,7 +850,7 @@
       "type": "class",
       "name": "TimeoutConfig",
       "filePath": "src/pact/config.py",
-      "summary": "class TimeoutConfig (src/pact/config.py:477) ## Methods - get_timeout(self, role: str) -> int",
+      "summary": "class TimeoutConfig (src/pact/config.py:489) ## Methods - get_timeout(self, role: str) -> int",
       "tags": [
         "code",
         "python"
@@ -849,7 +867,7 @@
       "type": "class",
       "name": "GlobalConfig",
       "filePath": "src/pact/config.py",
-      "summary": "class GlobalConfig (src/pact/config.py:42)",
+      "summary": "class GlobalConfig (src/pact/config.py:44)",
       "tags": [
         "code",
         "python"
@@ -866,7 +884,7 @@
       "type": "class",
       "name": "ImpatienceLevel",
       "filePath": "src/pact/config.py",
-      "summary": "class ImpatienceLevel(StrEnum) (src/pact/config.py:470)",
+      "summary": "class ImpatienceLevel(StrEnum) (src/pact/config.py:482)",
       "tags": [
         "code",
         "python"
@@ -883,7 +901,7 @@
       "type": "class",
       "name": "ParallelConfig",
       "filePath": "src/pact/config.py",
-      "summary": "class ParallelConfig (src/pact/config.py:394)",
+      "summary": "class ParallelConfig (src/pact/config.py:406)",
       "tags": [
         "code",
         "python"
@@ -900,7 +918,7 @@
       "type": "class",
       "name": "ModelTierConfig",
       "filePath": "src/pact/config.py",
-      "summary": "class ModelTierConfig (src/pact/config.py:28)",
+      "summary": "class ModelTierConfig (src/pact/config.py:30)",
       "tags": [
         "code",
         "python"
@@ -917,7 +935,7 @@
       "type": "class",
       "name": "ProjectConfig",
       "filePath": "src/pact/config.py",
-      "summary": "class ProjectConfig (src/pact/config.py:116)",
+      "summary": "class ProjectConfig (src/pact/config.py:118)",
       "tags": [
         "code",
         "python"
@@ -934,7 +952,7 @@
       "type": "class",
       "name": "ResolvedConfig",
       "filePath": "src/pact/config.py",
-      "summary": "class ResolvedConfig (src/pact/config.py:529)",
+      "summary": "class ResolvedConfig (src/pact/config.py:541)",
       "tags": [
         "code",
         "python"
@@ -951,7 +969,7 @@
       "type": "class",
       "name": "EnvironmentSpec",
       "filePath": "src/pact/config.py",
-      "summary": "class EnvironmentSpec (src/pact/config.py:422) ## Methods - build_env(self, pythonpath: str) -> dict[str,str]",
+      "summary": "class EnvironmentSpec (src/pact/config.py:434) ## Methods - build_env(self, pythonpath: str) -> dict[str,str]",
       "tags": [
         "code",
         "python"
@@ -968,7 +986,7 @@
       "type": "class",
       "name": "BuildMode",
       "filePath": "src/pact/config.py",
-      "summary": "class BuildMode(StrEnum) (src/pact/config.py:20)",
+      "summary": "class BuildMode(StrEnum) (src/pact/config.py:22)",
       "tags": [
         "code",
         "python"
@@ -985,7 +1003,7 @@
       "type": "file",
       "name": "src/pact/config.py",
       "filePath": "src/pact/config.py",
-      "summary": "Language: Python | Path: src/pact/config.py | ~574 lines ## Classes - BuildMode(StrEnum)",
+      "summary": "Language: Python | Path: src/pact/config.py | ~586 lines ## Classes - BuildMode(StrEnum)",
       "tags": [
         "code",
         "python"
@@ -1104,7 +1122,7 @@
       "type": "class",
       "name": "DecompositionResult",
       "filePath": "src/pact/decomposer.py",
-      "summary": "class DecompositionResult (src/pact/decomposer.py:160)",
+      "summary": "class DecompositionResult (src/pact/decomposer.py:185)",
       "tags": [
         "code",
         "python"
@@ -1121,7 +1139,7 @@
       "type": "class",
       "name": "run_decomposition.DecomposeResponse",
       "filePath": "src/pact/decomposer.py",
-      "summary": "class DecomposeResponse(BaseModel) (src/pact/decomposer.py:202)",
+      "summary": "class DecomposeResponse(BaseModel) (src/pact/decomposer.py:227)",
       "tags": [
         "code",
         "python"
@@ -1138,7 +1156,7 @@
       "type": "file",
       "name": "src/pact/decomposer.py",
       "filePath": "src/pact/decomposer.py",
-      "summary": "Language: Python | Path: src/pact/decomposer.py | ~506 lines ## Classes - DecomposeResponse(BaseModel)",
+      "summary": "Language: Python | Path: src/pact/decomposer.py | ~536 lines ## Classes - DecomposeResponse(BaseModel)",
       "tags": [
         "code",
         "python"
@@ -1155,12 +1173,12 @@
       "type": "file",
       "name": "src/pact/deploy.py",
       "filePath": "src/pact/deploy.py",
-      "summary": "Language: Python | Path: src/pact/deploy.py | ~92 lines ## Functions - generate_baton_yaml( project_dir: str | Path, output_path: str | None = None, sink: str = \"jsonl\", error_rate_threshold: float = 5.0, p95_ms_threshold: float = 500.0, ) -> None",
+      "summary": "Language: Python | Path: src/pact/deploy.py | ~158 lines ## Functions - generate_baton_yaml( project_dir: str | Path, output_path: str | None = None, sink: str = \"jsonl\", error_rate_threshold: float = 5.0, p95_ms_threshold: float = 500.0, ) -> None",
       "tags": [
         "code",
         "python"
       ],
-      "complexity": 7,
+      "complexity": 9,
       "languageNotes": {
         "language": "Python",
         "kindexType": "artifact",
@@ -1342,7 +1360,7 @@
       "type": "class",
       "name": "Remedy",
       "filePath": "src/pact/health.py",
-      "summary": "class Remedy (src/pact/health.py:830)",
+      "summary": "class Remedy (src/pact/health.py:841)",
       "tags": [
         "code",
         "python"
@@ -1427,7 +1445,7 @@
       "type": "class",
       "name": "HealthPolicyDecision",
       "filePath": "src/pact/health.py",
-      "summary": "class HealthPolicyDecision (src/pact/health.py:922)",
+      "summary": "class HealthPolicyDecision (src/pact/health.py:933)",
       "tags": [
         "code",
         "python"
@@ -1444,7 +1462,7 @@
       "type": "file",
       "name": "src/pact/health.py",
       "filePath": "src/pact/health.py",
-      "summary": "Language: Python | Path: src/pact/health.py | ~935 lines ## Classes - HealthCondition(StrEnum)",
+      "summary": "Language: Python | Path: src/pact/health.py | ~946 lines ## Classes - HealthCondition(StrEnum)",
       "tags": [
         "code",
         "python"
@@ -1682,12 +1700,12 @@
       "type": "file",
       "name": "src/pact/kindex_integration.py",
       "filePath": "src/pact/kindex_integration.py",
-      "summary": "Language: Python | Path: src/pact/kindex_integration.py | ~302 lines ## Functions - close() -> None",
+      "summary": "Language: Python | Path: src/pact/kindex_integration.py | ~368 lines ## Functions - close() -> None",
       "tags": [
         "code",
         "python"
       ],
-      "complexity": 16,
+      "complexity": 17,
       "languageNotes": {
         "language": "Python",
         "kindexType": "artifact",
@@ -1831,6 +1849,91 @@
       }
     },
     {
+      "id": "code-mod-pact-00354a1f7047",
+      "type": "file",
+      "name": "src/pact/production.py",
+      "filePath": "src/pact/production.py",
+      "summary": "Language: Python | Path: src/pact/production.py | ~21 lines",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "artifact",
+        "toolTier": "C"
+      }
+    },
+    {
+      "id": "code-mod-pact-c152f81c3442",
+      "type": "file",
+      "name": "src/pact/production_static.py",
+      "filePath": "src/pact/production_static.py",
+      "summary": "Language: Python | Path: src/pact/production_static.py | ~299 lines ## Functions - run_static_checks(project_dir: str | Path) -> list[StaticCheckResult]",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 9,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "artifact",
+        "toolTier": "C"
+      }
+    },
+    {
+      "id": "code-mod-pact-e05c66d16f84",
+      "type": "file",
+      "name": "src/pact/production_templates.py",
+      "filePath": "src/pact/production_templates.py",
+      "summary": "Language: Python | Path: src/pact/production_templates.py | ~386 lines ## Functions - compute_source_fingerprint(project_dir: str | Path) -> str",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 9,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "artifact",
+        "toolTier": "C"
+      }
+    },
+    {
+      "id": "code-sym-pact-97e85d0d6c48",
+      "type": "class",
+      "name": "ArtifactReadError",
+      "filePath": "src/pact/production_validation.py",
+      "summary": "class ArtifactReadError(ValueError) (src/pact/production_validation.py:43)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-mod-pact-caa9e7a3f6c2",
+      "type": "file",
+      "name": "src/pact/production_validation.py",
+      "filePath": "src/pact/production_validation.py",
+      "summary": "Language: Python | Path: src/pact/production_validation.py | ~660 lines ## Classes - ArtifactReadError(ValueError)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 20,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "artifact",
+        "toolTier": "C"
+      }
+    },
+    {
       "id": "code-sym-pact-08a7a2f07e78",
       "type": "class",
       "name": "ProjectManager",
@@ -1852,7 +1955,7 @@
       "type": "file",
       "name": "src/pact/project.py",
       "filePath": "src/pact/project.py",
-      "summary": "Language: Python | Path: src/pact/project.py | ~1047 lines ## Classes - ProjectManager",
+      "summary": "Language: Python | Path: src/pact/project.py | ~1065 lines ## Classes - ProjectManager",
       "tags": [
         "code",
         "python"
@@ -1875,6 +1978,108 @@
         "python"
       ],
       "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "artifact",
+        "toolTier": "C"
+      }
+    },
+    {
+      "id": "code-sym-pact-106eaf2b47ec",
+      "type": "class",
+      "name": "BuildSpec",
+      "filePath": "src/pact/readiness.py",
+      "summary": "class BuildSpec(BaseModel) (src/pact/readiness.py:245)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-350dee66beab",
+      "type": "class",
+      "name": "ReadinessProfile",
+      "filePath": "src/pact/readiness.py",
+      "summary": "class ReadinessProfile(BaseModel) (src/pact/readiness.py:114) ## Methods - render_for_prompt(self) -> str",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 2,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-3d3f662ba6c8",
+      "type": "class",
+      "name": "BuildSpecError",
+      "filePath": "src/pact/readiness.py",
+      "summary": "class BuildSpecError(ValueError) (src/pact/readiness.py:38)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-4bfdb32872bc",
+      "type": "class",
+      "name": "ReadinessLevel",
+      "filePath": "src/pact/readiness.py",
+      "summary": "class ReadinessLevel(StrEnum) (src/pact/readiness.py:28)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-5465cc21f46d",
+      "type": "class",
+      "name": "ReadinessDimension",
+      "filePath": "src/pact/readiness.py",
+      "summary": "class ReadinessDimension(BaseModel) (src/pact/readiness.py:42)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-mod-pact-739b45139017",
+      "type": "file",
+      "name": "src/pact/readiness.py",
+      "filePath": "src/pact/readiness.py",
+      "summary": "Language: Python | Path: src/pact/readiness.py | ~332 lines ## Classes - BuildSpec(BaseModel)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 15,
       "languageNotes": {
         "language": "Python",
         "kindexType": "artifact",
@@ -1984,6 +2189,23 @@
       }
     },
     {
+      "id": "code-mod-pact-669c71bb96b4",
+      "type": "file",
+      "name": "src/pact/review.py",
+      "filePath": "src/pact/review.py",
+      "summary": "Language: Python | Path: src/pact/review.py | ~332 lines ## Functions - find_simulacrum_command() -> list[str]",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 9,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "artifact",
+        "toolTier": "C"
+      }
+    },
+    {
       "id": "code-sym-pact-5b52dc010221",
       "type": "class",
       "name": "Scheduler",
@@ -2022,7 +2244,7 @@
       "type": "file",
       "name": "src/pact/scheduler.py",
       "filePath": "src/pact/scheduler.py",
-      "summary": "Language: Python | Path: src/pact/scheduler.py | ~2093 lines ## Classes - Scheduler",
+      "summary": "Language: Python | Path: src/pact/scheduler.py | ~2101 lines ## Classes - Scheduler",
       "tags": [
         "code",
         "python"
@@ -2039,7 +2261,7 @@
       "type": "class",
       "name": "FunctionContract",
       "filePath": "src/pact/schemas.py",
-      "summary": "class FunctionContract(BaseModel) (src/pact/schemas.py:148)",
+      "summary": "class FunctionContract(BaseModel) (src/pact/schemas.py:150)",
       "tags": [
         "code",
         "python"
@@ -2056,7 +2278,7 @@
       "type": "class",
       "name": "FieldSpec",
       "filePath": "src/pact/schemas.py",
-      "summary": "class FieldSpec(BaseModel) (src/pact/schemas.py:29)",
+      "summary": "class FieldSpec(BaseModel) (src/pact/schemas.py:31)",
       "tags": [
         "code",
         "python"
@@ -2073,7 +2295,7 @@
       "type": "class",
       "name": "EnvironmentCheck",
       "filePath": "src/pact/schemas.py",
-      "summary": "class EnvironmentCheck(BaseModel) (src/pact/schemas.py:228)",
+      "summary": "class EnvironmentCheck(BaseModel) (src/pact/schemas.py:230)",
       "tags": [
         "code",
         "python"
@@ -2090,7 +2312,7 @@
       "type": "class",
       "name": "DecompositionTree",
       "filePath": "src/pact/schemas.py",
-      "summary": "class DecompositionTree(BaseModel) (src/pact/schemas.py:535) ## Methods - children_of(self, node_id: str) -> list[DecompositionNode]",
+      "summary": "class DecompositionTree(BaseModel) (src/pact/schemas.py:540) ## Methods - children_of(self, node_id: str) -> list[DecompositionNode]",
       "tags": [
         "code",
         "python"
@@ -2103,11 +2325,28 @@
       }
     },
     {
+      "id": "code-sym-pact-30882d54bf46",
+      "type": "class",
+      "name": "TestCase",
+      "filePath": "src/pact/schemas.py",
+      "summary": "class TestCase(BaseModel) (src/pact/schemas.py:256)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
       "id": "code-sym-pact-3674630240e8",
       "type": "class",
       "name": "IOTrace",
       "filePath": "src/pact/schemas.py",
-      "summary": "class IOTrace(BaseModel) (src/pact/schemas.py:623)",
+      "summary": "class IOTrace(BaseModel) (src/pact/schemas.py:628)",
       "tags": [
         "code",
         "python"
@@ -2124,7 +2363,24 @@
       "type": "class",
       "name": "ConstrainContext",
       "filePath": "src/pact/schemas.py",
-      "summary": "class ConstrainContext(BaseModel) (src/pact/schemas.py:186)",
+      "summary": "class ConstrainContext(BaseModel) (src/pact/schemas.py:188)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-3b3efd12aef7",
+      "type": "class",
+      "name": "SpecAuditResult",
+      "filePath": "src/pact/schemas.py",
+      "summary": "class SpecAuditResult(BaseModel) (src/pact/schemas.py:786)",
       "tags": [
         "code",
         "python"
@@ -2141,7 +2397,7 @@
       "type": "class",
       "name": "ContractTestSuite",
       "filePath": "src/pact/schemas.py",
-      "summary": "class ContractTestSuite(BaseModel) (src/pact/schemas.py:296)",
+      "summary": "class ContractTestSuite(BaseModel) (src/pact/schemas.py:298)",
       "tags": [
         "code",
         "python"
@@ -2158,7 +2414,7 @@
       "type": "class",
       "name": "QuestionType",
       "filePath": "src/pact/schemas.py",
-      "summary": "class QuestionType(StrEnum) (src/pact/schemas.py:418)",
+      "summary": "class QuestionType(StrEnum) (src/pact/schemas.py:423)",
       "tags": [
         "code",
         "python"
@@ -2175,7 +2431,7 @@
       "type": "class",
       "name": "InterviewQuestion",
       "filePath": "src/pact/schemas.py",
-      "summary": "class InterviewQuestion(BaseModel) (src/pact/schemas.py:426)",
+      "summary": "class InterviewQuestion(BaseModel) (src/pact/schemas.py:431)",
       "tags": [
         "code",
         "python"
@@ -2192,7 +2448,7 @@
       "type": "class",
       "name": "ArtifactMetadata",
       "filePath": "src/pact/schemas.py",
-      "summary": "class ArtifactMetadata(BaseModel) (src/pact/schemas.py:759)",
+      "summary": "class ArtifactMetadata(BaseModel) (src/pact/schemas.py:764)",
       "tags": [
         "code",
         "python"
@@ -2209,7 +2465,7 @@
       "type": "class",
       "name": "ComponentTask",
       "filePath": "src/pact/schemas.py",
-      "summary": "class ComponentTask(BaseModel) (src/pact/schemas.py:675)",
+      "summary": "class ComponentTask(BaseModel) (src/pact/schemas.py:680)",
       "tags": [
         "code",
         "python"
@@ -2226,7 +2482,7 @@
       "type": "class",
       "name": "InterviewResult",
       "filePath": "src/pact/schemas.py",
-      "summary": "class InterviewResult(BaseModel) (src/pact/schemas.py:402)",
+      "summary": "class InterviewResult(BaseModel) (src/pact/schemas.py:406)",
       "tags": [
         "code",
         "python"
@@ -2243,7 +2499,7 @@
       "type": "class",
       "name": "PerformanceBudget",
       "filePath": "src/pact/schemas.py",
-      "summary": "class PerformanceBudget(BaseModel) (src/pact/schemas.py:141)",
+      "summary": "class PerformanceBudget(BaseModel) (src/pact/schemas.py:143)",
       "tags": [
         "code",
         "python"
@@ -2260,7 +2516,7 @@
       "type": "class",
       "name": "PlanEvaluation",
       "filePath": "src/pact/schemas.py",
-      "summary": "class PlanEvaluation(BaseModel) (src/pact/schemas.py:500)",
+      "summary": "class PlanEvaluation(BaseModel) (src/pact/schemas.py:505)",
       "tags": [
         "code",
         "python"
@@ -2277,7 +2533,7 @@
       "type": "class",
       "name": "FailureRecord",
       "filePath": "src/pact/schemas.py",
-      "summary": "class FailureRecord(BaseModel) (src/pact/schemas.py:648)",
+      "summary": "class FailureRecord(BaseModel) (src/pact/schemas.py:653)",
       "tags": [
         "code",
         "python"
@@ -2294,7 +2550,7 @@
       "type": "class",
       "name": "RequirementCoverage",
       "filePath": "src/pact/schemas.py",
-      "summary": "class RequirementCoverage(BaseModel) (src/pact/schemas.py:776)",
+      "summary": "class RequirementCoverage(BaseModel) (src/pact/schemas.py:781)",
       "tags": [
         "code",
         "python"
@@ -2311,7 +2567,7 @@
       "type": "class",
       "name": "AuditedAnswer",
       "filePath": "src/pact/schemas.py",
-      "summary": "class AuditedAnswer(BaseModel) (src/pact/schemas.py:392)",
+      "summary": "class AuditedAnswer(BaseModel) (src/pact/schemas.py:396)",
       "tags": [
         "code",
         "python"
@@ -2328,7 +2584,7 @@
       "type": "class",
       "name": "ErrorCase",
       "filePath": "src/pact/schemas.py",
-      "summary": "class ErrorCase(BaseModel) (src/pact/schemas.py:92)",
+      "summary": "class ErrorCase(BaseModel) (src/pact/schemas.py:94)",
       "tags": [
         "code",
         "python"
@@ -2345,7 +2601,7 @@
       "type": "class",
       "name": "CertificationArtifact",
       "filePath": "src/pact/schemas.py",
-      "summary": "class CertificationArtifact(BaseModel) (src/pact/schemas.py:797)",
+      "summary": "class CertificationArtifact(BaseModel) (src/pact/schemas.py:802)",
       "tags": [
         "code",
         "python"
@@ -2362,7 +2618,7 @@
       "type": "class",
       "name": "DataAccessSideEffect",
       "filePath": "src/pact/schemas.py",
-      "summary": "class DataAccessSideEffect(BaseModel) (src/pact/schemas.py:164)",
+      "summary": "class DataAccessSideEffect(BaseModel) (src/pact/schemas.py:166)",
       "tags": [
         "code",
         "python"
@@ -2379,7 +2635,7 @@
       "type": "class",
       "name": "SideEffectKind",
       "filePath": "src/pact/schemas.py",
-      "summary": "class SideEffectKind(StrEnum) (src/pact/schemas.py:123)",
+      "summary": "class SideEffectKind(StrEnum) (src/pact/schemas.py:125)",
       "tags": [
         "code",
         "python"
@@ -2396,7 +2652,7 @@
       "type": "class",
       "name": "DataAccessDeclaration",
       "filePath": "src/pact/schemas.py",
-      "summary": "class DataAccessDeclaration(BaseModel) (src/pact/schemas.py:172)",
+      "summary": "class DataAccessDeclaration(BaseModel) (src/pact/schemas.py:174)",
       "tags": [
         "code",
         "python"
@@ -2413,7 +2669,7 @@
       "type": "class",
       "name": "DecompositionNode",
       "filePath": "src/pact/schemas.py",
-      "summary": "class DecompositionNode(BaseModel) (src/pact/schemas.py:520)",
+      "summary": "class DecompositionNode(BaseModel) (src/pact/schemas.py:525)",
       "tags": [
         "code",
         "python"
@@ -2430,7 +2686,7 @@
       "type": "class",
       "name": "AuthorityDeclaration",
       "filePath": "src/pact/schemas.py",
-      "summary": "class AuthorityDeclaration(BaseModel) (src/pact/schemas.py:180)",
+      "summary": "class AuthorityDeclaration(BaseModel) (src/pact/schemas.py:182)",
       "tags": [
         "code",
         "python"
@@ -2447,7 +2703,7 @@
       "type": "class",
       "name": "AnswerSource",
       "filePath": "src/pact/schemas.py",
-      "summary": "class AnswerSource(StrEnum) (src/pact/schemas.py:383)",
+      "summary": "class AnswerSource(StrEnum) (src/pact/schemas.py:387)",
       "tags": [
         "code",
         "python"
@@ -2464,7 +2720,7 @@
       "type": "class",
       "name": "PreflightPlan",
       "filePath": "src/pact/schemas.py",
-      "summary": "class PreflightPlan(BaseModel) (src/pact/schemas.py:235)",
+      "summary": "class PreflightPlan(BaseModel) (src/pact/schemas.py:237)",
       "tags": [
         "code",
         "python"
@@ -2481,7 +2737,7 @@
       "type": "class",
       "name": "SideEffect",
       "filePath": "src/pact/schemas.py",
-      "summary": "class SideEffect(BaseModel) (src/pact/schemas.py:133)",
+      "summary": "class SideEffect(BaseModel) (src/pact/schemas.py:135)",
       "tags": [
         "code",
         "python"
@@ -2498,7 +2754,7 @@
       "type": "class",
       "name": "EngineeringDecision",
       "filePath": "src/pact/schemas.py",
-      "summary": "class EngineeringDecision(BaseModel) (src/pact/schemas.py:513)",
+      "summary": "class EngineeringDecision(BaseModel) (src/pact/schemas.py:518)",
       "tags": [
         "code",
         "python"
@@ -2515,7 +2771,7 @@
       "type": "class",
       "name": "ComponentContract",
       "filePath": "src/pact/schemas.py",
-      "summary": "class ComponentContract(BaseModel) (src/pact/schemas.py:194)",
+      "summary": "class ComponentContract(BaseModel) (src/pact/schemas.py:196)",
       "tags": [
         "code",
         "python"
@@ -2532,7 +2788,7 @@
       "type": "class",
       "name": "RunState",
       "filePath": "src/pact/schemas.py",
-      "summary": "class RunState(BaseModel) (src/pact/schemas.py:686) ## Methods - complete(self) -> None",
+      "summary": "class RunState(BaseModel) (src/pact/schemas.py:691) ## Methods - complete(self) -> None",
       "tags": [
         "code",
         "python"
@@ -2549,7 +2805,7 @@
       "type": "class",
       "name": "ResearchFinding",
       "filePath": "src/pact/schemas.py",
-      "summary": "class ResearchFinding(BaseModel) (src/pact/schemas.py:481)",
+      "summary": "class ResearchFinding(BaseModel) (src/pact/schemas.py:486)",
       "tags": [
         "code",
         "python"
@@ -2566,7 +2822,7 @@
       "type": "class",
       "name": "ResearchReport",
       "filePath": "src/pact/schemas.py",
-      "summary": "class ResearchReport(BaseModel) (src/pact/schemas.py:490)",
+      "summary": "class ResearchReport(BaseModel) (src/pact/schemas.py:495)",
       "tags": [
         "code",
         "python"
@@ -2583,7 +2839,7 @@
       "type": "class",
       "name": "LearningEntry",
       "filePath": "src/pact/schemas.py",
-      "summary": "class LearningEntry(BaseModel) (src/pact/schemas.py:742)",
+      "summary": "class LearningEntry(BaseModel) (src/pact/schemas.py:747)",
       "tags": [
         "code",
         "python"
@@ -2600,7 +2856,7 @@
       "type": "class",
       "name": "GateResult",
       "filePath": "src/pact/schemas.py",
-      "summary": "class GateResult(BaseModel) (src/pact/schemas.py:732)",
+      "summary": "class GateResult(BaseModel) (src/pact/schemas.py:737)",
       "tags": [
         "code",
         "python"
@@ -2617,7 +2873,7 @@
       "type": "class",
       "name": "RedLine",
       "filePath": "src/pact/schemas.py",
-      "summary": "class RedLine(BaseModel) (src/pact/schemas.py:214)",
+      "summary": "class RedLine(BaseModel) (src/pact/schemas.py:216)",
       "tags": [
         "code",
         "python"
@@ -2634,7 +2890,7 @@
       "type": "class",
       "name": "DesignDocument",
       "filePath": "src/pact/schemas.py",
-      "summary": "class DesignDocument(BaseModel) (src/pact/schemas.py:660)",
+      "summary": "class DesignDocument(BaseModel) (src/pact/schemas.py:665)",
       "tags": [
         "code",
         "python"
@@ -2651,7 +2907,7 @@
       "type": "class",
       "name": "Contingency",
       "filePath": "src/pact/schemas.py",
-      "summary": "class Contingency(BaseModel) (src/pact/schemas.py:221)",
+      "summary": "class Contingency(BaseModel) (src/pact/schemas.py:223)",
       "tags": [
         "code",
         "python"
@@ -2668,7 +2924,7 @@
       "type": "file",
       "name": "src/pact/schemas.py",
       "filePath": "src/pact/schemas.py",
-      "summary": "Language: Python | Path: src/pact/schemas.py | ~827 lines ## Classes - AnswerSource(StrEnum)",
+      "summary": "Language: Python | Path: src/pact/schemas.py | ~832 lines ## Classes - AnswerSource(StrEnum)",
       "tags": [
         "code",
         "python"
@@ -2759,6 +3015,346 @@
         "python"
       ],
       "complexity": 4,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "artifact",
+        "toolTier": "C"
+      }
+    },
+    {
+      "id": "code-sym-pact-05eab30f0121",
+      "type": "class",
+      "name": "LiveValidationReport",
+      "filePath": "src/pact/schemas_production.py",
+      "summary": "class LiveValidationReport(BaseModel) (src/pact/schemas_production.py:110)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-14ef01b21740",
+      "type": "class",
+      "name": "ProductionManifest",
+      "filePath": "src/pact/schemas_production.py",
+      "summary": "class ProductionManifest(BaseModel) (src/pact/schemas_production.py:155)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-1aaff9167b50",
+      "type": "class",
+      "name": "ProductionPreflight",
+      "filePath": "src/pact/schemas_production.py",
+      "summary": "class ProductionPreflight(BaseModel) (src/pact/schemas_production.py:103)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-3b2bc1822430",
+      "type": "class",
+      "name": "PreflightRule",
+      "filePath": "src/pact/schemas_production.py",
+      "summary": "class PreflightRule(BaseModel) (src/pact/schemas_production.py:94)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-4d758eb8ff99",
+      "type": "class",
+      "name": "NaRecord",
+      "filePath": "src/pact/schemas_production.py",
+      "summary": "class NaRecord(BaseModel) (src/pact/schemas_production.py:141)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-51d435e61fe7",
+      "type": "class",
+      "name": "NaRegister",
+      "filePath": "src/pact/schemas_production.py",
+      "summary": "class NaRegister(BaseModel) (src/pact/schemas_production.py:149)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-678138f44ef9",
+      "type": "class",
+      "name": "ThreatModel",
+      "filePath": "src/pact/schemas_production.py",
+      "summary": "class ThreatModel(BaseModel) (src/pact/schemas_production.py:70)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-6d90d4528416",
+      "type": "class",
+      "name": "ProductionFinding",
+      "filePath": "src/pact/schemas_production.py",
+      "summary": "class ProductionFinding(BaseModel) (src/pact/schemas_production.py:169)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-70324ecb42c5",
+      "type": "class",
+      "name": "ArchitectureLaw",
+      "filePath": "src/pact/schemas_production.py",
+      "summary": "class ArchitectureLaw(BaseModel) (src/pact/schemas_production.py:79)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-7c80bcda6b28",
+      "type": "class",
+      "name": "StaticCheckResult",
+      "filePath": "src/pact/schemas_production.py",
+      "summary": "class StaticCheckResult(BaseModel) (src/pact/schemas_production.py:178)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-a6979af662b4",
+      "type": "class",
+      "name": "ProductionValidationReport",
+      "filePath": "src/pact/schemas_production.py",
+      "summary": "class ProductionValidationReport(BaseModel) (src/pact/schemas_production.py:189) ## Methods - error_count(self) -> int",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 2,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-ab044f1b8a39",
+      "type": "class",
+      "name": "ControlEntry",
+      "filePath": "src/pact/schemas_production.py",
+      "summary": "class ControlEntry(BaseModel) (src/pact/schemas_production.py:39)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-b36ed3b88917",
+      "type": "class",
+      "name": "ControlMatrix",
+      "filePath": "src/pact/schemas_production.py",
+      "summary": "class ControlMatrix(BaseModel) (src/pact/schemas_production.py:52)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-bb0b3e019bab",
+      "type": "class",
+      "name": "ThreatEntry",
+      "filePath": "src/pact/schemas_production.py",
+      "summary": "class ThreatEntry(BaseModel) (src/pact/schemas_production.py:58)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-c340d6c50993",
+      "type": "class",
+      "name": "ArchitectureLaws",
+      "filePath": "src/pact/schemas_production.py",
+      "summary": "class ArchitectureLaws(BaseModel) (src/pact/schemas_production.py:88)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-e348760ecf9a",
+      "type": "class",
+      "name": "ProductionGate",
+      "filePath": "src/pact/schemas_production.py",
+      "summary": "class ProductionGate(BaseModel) (src/pact/schemas_production.py:134)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-ece8b27fee08",
+      "type": "class",
+      "name": "GateItem",
+      "filePath": "src/pact/schemas_production.py",
+      "summary": "class GateItem(BaseModel) (src/pact/schemas_production.py:120)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-f8c5d8d5a542",
+      "type": "class",
+      "name": "TrustPolicy",
+      "filePath": "src/pact/schemas_production.py",
+      "summary": "class TrustPolicy(BaseModel) (src/pact/schemas_production.py:33)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-sym-pact-f8dfc7afa6f9",
+      "type": "class",
+      "name": "TrustAssertion",
+      "filePath": "src/pact/schemas_production.py",
+      "summary": "class TrustAssertion(BaseModel) (src/pact/schemas_production.py:19)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "concept",
+        "toolTier": ""
+      }
+    },
+    {
+      "id": "code-mod-pact-b9a167a1b0af",
+      "type": "file",
+      "name": "src/pact/schemas_production.py",
+      "filePath": "src/pact/schemas_production.py",
+      "summary": "Language: Python | Path: src/pact/schemas_production.py | ~205 lines ## Classes - ArchitectureLaw(BaseModel)",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 19,
       "languageNotes": {
         "language": "Python",
         "kindexType": "artifact",
@@ -3263,7 +3859,7 @@
       "type": "file",
       "name": "src/pact/test_harness.py",
       "filePath": "src/pact/test_harness.py",
-      "summary": "Language: Python | Path: src/pact/test_harness.py | ~521 lines ## Classes - EvalTier(StrEnum)",
+      "summary": "Language: Python | Path: src/pact/test_harness.py | ~535 lines ## Classes - EvalTier(StrEnum)",
       "tags": [
         "code",
         "python"
@@ -3286,6 +3882,40 @@
         "python"
       ],
       "complexity": 12,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "artifact",
+        "toolTier": "C"
+      }
+    },
+    {
+      "id": "code-mod-pact-454bad6960d3",
+      "type": "file",
+      "name": "src/pact/vendor/simulacrum/__init__.py",
+      "filePath": "src/pact/vendor/simulacrum/__init__.py",
+      "summary": "Language: Python | Path: src/pact/vendor/simulacrum/__init__.py | ~9 lines",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 1,
+      "languageNotes": {
+        "language": "Python",
+        "kindexType": "artifact",
+        "toolTier": "C"
+      }
+    },
+    {
+      "id": "code-mod-pact-37b06da9f133",
+      "type": "file",
+      "name": "src/pact/vendor/simulacrum/runtime.py",
+      "filePath": "src/pact/vendor/simulacrum/runtime.py",
+      "summary": "Language: Python | Path: src/pact/vendor/simulacrum/runtime.py | ~375 lines ## Functions - call_simulacrum(question, history, temperature=0.7) -> dict",
+      "tags": [
+        "code",
+        "python"
+      ],
+      "complexity": 11,
       "languageNotes": {
         "language": "Python",
         "kindexType": "artifact",
@@ -3365,7 +3995,7 @@
       "type": "class",
       "name": "WizardConfig",
       "filePath": "src/pact/wizard.py",
-      "summary": "class WizardConfig(BaseModel) (src/pact/wizard.py:19)",
+      "summary": "class WizardConfig(BaseModel) (src/pact/wizard.py:20)",
       "tags": [
         "code",
         "python"
@@ -3382,7 +4012,7 @@
       "type": "file",
       "name": "src/pact/wizard.py",
       "filePath": "src/pact/wizard.py",
-      "summary": "Language: Python | Path: src/pact/wizard.py | ~471 lines ## Classes - WizardConfig(BaseModel)",
+      "summary": "Language: Python | Path: src/pact/wizard.py | ~475 lines ## Classes - WizardConfig(BaseModel)",
       "tags": [
         "code",
         "python"
@@ -3396,6 +4026,20 @@
     }
   ],
   "edges": [
+    {
+      "source": "code-mod-pact-37b06da9f133",
+      "target": "code-mod-pact-2ad6f90e7afc",
+      "type": "depends_on",
+      "direction": "outbound",
+      "weight": 0.5
+    },
+    {
+      "source": "code-mod-pact-37b06da9f133",
+      "target": "code-mod-pact-4f6b28611ac6",
+      "type": "depends_on",
+      "direction": "outbound",
+      "weight": 0.5
+    },
     {
       "source": "code-mod-pact-7353584a3309",
       "target": "code-mod-pact-b4ff502a3a2a",
@@ -3439,6 +4083,13 @@
       "weight": 0.6
     },
     {
+      "source": "code-sym-pact-05eab30f0121",
+      "target": "code-mod-pact-b9a167a1b0af",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
       "source": "code-sym-pact-084be8bdcb87",
       "target": "code-mod-pact-f6d2d8ca7847",
       "type": "contains",
@@ -3453,8 +4104,22 @@
       "weight": 0.6
     },
     {
+      "source": "code-sym-pact-106eaf2b47ec",
+      "target": "code-mod-pact-739b45139017",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
       "source": "code-sym-pact-140d3d2f24e7",
       "target": "code-mod-pact-a98508a4c2c3",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
+      "source": "code-sym-pact-14ef01b21740",
+      "target": "code-mod-pact-b9a167a1b0af",
       "type": "contains",
       "direction": "outbound",
       "weight": 0.6
@@ -3483,6 +4148,13 @@
     {
       "source": "code-sym-pact-19bbb0e2d226",
       "target": "code-mod-pact-f6d2d8ca7847",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
+      "source": "code-sym-pact-1aaff9167b50",
+      "target": "code-mod-pact-b9a167a1b0af",
       "type": "contains",
       "direction": "outbound",
       "weight": 0.6
@@ -3558,6 +4230,20 @@
       "weight": 0.6
     },
     {
+      "source": "code-sym-pact-30882d54bf46",
+      "target": "code-mod-pact-a98508a4c2c3",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
+      "source": "code-sym-pact-350dee66beab",
+      "target": "code-mod-pact-739b45139017",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
       "source": "code-sym-pact-3674630240e8",
       "target": "code-mod-pact-a98508a4c2c3",
       "type": "contains",
@@ -3579,8 +4265,29 @@
       "weight": 0.6
     },
     {
+      "source": "code-sym-pact-3b2bc1822430",
+      "target": "code-mod-pact-b9a167a1b0af",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
+      "source": "code-sym-pact-3b3efd12aef7",
+      "target": "code-mod-pact-a98508a4c2c3",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
       "source": "code-sym-pact-3bcce15327bc",
       "target": "code-mod-pact-be6cd8f062f0",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
+      "source": "code-sym-pact-3d3f662ba6c8",
+      "target": "code-mod-pact-739b45139017",
       "type": "contains",
       "direction": "outbound",
       "weight": 0.6
@@ -3623,6 +4330,34 @@
     {
       "source": "code-sym-pact-4bba251dfee3",
       "target": "code-mod-pact-8586214fa668",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
+      "source": "code-sym-pact-4bfdb32872bc",
+      "target": "code-mod-pact-739b45139017",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
+      "source": "code-sym-pact-4d758eb8ff99",
+      "target": "code-mod-pact-b9a167a1b0af",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
+      "source": "code-sym-pact-51d435e61fe7",
+      "target": "code-mod-pact-b9a167a1b0af",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
+      "source": "code-sym-pact-5465cc21f46d",
+      "target": "code-mod-pact-739b45139017",
       "type": "contains",
       "direction": "outbound",
       "weight": 0.6
@@ -3712,8 +4447,22 @@
       "weight": 0.6
     },
     {
+      "source": "code-sym-pact-678138f44ef9",
+      "target": "code-mod-pact-b9a167a1b0af",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
       "source": "code-sym-pact-6ac0ecfd5a53",
       "target": "code-mod-pact-fb6e7f10cd51",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
+      "source": "code-sym-pact-6d90d4528416",
+      "target": "code-mod-pact-b9a167a1b0af",
       "type": "contains",
       "direction": "outbound",
       "weight": 0.6
@@ -3728,6 +4477,13 @@
     {
       "source": "code-sym-pact-6f9aa3952e5f",
       "target": "code-mod-pact-033d490ddbba",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
+      "source": "code-sym-pact-70324ecb42c5",
+      "target": "code-mod-pact-b9a167a1b0af",
       "type": "contains",
       "direction": "outbound",
       "weight": 0.6
@@ -3777,6 +4533,13 @@
     {
       "source": "code-sym-pact-7b7369f76eba",
       "target": "code-mod-pact-f6d2d8ca7847",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
+      "source": "code-sym-pact-7c80bcda6b28",
+      "target": "code-mod-pact-b9a167a1b0af",
       "type": "contains",
       "direction": "outbound",
       "weight": 0.6
@@ -3894,6 +4657,13 @@
       "weight": 0.6
     },
     {
+      "source": "code-sym-pact-97e85d0d6c48",
+      "target": "code-mod-pact-caa9e7a3f6c2",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
       "source": "code-sym-pact-9899ce68ac02",
       "target": "code-mod-pact-a98508a4c2c3",
       "type": "contains",
@@ -3985,8 +4755,22 @@
       "weight": 0.6
     },
     {
+      "source": "code-sym-pact-a6979af662b4",
+      "target": "code-mod-pact-b9a167a1b0af",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
       "source": "code-sym-pact-aaf475b7d168",
       "target": "code-mod-pact-a98508a4c2c3",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
+      "source": "code-sym-pact-ab044f1b8a39",
+      "target": "code-mod-pact-b9a167a1b0af",
       "type": "contains",
       "direction": "outbound",
       "weight": 0.6
@@ -4013,6 +4797,13 @@
       "weight": 0.6
     },
     {
+      "source": "code-sym-pact-b36ed3b88917",
+      "target": "code-mod-pact-b9a167a1b0af",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
       "source": "code-sym-pact-b8142a736db6",
       "target": "code-mod-pact-ae33d642e65f",
       "type": "contains",
@@ -4029,6 +4820,13 @@
     {
       "source": "code-sym-pact-b9ab9975ad33",
       "target": "code-mod-pact-49f078e2c789",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
+      "source": "code-sym-pact-bb0b3e019bab",
+      "target": "code-mod-pact-b9a167a1b0af",
       "type": "contains",
       "direction": "outbound",
       "weight": 0.6
@@ -4057,6 +4855,13 @@
     {
       "source": "code-sym-pact-c24e3c0a4cb9",
       "target": "code-mod-pact-aef5404e7b18",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
+      "source": "code-sym-pact-c340d6c50993",
+      "target": "code-mod-pact-b9a167a1b0af",
       "type": "contains",
       "direction": "outbound",
       "weight": 0.6
@@ -4202,6 +5007,13 @@
       "weight": 0.6
     },
     {
+      "source": "code-sym-pact-e348760ecf9a",
+      "target": "code-mod-pact-b9a167a1b0af",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
       "source": "code-sym-pact-e41d50b72e68",
       "target": "code-mod-pact-794dc5b1cccf",
       "type": "contains",
@@ -4225,6 +5037,13 @@
     {
       "source": "code-sym-pact-eaf15125dab2",
       "target": "code-mod-pact-a98508a4c2c3",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
+      "source": "code-sym-pact-ece8b27fee08",
+      "target": "code-mod-pact-b9a167a1b0af",
       "type": "contains",
       "direction": "outbound",
       "weight": 0.6
@@ -4286,6 +5105,20 @@
       "weight": 0.6
     },
     {
+      "source": "code-sym-pact-f8c5d8d5a542",
+      "target": "code-mod-pact-b9a167a1b0af",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
+      "source": "code-sym-pact-f8dfc7afa6f9",
+      "target": "code-mod-pact-b9a167a1b0af",
+      "type": "contains",
+      "direction": "outbound",
+      "weight": 0.6
+    },
+    {
       "source": "code-sym-pact-f9cea70e53e3",
       "target": "code-mod-pact-fb6e7f10cd51",
       "type": "contains",
@@ -4334,6 +5167,7 @@
       "name": "Core",
       "description": "Kindex-inferred core layer.",
       "nodeIds": [
+        "code-mod-pact-00354a1f7047",
         "code-mod-pact-033d490ddbba",
         "code-mod-pact-07187d296808",
         "code-mod-pact-07b1202ea459",
@@ -4342,9 +5176,11 @@
         "code-mod-pact-1da19a62b57a",
         "code-mod-pact-26e985d1be30",
         "code-mod-pact-2ad6f90e7afc",
+        "code-mod-pact-37b06da9f133",
         "code-mod-pact-387b4f2559f5",
         "code-mod-pact-3a4698aea265",
         "code-mod-pact-428626b90b9c",
+        "code-mod-pact-454bad6960d3",
         "code-mod-pact-4964ee5c8902",
         "code-mod-pact-49e7f81fc34f",
         "code-mod-pact-49f078e2c789",
@@ -4355,6 +5191,7 @@
         "code-mod-pact-6d8e62424eb9",
         "code-mod-pact-726caf113a1f",
         "code-mod-pact-7353584a3309",
+        "code-mod-pact-739b45139017",
         "code-mod-pact-73d2f0c564a9",
         "code-mod-pact-73dc8657bc5e",
         "code-mod-pact-794dc5b1cccf",
@@ -4372,6 +5209,7 @@
         "code-mod-pact-97bc099e4351",
         "code-mod-pact-9fa5de810794",
         "code-mod-pact-a38b32f7916c",
+        "code-mod-pact-a8704a67be93",
         "code-mod-pact-ab06f5642332",
         "code-mod-pact-aef5404e7b18",
         "code-mod-pact-afee76cdb64a",
@@ -4379,9 +5217,11 @@
         "code-mod-pact-b69dda9dca74",
         "code-mod-pact-b9087a29931c",
         "code-mod-pact-be6cd8f062f0",
+        "code-mod-pact-c152f81c3442",
         "code-mod-pact-c23fabd0f558",
         "code-mod-pact-c333917ce01b",
         "code-mod-pact-c624f6ed3998",
+        "code-mod-pact-caa9e7a3f6c2",
         "code-mod-pact-cac3ecd752f9",
         "code-mod-pact-d00b483362b2",
         "code-mod-pact-d1e8b0edf041",
@@ -4390,6 +5230,7 @@
         "code-mod-pact-d7aaf24c1256",
         "code-mod-pact-dbef1f35a21a",
         "code-mod-pact-dd5070bdd389",
+        "code-mod-pact-e05c66d16f84",
         "code-mod-pact-e0782a921375",
         "code-mod-pact-e2a7519a54e6",
         "code-mod-pact-e577f268671e",
@@ -4405,6 +5246,7 @@
       "nodeIds": [
         "code-mod-pact-a98508a4c2c3",
         "code-mod-pact-ae33d642e65f",
+        "code-mod-pact-b9a167a1b0af",
         "code-mod-pact-f6d2d8ca7847"
       ]
     },
@@ -4414,13 +5256,17 @@
       "description": "Kindex-inferred domain layer.",
       "nodeIds": [
         "code-sym-pact-0502e6fd4711",
+        "code-sym-pact-05eab30f0121",
         "code-sym-pact-084be8bdcb87",
         "code-sym-pact-08a7a2f07e78",
+        "code-sym-pact-106eaf2b47ec",
         "code-sym-pact-140d3d2f24e7",
+        "code-sym-pact-14ef01b21740",
         "code-sym-pact-160bcf56df37",
         "code-sym-pact-17aa04e07cfa",
         "code-sym-pact-1954aacc337b",
         "code-sym-pact-19bbb0e2d226",
+        "code-sym-pact-1aaff9167b50",
         "code-sym-pact-1d7d2fd23613",
         "code-sym-pact-1d9b61d9a143",
         "code-sym-pact-1fb1baf11477",
@@ -4431,17 +5277,26 @@
         "code-sym-pact-2b6cb0bcdfd0",
         "code-sym-pact-2e2685cb307b",
         "code-sym-pact-301c1100e0b5",
+        "code-sym-pact-30882d54bf46",
         "code-sym-pact-33550f0136d3",
+        "code-sym-pact-350dee66beab",
         "code-sym-pact-3674630240e8",
         "code-sym-pact-388311a64c92",
         "code-sym-pact-3b1bb09dcaab",
+        "code-sym-pact-3b2bc1822430",
+        "code-sym-pact-3b3efd12aef7",
         "code-sym-pact-3bcce15327bc",
+        "code-sym-pact-3d3f662ba6c8",
         "code-sym-pact-3e04594863c6",
         "code-sym-pact-405eb134fe09",
         "code-sym-pact-40b40af3cab5",
         "code-sym-pact-4507c355079b",
         "code-sym-pact-4667e10062cf",
         "code-sym-pact-4bba251dfee3",
+        "code-sym-pact-4bfdb32872bc",
+        "code-sym-pact-4d758eb8ff99",
+        "code-sym-pact-51d435e61fe7",
+        "code-sym-pact-5465cc21f46d",
         "code-sym-pact-5532f17920b6",
         "code-sym-pact-554100caca48",
         "code-sym-pact-5637233c31fc",
@@ -4454,10 +5309,13 @@
         "code-sym-pact-64cd711ae8b0",
         "code-sym-pact-66a983e8b8bd",
         "code-sym-pact-6746962f7365",
+        "code-sym-pact-678138f44ef9",
         "code-sym-pact-6ac0ecfd5a53",
         "code-sym-pact-6b1f143a26af",
+        "code-sym-pact-6d90d4528416",
         "code-sym-pact-6e633b940a45",
         "code-sym-pact-6f9aa3952e5f",
+        "code-sym-pact-70324ecb42c5",
         "code-sym-pact-73dd1badbca1",
         "code-sym-pact-74a320f08c4c",
         "code-sym-pact-75eb4e3d7b30",
@@ -4465,6 +5323,7 @@
         "code-sym-pact-7965a19ab611",
         "code-sym-pact-7abd810622ad",
         "code-sym-pact-7b7369f76eba",
+        "code-sym-pact-7c80bcda6b28",
         "code-sym-pact-7d69acc6e926",
         "code-sym-pact-7e351cd86925",
         "code-sym-pact-810a73198811",
@@ -4481,6 +5340,7 @@
         "code-sym-pact-937db436f675",
         "code-sym-pact-9677026b12d3",
         "code-sym-pact-978f435fff15",
+        "code-sym-pact-97e85d0d6c48",
         "code-sym-pact-9899ce68ac02",
         "code-sym-pact-99fbf5ee09c8",
         "code-sym-pact-99fc8a2e7c33",
@@ -4494,17 +5354,22 @@
         "code-sym-pact-a408b2322123",
         "code-sym-pact-a51989c158ce",
         "code-sym-pact-a68d3a4f8d26",
+        "code-sym-pact-a6979af662b4",
         "code-sym-pact-aaf475b7d168",
+        "code-sym-pact-ab044f1b8a39",
         "code-sym-pact-aeef71a5bc26",
         "code-sym-pact-b1a05df1c9aa",
         "code-sym-pact-b3086722b876",
+        "code-sym-pact-b36ed3b88917",
         "code-sym-pact-b8142a736db6",
         "code-sym-pact-b8bbad9a9ac4",
         "code-sym-pact-b9ab9975ad33",
+        "code-sym-pact-bb0b3e019bab",
         "code-sym-pact-c040e54f3e5d",
         "code-sym-pact-c08e780b0988",
         "code-sym-pact-c22a932fe5d1",
         "code-sym-pact-c24e3c0a4cb9",
+        "code-sym-pact-c340d6c50993",
         "code-sym-pact-c7f61db09e0f",
         "code-sym-pact-c852fe2a3d37",
         "code-sym-pact-caece21eb0fa",
@@ -4525,10 +5390,12 @@
         "code-sym-pact-df9b164f0c11",
         "code-sym-pact-e0459cb9e0e7",
         "code-sym-pact-e093c27db363",
+        "code-sym-pact-e348760ecf9a",
         "code-sym-pact-e41d50b72e68",
         "code-sym-pact-e78aeaeef4b8",
         "code-sym-pact-e9d4a04de064",
         "code-sym-pact-eaf15125dab2",
+        "code-sym-pact-ece8b27fee08",
         "code-sym-pact-ed12d860bac8",
         "code-sym-pact-ee751d894293",
         "code-sym-pact-efa87c8eb3ef",
@@ -4537,6 +5404,8 @@
         "code-sym-pact-f3cf7a2df38f",
         "code-sym-pact-f59ba2e3c34e",
         "code-sym-pact-f7faad21e118",
+        "code-sym-pact-f8c5d8d5a542",
+        "code-sym-pact-f8dfc7afa6f9",
         "code-sym-pact-f9cea70e53e3",
         "code-sym-pact-f9e26a71f864",
         "code-sym-pact-fb3e8cb06f6c",
@@ -4555,14 +5424,23 @@
         "code-mod-pact-907b2f35b05b",
         "code-mod-pact-93ecc28abe59"
       ]
+    },
+    {
+      "id": "ui",
+      "name": "Ui",
+      "description": "Kindex-inferred ui layer.",
+      "nodeIds": [
+        "code-mod-pact-669c71bb96b4"
+      ]
     }
   ],
   "tour": [
     {
       "order": 1,
       "title": "Core",
-      "description": "Review 62 node(s) in the Core layer.",
+      "description": "Review 70 node(s) in the Core layer.",
       "nodeIds": [
+        "code-mod-pact-00354a1f7047",
         "code-mod-pact-033d490ddbba",
         "code-mod-pact-07187d296808",
         "code-mod-pact-07b1202ea459",
@@ -4571,9 +5449,11 @@
         "code-mod-pact-1da19a62b57a",
         "code-mod-pact-26e985d1be30",
         "code-mod-pact-2ad6f90e7afc",
+        "code-mod-pact-37b06da9f133",
         "code-mod-pact-387b4f2559f5",
         "code-mod-pact-3a4698aea265",
         "code-mod-pact-428626b90b9c",
+        "code-mod-pact-454bad6960d3",
         "code-mod-pact-4964ee5c8902",
         "code-mod-pact-49e7f81fc34f",
         "code-mod-pact-49f078e2c789",
@@ -4584,35 +5464,37 @@
         "code-mod-pact-6d8e62424eb9",
         "code-mod-pact-726caf113a1f",
         "code-mod-pact-7353584a3309",
-        "code-mod-pact-73d2f0c564a9",
-        "code-mod-pact-73dc8657bc5e",
-        "code-mod-pact-794dc5b1cccf",
-        "code-mod-pact-7fcd80e50780"
+        "code-mod-pact-739b45139017"
       ]
     },
     {
       "order": 2,
       "title": "Data",
-      "description": "Review 3 node(s) in the Data layer.",
+      "description": "Review 4 node(s) in the Data layer.",
       "nodeIds": [
         "code-mod-pact-a98508a4c2c3",
         "code-mod-pact-ae33d642e65f",
+        "code-mod-pact-b9a167a1b0af",
         "code-mod-pact-f6d2d8ca7847"
       ]
     },
     {
       "order": 3,
       "title": "Domain",
-      "description": "Review 130 node(s) in the Domain layer.",
+      "description": "Review 157 node(s) in the Domain layer.",
       "nodeIds": [
         "code-sym-pact-0502e6fd4711",
+        "code-sym-pact-05eab30f0121",
         "code-sym-pact-084be8bdcb87",
         "code-sym-pact-08a7a2f07e78",
+        "code-sym-pact-106eaf2b47ec",
         "code-sym-pact-140d3d2f24e7",
+        "code-sym-pact-14ef01b21740",
         "code-sym-pact-160bcf56df37",
         "code-sym-pact-17aa04e07cfa",
         "code-sym-pact-1954aacc337b",
         "code-sym-pact-19bbb0e2d226",
+        "code-sym-pact-1aaff9167b50",
         "code-sym-pact-1d7d2fd23613",
         "code-sym-pact-1d9b61d9a143",
         "code-sym-pact-1fb1baf11477",
@@ -4623,13 +5505,9 @@
         "code-sym-pact-2b6cb0bcdfd0",
         "code-sym-pact-2e2685cb307b",
         "code-sym-pact-301c1100e0b5",
+        "code-sym-pact-30882d54bf46",
         "code-sym-pact-33550f0136d3",
-        "code-sym-pact-3674630240e8",
-        "code-sym-pact-388311a64c92",
-        "code-sym-pact-3b1bb09dcaab",
-        "code-sym-pact-3bcce15327bc",
-        "code-sym-pact-3e04594863c6",
-        "code-sym-pact-405eb134fe09"
+        "code-sym-pact-350dee66beab"
       ]
     },
     {
@@ -4641,6 +5519,14 @@
         "code-mod-pact-4003bc640e4f",
         "code-mod-pact-907b2f35b05b",
         "code-mod-pact-93ecc28abe59"
+      ]
+    },
+    {
+      "order": 5,
+      "title": "Ui",
+      "description": "Review 1 node(s) in the Ui layer.",
+      "nodeIds": [
+        "code-mod-pact-669c71bb96b4"
       ]
     }
   ]

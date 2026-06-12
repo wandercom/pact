@@ -15,6 +15,8 @@ import json as _json
 
 from pydantic import BaseModel, Field, field_validator, model_validator
 
+from pact.readiness import ReadinessProfile
+
 
 # ── Contract Models ──────────────────────────────────────────────────
 
@@ -412,6 +414,7 @@ class InterviewResult(BaseModel):
     approved: bool = False
     audited_answers: list[AuditedAnswer] = []
     processing_register: str = ""
+    readiness_profile: ReadinessProfile = Field(default_factory=ReadinessProfile)
 
 
 # ── Interview V2 Models ─────────────────────────────────────────────

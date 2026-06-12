@@ -18,6 +18,8 @@ Build one specific component | `pact build <project> <id>`
 Monitor coordination health | `pact health`
 Integrate with Claude Code | `pact mcp-server`
 Run adversarial implementation + claim review | `pact review`
+Scaffold or validate a production-readiness pack | `pact production init` / `pact production validate`
+Apply an AI-authored build spec | `pact init --spec` / `pact spec apply`
 
 ## Capabilities
 
@@ -103,14 +105,32 @@ Run adversarial implementation + claim review | `pact review`
 **Tools:** status, contracts, budget, validate, resume, components, build.
 **Install:** `pip install pact-agents[mcp]`
 
-### 10. Task Planning
+### 10. Production-Readiness Pack
+
+**Command:** `pact production init <project-dir>` / `pact production status <project-dir>` / `pact production fingerprint <project-dir>` / `pact production validate <project-dir>`
+**When:** A build needs explicit production-readiness evidence beyond ordinary contracts and tests.
+**Requires:** A Pact project. No additional dependency.
+**Output:** File-backed `production/` artifacts, or the configured `production_artifact_dir`, plus a deterministic readiness report.
+**Checks:** Required pack files, source-fingerprint freshness, bounded evidence age, trust assertions, control matrix, threat model, architecture laws, preflight, live validation, derived evidence, external evidence, placeholder rejection, justified N/A records, and static secret/dependency/SBOM/OpenAPI checks.
+**Cost:** Free. Mechanical.
+
+### 11. Readiness Profile and AI Build Spec
+
+**Command:** `pact init <project-dir> --spec <file>` / `pact spec apply <project-dir> <file>` / `pact spec show <file>`
+**When:** A build needs explicit up-front decisions about operational maturity, security, privacy, compliance, gating, testing, or monitoring.
+**Requires:** JSON or YAML spec, or the default `build_spec.yaml` created by `pact init`.
+**Output:** Typed readiness profile in `pact.yaml`, copied `build_spec.yaml`, and interview questions that confirm each dimension before decomposition.
+**Checks:** Levels resolve to concrete baseline controls; canonical readiness questions use defaults unless the user or AI overrides them; tracked build specs exclude secrets and machine-local paths.
+**Cost:** Free. Mechanical.
+
+### 12. Task Planning
 
 **Command:** `pact tasks <project-dir> [--phase] [--component] [--complete TASK_ID]`
 **When:** After decomposition, to see phased task list with dependencies.
 **Output:** Phased task list (setup -> foundational -> component -> integration -> polish).
 **Cost:** Free. Mechanical.
 
-### 11. Adversarial Review
+### 12. Adversarial Review
 
 **Command:** `pact review <target> --claim "<architecture or done claim>"`
 **When:** After implementation or before locking a consequential architecture frame.
@@ -126,7 +146,7 @@ Run adversarial implementation + claim review | `pact review`
 | Arbiter | Gate | POSTs `access_graph.json` for blast radius analysis |
 | Ledger | Upstream | `--ledger-dir` loads field-level audit assertions |
 | Sentinel | Downstream | PACT log keys for production attribution |
-| Kindex | Bidirectional | Knowledge graph context for agents + post-run capture |
+| Kindex | Bidirectional | Durable task and knowledge-graph context for agents + post-run capture + tracked `.kin` state |
 | Advocate | Downstream gate | Multi-persona implementation review via `pact review` |
 | Simulacrum | Packaged downstream gate | Architecture and done-claim stress test via `pact review`; external command only by explicit override |
 

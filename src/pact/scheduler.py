@@ -568,6 +568,12 @@ class Scheduler:
         """
         existing = self.project.load_interview()
         if existing and existing.approved:
+            if (
+                state.status == "paused"
+                and state.pause_reason.startswith("Interview questions pending")
+            ):
+                state.status = "active"
+                state.pause_reason = ""
             # Carry register forward from existing interview
             if existing.processing_register:
                 state.processing_register = existing.processing_register
@@ -583,6 +589,7 @@ class Scheduler:
             result = await run_interview(
                 agent, task, sops,
                 processing_register=config_register,
+                readiness_profile=self.project_config.readiness,
             )
             state.processing_register = result.processing_register
             self.project.save_interview(result)

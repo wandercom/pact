@@ -2,6 +2,7 @@
 
 Commands:
   pact init <project-dir>              Scaffold a new project
+  pact spec apply <project-dir> <file> Apply an AI-authored build spec
   pact status <project-dir> [comp]     Show project or component status
   pact run <project-dir>               Run the pipeline (single burst or poll loop)
   pact daemon <project-dir>            Run event-driven daemon (FIFO-based, zero-delay)
@@ -27,6 +28,7 @@ Commands:
   pact report <project-dir> <error>    Manually report a production error
   pact incidents <project-dir>         List active/recent incidents
   pact incident <project-dir> <id>     Show incident details + diagnostic report
+  pact production <subcommand> ...     Manage production-readiness artifact pack
   pact ci <project-dir>               Generate GitHub Actions CI workflow
   pact deploy <project-dir>           Generate baton.yaml topology config
 """
@@ -37,6 +39,7 @@ import argparse
 import asyncio
 import json
 import logging
+import os
 import sys
 from pathlib import Path
 
@@ -63,6 +66,7 @@ def main() -> None:
     p_init = subparsers.add_parser("init", help="Initialize a new project")
     p_init.add_argument("project_dir", help="Project directory path")
     p_init.add_argument("--budget", type=float, default=10.00, help="Budget cap in dollars")
+    p_init.add_argument("--spec", default=None, metavar="FILE", help="AI-authored JSON/YAML build spec")
 
     # status
     p_status = subparsers.add_parser("status", help="Show project or component status")
@@ -147,6 +151,16 @@ def main() -> None:
     p_signal = subparsers.add_parser("signal", help="Send signal to running daemon")
     p_signal.add_argument("project_dir", help="Project directory path")
     p_signal.add_argument("--msg", default="resume", help="Signal message (default: resume)")
+
+    # build spec
+    p_spec = subparsers.add_parser("spec", help="Apply or inspect AI-authored build specs")
+    spec_sub = p_spec.add_subparsers(dest="spec_command")
+    p_spec_apply = spec_sub.add_parser("apply", help="Apply a JSON/YAML build spec to a project")
+    p_spec_apply.add_argument("project_dir", help="Project directory path")
+    p_spec_apply.add_argument("spec_file", help="JSON/YAML build spec path")
+    p_spec_show = spec_sub.add_parser("show", help="Show a normalized build spec")
+    p_spec_show.add_argument("spec_file", help="JSON/YAML build spec path")
+    p_spec_show.add_argument("--json", action="store_true", dest="json_output", help="Output JSON instead of YAML")
 
     # interview
     p_interview = subparsers.add_parser("interview", help="Run interview phase")
@@ -234,6 +248,27 @@ def main() -> None:
     p_checklist = subparsers.add_parser("checklist", help="Generate requirements checklist")
     p_checklist.add_argument("project_dir", help="Project directory path")
     p_checklist.add_argument("--json", action="store_true", dest="json_output", help="Output as JSON")
+
+    # production-readiness artifact pack
+    p_production = subparsers.add_parser(
+        "production",
+        help="Manage optional production-readiness artifact pack",
+    )
+    production_sub = p_production.add_subparsers(dest="production_command")
+    p_production_init = production_sub.add_parser("init", help="Scaffold production-readiness artifacts")
+    p_production_init.add_argument("project_dir", help="Project directory path")
+    p_production_init.add_argument("--force", action="store_true", help="Overwrite existing production templates")
+    p_production_status = production_sub.add_parser("status", help="Show production-readiness status")
+    p_production_status.add_argument("project_dir", help="Project directory path")
+    p_production_status.add_argument("--json", action="store_true", dest="json_output", help="Output as JSON")
+    p_production_validate = production_sub.add_parser("validate", help="Validate production-readiness gate")
+    p_production_validate.add_argument("project_dir", help="Project directory path")
+    p_production_validate.add_argument("--json", action="store_true", dest="json_output", help="Output as JSON")
+    p_production_fingerprint = production_sub.add_parser(
+        "fingerprint",
+        help="Print the current source fingerprint for production evidence",
+    )
+    p_production_fingerprint.add_argument("project_dir", help="Project directory path")
 
     # directive
     p_directive = subparsers.add_parser("directive", help="Send structured directive to daemon")
@@ -408,6 +443,8 @@ def main() -> None:
         asyncio.run(cmd_ping(args))
     elif args.command == "signal":
         cmd_signal(args)
+    elif args.command == "spec":
+        cmd_spec(args)
     elif args.command == "interview":
         asyncio.run(cmd_interview(args))
     elif args.command == "answer":
@@ -440,6 +477,8 @@ def main() -> None:
         cmd_analyze(args)
     elif args.command == "checklist":
         cmd_checklist(args)
+    elif args.command == "production":
+        cmd_production(args)
     elif args.command == "directive":
         cmd_directive(args)
     elif args.command == "export-tasks":
@@ -587,6 +626,10 @@ def _kindex_prompt_and_index(project_dir: str) -> None:
         print("Kindex: auto-indexing codebase...")
         kindex.index_codebase(directory)
     elif auto is None:
+        if not _stdin_is_interactive():
+            print("Kindex detected; skipping interactive indexing prompt in noninteractive mode.")
+            print("  Set auto_index in .kin/config to opt in.")
+            return
         # Not configured — prompt
         print("Kindex detected. Index this codebase for cross-session context?")
         print("  [y] Yes  [n] No  [a] Always (save)  [v] Never (save)")
@@ -600,6 +643,18 @@ def _kindex_prompt_and_index(project_dir: str) -> None:
         elif choice == "v":
             kindex.write_kin_config(directory, {"auto_index": False})
             print("  Saved to .kin/config (auto_index: false)")
+
+
+def _stdin_is_interactive() -> bool:
+    """Return whether stdin can safely answer an interactive prompt."""
+    override = os.environ.get("PACT_INTERACTIVE", "").strip().lower()
+    if override in {"1", "true", "yes", "on"}:
+        return True
+    if override in {"0", "false", "no", "off"}:
+        return False
+
+    isatty = getattr(sys.stdin, "isatty", None)
+    return bool(isatty and isatty())
 
 
 def _kindex_fetch_context(project_dir: str) -> str | None:
@@ -644,9 +699,16 @@ def _kindex_publish_task(project_dir: str) -> None:
 def cmd_init(args: argparse.Namespace) -> None:
     """Initialize a new project."""
     from pact.archive import list_archived_sessions
+    from pact.readiness import BuildSpecError, apply_build_spec, load_build_spec
 
     project = ProjectManager(args.project_dir)
     project.init(budget=args.budget)
+    if getattr(args, "spec", None):
+        try:
+            spec = load_build_spec(args.spec)
+        except BuildSpecError as exc:
+            raise SystemExit(str(exc)) from exc
+        apply_build_spec(project.project_dir, spec, source_path=args.spec)
 
     # Show archive info if artifacts were just archived
     sessions = list_archived_sessions(project.archive_dir)
@@ -661,6 +723,7 @@ def cmd_init(args: argparse.Namespace) -> None:
     print(f"Initialized project: {project.project_dir}")
     print(f"  Edit {project.task_path} to describe your task")
     print(f"  Edit {project.sops_path} to set operating procedures")
+    print(f"  Edit {project.project_dir / 'build_spec.yaml'} to set readiness and AI handoff")
 
     if kindex_context:
         print("  Kindex context loaded — will be available during interview phase")
@@ -669,6 +732,38 @@ def cmd_init(args: argparse.Namespace) -> None:
         print(f"  Previous sessions available: {', '.join(s['slug'] for s in sessions)}")
 
     print(f"  Then run: pact daemon {args.project_dir}")
+
+
+def cmd_spec(args: argparse.Namespace) -> None:
+    """Apply or show an AI-authored build spec."""
+
+    from pact.readiness import BuildSpecError, apply_build_spec, dump_build_spec, load_build_spec
+
+    subcommand = getattr(args, "spec_command", "")
+    if subcommand == "apply":
+        try:
+            spec = load_build_spec(args.spec_file)
+        except BuildSpecError as exc:
+            raise SystemExit(str(exc)) from exc
+        project = ProjectManager(args.project_dir)
+        if not project.config_path.exists():
+            raise SystemExit(f"No Pact project found at {project.project_dir}; run 'pact init' first.")
+        apply_build_spec(project.project_dir, spec, source_path=args.spec_file)
+        print(f"Applied build spec: {args.spec_file}")
+        return
+
+    if subcommand == "show":
+        try:
+            spec = load_build_spec(args.spec_file)
+        except BuildSpecError as exc:
+            raise SystemExit(str(exc)) from exc
+        if getattr(args, "json_output", False):
+            print(spec.model_dump_json(indent=2))
+        else:
+            print(dump_build_spec(spec), end="")
+        return
+
+    raise SystemExit("Usage: pact spec {apply,show} ...")
 
 
 def cmd_status(args: argparse.Namespace) -> None:
@@ -1197,7 +1292,12 @@ async def cmd_interview(args: argparse.Namespace) -> None:
     try:
         task = project.load_task()
         sops = project.load_sops()
-        result = await run_interview(agent, task, sops)
+        result = await run_interview(
+            agent,
+            task,
+            sops,
+            readiness_profile=project_config.readiness,
+        )
         project.save_interview(result)
 
         if result.questions:
@@ -1234,9 +1334,11 @@ def cmd_answer(args: argparse.Namespace) -> None:
 
     print("Answer each question (or press Enter to accept assumption):\n")
     for q in interview.questions:
+        from pact.readiness import default_answer_for_question
+
         assumption = next(
             (a for a in interview.assumptions if a.lower() in q.lower()),
-            "No default",
+            default_answer_for_question(q) or "No default",
         )
         answer = input(f"Q: {q}\n  [Default: {assumption}]\n  A: ").strip()
         interview.user_answers[q] = answer or assumption
@@ -1274,9 +1376,11 @@ def match_answer_to_question(
     Algorithm (in order):
       1. Keyword overlap (>= 2 significant words shared): use best match
          Confidence: word_overlap / max(len_q_words, len_a_words)
-      2. Index-based pairing: if question_index < len(assumptions), use assumptions[question_index]
+      2. Explicit question default: use [default: ...] when present
+         Confidence: 0.9
+      3. Index-based pairing: if question_index < len(assumptions), use assumptions[question_index]
          Confidence: 0.5
-      3. No match: return ("Accepted as stated", 0.0)
+      4. No match: return ("Accepted as stated", 0.0)
 
     Significant words: exclude STOPWORDS
     """
@@ -1304,11 +1408,18 @@ def match_answer_to_question(
     if best_match and best_confidence > 0.0:
         return best_match, best_confidence
 
-    # 2. Index-based fallback
+    # 2. Explicit question default
+    from pact.readiness import default_answer_for_question
+
+    explicit_default = default_answer_for_question(question)
+    if explicit_default:
+        return explicit_default, 0.9
+
+    # 3. Index-based fallback
     if question_index < len(assumptions):
         return assumptions[question_index], 0.5
 
-    # 3. No match
+    # 4. No match
     return "Accepted as stated", 0.0
 
 
@@ -2199,6 +2310,42 @@ def cmd_checklist(args: argparse.Namespace) -> None:
         return
 
     print(render_checklist_markdown(checklist))
+
+
+def cmd_production(args: argparse.Namespace) -> None:
+    """Manage the optional production-readiness artifact pack."""
+
+    from pact.production import (
+        initialize_production_pack,
+        compute_source_fingerprint,
+        production_status,
+        render_production_report,
+        save_production_report,
+    )
+
+    subcommand = getattr(args, "production_command", "")
+    if subcommand == "init":
+        root = initialize_production_pack(args.project_dir, overwrite=getattr(args, "force", False))
+        print(f"Initialized production artifact pack: {root}")
+        print(f"  Run: pact run {args.project_dir} --constrain-dir {root} --plan-only")
+        return
+
+    if subcommand in {"status", "validate"}:
+        report = production_status(args.project_dir)
+        save_production_report(report, args.project_dir)
+        if getattr(args, "json_output", False):
+            print(report.model_dump_json(indent=2))
+        else:
+            print(render_production_report(report))
+        if subcommand == "validate" and not report.passed:
+            raise SystemExit(1)
+        return
+
+    if subcommand == "fingerprint":
+        print(compute_source_fingerprint(args.project_dir))
+        return
+
+    raise SystemExit("Usage: pact production {init,status,validate,fingerprint} ...")
 
 
 def cmd_assess(args: argparse.Namespace) -> None:

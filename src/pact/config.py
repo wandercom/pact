@@ -16,6 +16,8 @@ logger = logging.getLogger(__name__)
 
 import yaml
 
+from pact.readiness import ReadinessProfile
+
 
 class BuildMode(StrEnum):
     """How pact decomposes and implements tasks."""
@@ -202,6 +204,13 @@ class ProjectConfig:
     # Tool index (ctags/cscope/tree-sitter/kindex enrichment)
     tool_index_enabled: bool | None = None  # None = auto (use if tools available)
 
+    # Optional production-readiness artifact pack
+    production_profile: bool = False
+    production_artifact_dir: str = "production"
+
+    # Up-front build readiness profile
+    readiness: ReadinessProfile = field(default_factory=ReadinessProfile)
+
 
 def load_global_config(config_path: str | Path | None = None) -> GlobalConfig:
     """Load global config from config.yaml."""
@@ -343,6 +352,9 @@ def load_project_config(project_dir: str | Path) -> ProjectConfig:
         skip_arbiter=raw.get("skip_arbiter", False),
         tool_index_enabled=raw.get("tool_index_enabled"),
         package_namespace=raw.get("package_namespace", ""),
+        production_profile=raw.get("production_profile", False),
+        production_artifact_dir=raw.get("production_artifact_dir", "production"),
+        readiness=ReadinessProfile.model_validate(raw.get("readiness", {})),
     )
 
     model_tiers_raw = raw.get("model_tiers", {})

@@ -1,5 +1,8 @@
 """Tests for optional kindex integration — graceful degradation."""
 
+import sys
+from types import ModuleType
+
 import pytest
 from pathlib import Path
 from unittest.mock import patch, MagicMock
@@ -131,6 +134,83 @@ class TestPublishDecomposition:
 
 
 # ============================================================================
+# Durable task publishing
+# ============================================================================
+
+class TestPublishTask:
+    def test_uses_kindex_task_helper(self):
+        from pact import kindex_integration as ki
+        mock_store = MagicMock()
+        ki._store = mock_store
+        ki._checked = True
+
+        package = ModuleType("kindex")
+        package.__path__ = []
+        tasks = ModuleType("kindex.tasks")
+        create_task = MagicMock(return_value="task-123")
+        tasks.create_task = create_task
+
+        with patch.dict(sys.modules, {"kindex": package, "kindex.tasks": tasks}):
+            assert ki.publish_task("title", "content", tags=["pact"]) == "task-123"
+
+        create_task.assert_called_once_with(
+            mock_store,
+            "title",
+            content="content",
+            domains=["pact"],
+        )
+        ki.close()
+
+    def test_falls_back_to_raw_task_node(self):
+        from pact import kindex_integration as ki
+        mock_store = MagicMock()
+        ki._store = mock_store
+        ki._checked = True
+
+        package = ModuleType("kindex")
+        package.__path__ = []
+        tasks = ModuleType("kindex.tasks")
+        tasks.create_task = MagicMock(side_effect=TypeError("helper unavailable"))
+
+        with patch.dict(sys.modules, {"kindex": package, "kindex.tasks": tasks}):
+            with patch.object(ki, "_publish_raw_task", return_value="task-456") as publish_raw_task:
+                assert ki.publish_task("title", "content", tags=["pact"]) == "task-456"
+
+        publish_raw_task.assert_called_once_with(
+            "title",
+            "content",
+            ["pact"],
+        )
+        ki.close()
+
+
+# ============================================================================
+# CLI code indexing
+# ============================================================================
+
+class TestIndexCodebase:
+    @patch("pact.kindex_integration.subprocess.run")
+    @patch("pact.kindex_integration._cli_available", return_value=True)
+    def test_cli_indexing_passes_project_path(self, mock_available, mock_run, tmp_path):
+        from pact import kindex_integration as ki
+
+        mock_run.return_value.returncode = 0
+        assert ki.index_codebase(tmp_path) is True
+
+        command = mock_run.call_args.args[0]
+        assert command[0:3] == ["kin", "ingest", "code"]
+        assert command[command.index("--directory") + 1] == str(tmp_path.resolve())
+        assert command[command.index("--project-path") + 1] == str(tmp_path.resolve())
+
+    @patch("pact.kindex_integration._cli_available", return_value=True)
+    def test_skips_missing_directory(self, mock_available, tmp_path):
+        from pact import kindex_integration as ki
+
+        missing = tmp_path / "missing"
+        assert ki.index_codebase(missing) is False
+
+
+# ============================================================================
 # CLI integration (mocked)
 # ============================================================================
 
@@ -140,6 +220,37 @@ class TestCLIKindexPrompt:
         with patch("pact.kindex_integration.is_available", return_value=False):
             _kindex_prompt_and_index("/tmp/test")
             # Should not raise
+
+    @patch("pact.cli._stdin_is_interactive", return_value=False)
+    @patch("pact.kindex_integration.index_codebase")
+    @patch("pact.kindex_integration.should_auto_index", return_value=None)
+    @patch("pact.kindex_integration.is_available", return_value=True)
+    def test_skips_prompt_when_stdin_is_noninteractive(
+        self,
+        mock_available,
+        mock_auto_index,
+        mock_index_codebase,
+        mock_interactive,
+    ):
+        from pact.cli import _kindex_prompt_and_index
+
+        _kindex_prompt_and_index("/tmp/test")
+
+        mock_index_codebase.assert_not_called()
+
+    @patch.dict("pact.cli.os.environ", {"PACT_INTERACTIVE": "true"}, clear=True)
+    @patch("pact.cli.sys.stdin.isatty", return_value=False)
+    def test_interactive_override_beats_tty_detection(self, mock_isatty):
+        from pact.cli import _stdin_is_interactive
+
+        assert _stdin_is_interactive() is True
+
+    @patch.dict("pact.cli.os.environ", {"PACT_INTERACTIVE": "false"}, clear=True)
+    @patch("pact.cli.sys.stdin.isatty", return_value=True)
+    def test_noninteractive_override_beats_tty_detection(self, mock_isatty):
+        from pact.cli import _stdin_is_interactive
+
+        assert _stdin_is_interactive() is False
 
     def test_fetch_context_returns_none_when_unavailable(self):
         from pact.cli import _kindex_fetch_context

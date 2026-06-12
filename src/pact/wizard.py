@@ -11,9 +11,10 @@ from pathlib import Path
 from typing import Any, Callable
 
 import yaml
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from pact.schemas import InterviewQuestion, QuestionType, validate_answer
+from pact.readiness import ReadinessProfile
 
 
 class WizardConfig(BaseModel):
@@ -30,6 +31,7 @@ class WizardConfig(BaseModel):
     max_file_lines: int = 300
     prefer_stdlib: bool = True
     run_interview: bool = False
+    readiness: ReadinessProfile = Field(default_factory=ReadinessProfile)
 
 
 def build_wizard_questions() -> list[InterviewQuestion]:
@@ -464,6 +466,8 @@ def generate_pact_yaml(config: WizardConfig) -> dict[str, Any]:
 
     if config.parallel_components:
         cfg["parallel_components"] = True
+
+    cfg["readiness"] = config.readiness.model_dump(mode="json")
 
     return cfg
 

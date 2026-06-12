@@ -55,6 +55,10 @@ class TestProjectInit:
 
     def test_creates_config(self, tmp_project: ProjectManager):
         assert tmp_project.config_path.exists()
+        config = tmp_project.load_config()
+        assert config.plan_only is True
+        assert config.readiness.security.level == "standard"
+        assert (tmp_project.project_dir / "build_spec.yaml").exists()
 
     def test_creates_design_doc(self, tmp_project: ProjectManager):
         assert tmp_project.design_path.exists()

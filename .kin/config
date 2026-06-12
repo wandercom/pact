@@ -20,11 +20,13 @@ voice:
     - Goodhart tests catch implementations that game visible tests
     - Agents are interchangeable — contracts are the stable interface
     - Adoption meets projects where they are (pact adopt)
+    - Kindex is durable shared state — use persistent tasks and regenerate tracked artifacts
   anti-patterns:
     - Generating code before contracts are validated
     - Coupling agents to specific implementations
     - Skipping Goodhart tests (gaming visible tests is the default failure mode)
     - Manual decomposition when auto mode suffices
+    - Treating tracked .kin artifacts as local cache or hand-editing generated snapshots
 
 standards:
   code_review:
@@ -35,6 +37,7 @@ standards:
   documentation:
     - Pipeline phases documented with entry/exit criteria
     - Agent roles documented with tool access and constraints
+    - Tracked .kin artifacts remain repo-relative and machine-portable
   communication:
     - Lead with contract status and test results
 

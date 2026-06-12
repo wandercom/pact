@@ -28,6 +28,12 @@ from pact.agents.test_author import (
 )
 from pact.contracts import validate_all_contracts, validate_decomposition_coverage
 from pact.project import ProjectManager
+from pact.readiness import (
+    ReadinessProfile,
+    question_dimension,
+    readiness_questions,
+    resolve_readiness_profile,
+)
 from pact.schemas import (
     ComponentContract,
     ContractTestSuite,
@@ -100,6 +106,7 @@ async def run_interview(
     task: str,
     sops: str = "",
     processing_register: str = "",
+    readiness_profile: ReadinessProfile | None = None,
 ) -> InterviewResult:
     """Run the interview phase — identify risks and ask clarifying questions.
 
@@ -110,11 +117,15 @@ async def run_interview(
     # Establish register if not already set
     if not processing_register:
         processing_register = await run_register_establishment(agent, task, sops)
+    if readiness_profile is None:
+        readiness_profile = ReadinessProfile()
 
     register_context = (
         f"\nProcessing register: {processing_register}\n"
         f"Conduct this review in {processing_register} mode.\n"
     )
+    readiness_context = readiness_profile.render_for_prompt()
+    canonical_questions = readiness_questions(readiness_profile)
 
     prompt = f"""Review this task specification and identify issues:
 {register_context}
@@ -124,10 +135,15 @@ Task:
 SOPs:
 {sops or 'None provided'}
 
+Readiness profile defaults:
+{readiness_context}
+
 Identify:
 1. Risks: What could go wrong during implementation?
 2. Ambiguities: What aspects are unclear or underspecified?
-3. Questions: Specific questions for the product owner
+3. Questions: Specific questions for the product owner. Include these exact
+   readiness questions unless the task already answers them:
+{chr(10).join(f"   - {question}" for question in canonical_questions)}
 4. Assumptions: What assumptions will you make if not clarified?
 5. Acceptance criteria: What specific, testable conditions must be true
    for this task to be considered DONE? These should be concrete and
@@ -140,6 +156,15 @@ different engineers to implement incompatible solutions."""
 
     result, _, _ = await agent.assess(InterviewResult, prompt, INTERVIEW_SYSTEM)
     result.processing_register = processing_register
+    result.readiness_profile = readiness_profile
+    existing_dimensions = {
+        dimension
+        for question in result.questions
+        if (dimension := question_dimension(question))
+    }
+    for question in canonical_questions:
+        if question_dimension(question) not in existing_dimensions:
+            result.questions.append(question)
     return result
 
 
@@ -207,6 +232,10 @@ async def run_decomposition(
 
     interview_context = ""
     if interview:
+        resolved_readiness = resolve_readiness_profile(
+            interview.readiness_profile,
+            interview.user_answers,
+        )
         answers = "\n".join(
             f"  Q: {q}\n  A: {interview.user_answers.get(q, 'No answer')}"
             for q in interview.questions
@@ -218,6 +247,7 @@ async def run_decomposition(
             f"Answers:\n{answers}\n"
             f"Assumptions:\n{assumptions}"
         )
+        interview_context += f"\n{resolved_readiness.render_for_prompt()}"
         if acceptance:
             interview_context += f"\nAcceptance criteria (definition of done):\n{acceptance}"
 
@@ -525,6 +555,11 @@ async def decompose_and_contract(
     interview = project.load_interview()
     if not processing_register and interview:
         processing_register = interview.processing_register
+    readiness_profile = (
+        resolve_readiness_profile(interview.readiness_profile, interview.user_answers)
+        if interview
+        else ReadinessProfile()
+    )
 
     # Load existing tree or run decomposition
     existing_tree = project.load_tree()
@@ -616,6 +651,7 @@ async def decompose_and_contract(
                 max_plan_revisions=max_plan_revisions,
                 processing_register=processing_register,
                 type_registry=type_registry,
+                readiness_profile=readiness_profile,
             )
 
             # Mechanical correction: replace shared types with registry versions.

@@ -156,6 +156,27 @@ class TestRegisterEstablishment:
         assert mock_agent.assess.call_count == 1
 
     @pytest.mark.asyncio
+    async def test_interview_adds_canonical_readiness_questions(self):
+        from pact.decomposer import run_interview
+        from pact.readiness import ReadinessProfile
+
+        mock_agent = AsyncMock()
+        mock_agent.assess = AsyncMock(return_value=(
+            InterviewResult(risks=["test risk"]),
+            100, 20,
+        ))
+
+        result = await run_interview(
+            mock_agent,
+            "Build a thing",
+            processing_register="pragmatic-implementation",
+            readiness_profile=ReadinessProfile(security="strict"),
+        )
+
+        assert any("Readiness: What level of security" in question for question in result.questions)
+        assert result.readiness_profile.security.level == "strict"
+
+    @pytest.mark.asyncio
     async def test_interview_establishes_register_if_missing(self):
         from pact.decomposer import run_interview, _RegisterResponse
 
@@ -358,6 +379,35 @@ class TestContractAuthorRegister:
                 processing_register="rigorous-analytical",
             )
         assert contract.processing_register == "rigorous-analytical"
+
+    @pytest.mark.asyncio
+    async def test_readiness_profile_reaches_contract_context(self):
+        from pact.agents.contract_author import author_contract
+        from pact.readiness import ReadinessProfile
+        from pact.schemas import PlanEvaluation, ResearchReport
+
+        mock_agent = AsyncMock()
+        mock_agent._model = "test-model"
+        mock_agent.set_model = MagicMock()
+        mock_agent.assess_cached = AsyncMock(side_effect=[
+            (ResearchReport(task_summary="test"), 100, 20),
+            (PlanEvaluation(plan_summary="test", decision="proceed"), 100, 20),
+            (ComponentContract(component_id="c1", name="C1", description="test"), 200, 50),
+        ])
+
+        with patch("pact.quality.audit_contract_specificity", return_value=[]):
+            await author_contract(
+                mock_agent,
+                component_id="c1",
+                component_name="C1",
+                component_description="Test component",
+                readiness_profile=ReadinessProfile(security="strict"),
+            )
+
+        first_call = mock_agent.assess_cached.call_args_list[0]
+        assert "security: strict" in first_call.args[1]
+        final_call = mock_agent.assess_cached.call_args_list[-1]
+        assert "security: strict" in final_call.kwargs["cache_prefix"]
 
 
 # ── Runtime Drift Detection Tests ───────────────────────────────────

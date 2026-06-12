@@ -8,6 +8,8 @@ Contract-first multi-agent software engineering. Decomposition produces contract
 cd ~/Code/pact
 python3 -m pytest tests/ -v        # Run all tests
 pact init <project-dir>            # Initialize project
+pact init <project-dir> --spec <file> # Initialize from AI-authored build spec
+pact spec apply <project-dir> <file> # Apply AI-authored build spec
 pact status <project-dir>          # Show state
 pact components <project-dir>      # List components
 pact build <project-dir> <id>      # Build specific component
@@ -15,6 +17,9 @@ pact run <project-dir>             # Execute pipeline
 pact tasks <project-dir>           # Generate/display task list
 pact analyze <project-dir>         # Cross-artifact analysis
 pact checklist <project-dir>       # Requirements quality checklist
+pact production init <project-dir> # Scaffold optional production-readiness pack
+pact production fingerprint <project-dir> # Print the source fingerprint for evidence
+pact production validate <project-dir> # Validate production-readiness gate
 pact assess <directory>            # Architectural assessment (any codebase)
 pact export-tasks <project-dir>    # Export TASKS.md
 pact handoff <project-dir> <id>    # Render/validate handoff brief
@@ -37,6 +42,8 @@ Every agent follows 3 phases: Research -> Plan+Evaluate -> Execute. Research and
 ### Core Workflow
 
 1. **Interview** -- Establishes processing register (cognitive mode), then identifies risks/ambiguities, asks user clarifying questions
+   and confirms the readiness profile for operational maturity, security,
+   privacy, compliance, gating, testing, and monitoring.
 2. **Shape** -- (Optional) Produce a Shape Up pitch: appetite, breadboard, rabbit holes, no-gos
 3. **Decompose** -- Task -> DecompositionNode tree (2-7 components), guided by shaping context
 3. **Contract** -- For each component (leaves first), generate ComponentContract
@@ -47,6 +54,64 @@ Every agent follows 3 phases: Research -> Plan+Evaluate -> Execute. Research and
 8. **Integrate** -- Parent components: glue code wiring children, parent-level tests
 9. **Retrospective** -- Post-run analysis: cost, failure patterns, lessons learned (mechanical, no LLM)
 10. **Diagnose** -- On failure: I/O tracing, systematic error recovery
+
+### Production-Readiness Pack
+
+`pact production` is an explicit opt-in layer for higher-bar builds. It does
+not alter the default planner or implementation flow. Instead it scaffolds
+file-backed artifacts under `production/` and validates them against Pact's
+existing outputs:
+
+- `trust_policy.yaml` for machine-checkable trust assertions
+- `control_matrix.yaml` for control-to-evidence mapping
+- `threat_model.yaml` for threat and mitigation coverage
+- `architecture_laws.yaml` for hard implementation invariants
+- `preflight.yaml` for red lines and fallback
+- `live_validation.yaml` for running-instance evidence
+- `done_gate.yaml` plus `na_register.yaml` for falsifiable readiness status
+
+Derived evidence comes from project config, Constrain bundle, contracts,
+contract tests, Goodhart tests, analysis, checklist, review, certification, and
+stub scan. It also runs deterministic static checks inspired by webprobe's
+mechanical audit model: likely hard-coded secrets, dependency manifest, SBOM,
+and OpenAPI validity/auth/error/rate-limit shape. Static checks are never live
+browser, network, or LLM probes; missing optional artifacts are reported as
+`not_detected`, not as false failures. External evidence must be explicit. N/A
+across the pack requires a matching structured record and review reference. Set
+`production_artifact_dir` when the tracked pack should live somewhere other
+than `production/`; an unset `constrain_dir` follows that configured directory.
+The manifest fingerprint and bounded validation age prevent stale evidence from
+passing after source or Pact artifact changes, or after the evidence ages out.
+This is a deployment gate, not a runtime substitute; `live_validation.yaml`
+must still prove the running environment matches the evidence being claimed.
+
+### Readiness Profile
+
+Every project starts with a typed `readiness` section in `pact.yaml` and a
+`build_spec.yaml` template. The profile uses `none`, `basic`, `standard`,
+`strict`, and `regulated` levels per dimension, but each level expands to
+concrete controls before decomposition and contract authoring. The interview
+phase confirms or overrides those levels before any contract is generated.
+`build_spec.yaml` is tracked planning input, not a secret store; keep tokens,
+credentials, and machine-local paths out of it.
+If the task scope materially changes after interview, update the spec or
+`pact.yaml` and rerun interview before regenerating contracts.
+
+An AI can provide a full build request as JSON or YAML:
+
+```yaml
+task: |
+  Build a tenant-scoped booking API.
+sops: |
+  Use Python 3.12 and pytest.
+readiness:
+  security: strict
+  privacy: standard
+  compliance: basic
+config:
+  build_mode: hierarchy
+  budget: 25
+```
 
 ### Execution Modes
 
@@ -181,6 +246,8 @@ src/pact/
   cli.py               # CLI entry points
   mcp_server.py        # MCP server (FastMCP transport + PactMCPServer handlers)
   tool_index.py        # External tool enrichment (ctags, cscope, tree-sitter, kindex)
+  production.py        # Optional production-readiness pack scaffold + validation
+  schemas_production.py # Production-readiness artifact schemas
 
   # Spec-kit capabilities (task list, analysis, checklist)
   schemas_tasks.py     # Task list, analysis, checklist Pydantic models
@@ -237,6 +304,21 @@ All project knowledge is visible in the project tree. Only ephemeral per-run sta
   tasks.json           # Phased task list (auto-generated after decomposition)
   analysis.json        # Cross-artifact analysis report
   checklist.json       # Requirements quality checklist
+  production/          # Optional production-readiness pack
+    manifest.yaml
+    prompt.md
+    constraints.yaml
+    component_map.yaml
+    trust_policy.yaml
+    control_matrix.yaml
+    threat_model.yaml
+    architecture_laws.yaml
+    preflight.yaml
+    live_validation.yaml
+    done_gate.yaml
+    na_register.yaml
+    build_charter.md
+    reports/
   TASKS.md             # Rendered task list
   decomposition/       # Decomposition artifacts
     tree.json
@@ -360,6 +442,44 @@ A persistent knowledge graph (`kin`) indexes conversations, projects, and intell
 kin search "pact contracts"      # Hybrid search (FTS + graph)
 kin context contracts             # Pull related context
 kin add "<insight>"               # Capture discoveries
+```
+
+Kindex is an optional knowledge graph for carrying agent decisions, tasks, and
+project context across sessions. When Kindex is available, use its persistent
+task and knowledge surfaces rather than host-session-only scratch state. Start
+or resume a tag, search before adding, use `task_add` / `task_list` /
+`task_done` for work that must survive the current conversation, and prefer
+`edit` or `supersede` over duplicate nodes. Pact's post-run publishing writes
+durable task nodes, not concept-only task stand-ins. Kindex remains optional:
+Pact keeps its own run state under `.pact/` and still runs when Kindex is
+unavailable.
+
+This closes three concrete failure modes: task-shaped concepts were not durable
+Kindex tasks, noninteractive `pact init` could block or EOF on the indexing
+prompt, and an approved interview could remain paused until a daemon-specific
+recovery path intervened. Existing automation should set `auto_index: true` or
+`auto_index: false` in `.kin/config`; `PACT_INTERACTIVE=true|false` overrides
+TTY detection when a shell's interactivity is ambiguous.
+
+Tracked `.kin/` files are part of the repository contract:
+- `.kin/config` — project metadata, voice, domains, and work policy
+- `.kin/index.json` — tracked graph snapshot generated by `kin index`
+- `.kin/code-map.json` — repo-relative code map generated by `kin export code-map`
+- `.kin/.gitignore` — local/private runtime exclusions only
+
+Tracked artifacts must be self-contained and machine-portable. Never commit a
+developer-local path, local-only report pointer, secret, private transcript,
+or host-specific scratch reference. Regenerate snapshots from source rather
+than hand-editing generated JSON. In noninteractive shells, `pact init`
+skips the Kindex indexing prompt unless `.kin/config` explicitly sets
+`auto_index: true`.
+
+Refresh tracked Kindex artifacts with:
+
+```bash
+kin ingest code --directory . --project-path .
+kin index --project-path . --output-dir .
+kin export code-map --directory . --project-path . --output .kin/code-map.json
 ```
 
 Legacy Conv vault (459 nodes, richer historical data): `~/Personal/Projects/Conv/`

@@ -15,6 +15,7 @@ from pact.config import (
     resolve_backend,
     resolve_model,
 )
+from pact.readiness import ReadinessLevel
 
 
 class TestGlobalConfig:
@@ -74,6 +75,20 @@ class TestProjectConfig:
         c = load_project_config(tmp_path)
         assert c.budget == 50.00
         assert c.backend == "claude_code"
+
+    def test_readiness_defaults_and_overrides(self, tmp_path: Path):
+        assert ProjectConfig().readiness.security.level == ReadinessLevel.STANDARD
+
+        config_path = tmp_path / "pact.yaml"
+        config_path.write_text(yaml.dump({
+            "readiness": {
+                "security": "strict",
+                "compliance": {"level": "regulated"},
+            },
+        }))
+        c = load_project_config(tmp_path)
+        assert c.readiness.security.level == ReadinessLevel.STRICT
+        assert c.readiness.compliance.level == ReadinessLevel.REGULATED
 
 
 class TestResolveModel:

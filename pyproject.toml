@@ -1,6 +1,6 @@
 [project]
 name = "pact-agents"
-version = "1.0.0"
+version = "1.1.0"
 description = "Contract-first multi-agent software engineering. Contracts before code. Tests as law. Agents that can't cheat."
 readme = "README.md"
 license = {text = "MIT"}
@@ -26,9 +26,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://jmcentire.github.io/pact/"
+Homepage = "https://pact.tools"
 Repository = "https://github.com/jmcentire/pact"
-Documentation = "https://jmcentire.github.io/pact/"
+Documentation = "https://pact.tools/docs/"
 
 [project.scripts]
 pact = "pact.cli:main"
