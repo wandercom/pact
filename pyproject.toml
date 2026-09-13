@@ -6,7 +6,7 @@ readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.12"
 authors = [
-    {name = "J. Andrew McEntire", email = "j.andrew.mcentire@gmail.com"},
+    {name = "Wander"},
     {name = "blast_hardcheese"},
 ]
 keywords = ["multi-agent", "llm", "contracts", "testing", "software-engineering", "ai-agents"]

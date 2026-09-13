@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Plan-first contract engineering for Claude Code and Codex.",
   "author": {
-    "name": "J. Andrew McEntire"
+    "name": "Wander"
   },
   "repository": "https://github.com/wandercom/pact",
   "license": "MIT",
