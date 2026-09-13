@@ -5,7 +5,7 @@ Contract-first multi-agent software engineering. Decomposition produces contract
 ## Quick Reference
 
 ```bash
-cd ~/Code/pact
+cd ~/WanderRepos/repos/pact
 python3 -m pytest tests/ -v        # Run all tests
 pact init <project-dir>            # Initialize project
 pact init <project-dir> --spec <file> # Initialize from AI-authored JSON/YAML build spec
@@ -460,7 +460,7 @@ When asked to release, follow these steps exactly. Do NOT install twine or attem
 
 ## Kindex Knowledge Graph
 
-A persistent knowledge graph (`kin`) indexes conversations, projects, and intellectual work across all repos. It hooks into Claude Code automatically (SessionStart, PreCompact). Docs: https://jmcentire.github.io/kindex/
+A persistent knowledge graph (`kin`) indexes conversations, projects, and intellectual work across all repos. It hooks into Claude Code automatically (SessionStart, PreCompact). Docs: https://wandercom.github.io/kindex/
 
 ```bash
 kin search "pact contracts"      # Hybrid search (FTS + graph)
