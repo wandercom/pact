@@ -28,7 +28,7 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://pact.tools"
-Repository = "https://github.com/jmcentire/pact"
+Repository = "https://github.com/wandercom/pact"
 Documentation = "https://pact.tools/docs/"
 
 [project.scripts]

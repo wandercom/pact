@@ -2,7 +2,7 @@
 
 **Contracts before code. Tests as law. Agents that can't cheat.**
 
-Website: [pact.tools](https://pact.tools) · Docs: [pact.tools/docs](https://pact.tools/docs/) · Repository: [github.com/jmcentire/pact](https://github.com/jmcentire/pact)
+Website: [pact.tools](https://pact.tools) · Docs: [pact.tools/docs](https://pact.tools/docs/) · Repository: [github.com/wandercom/pact](https://github.com/wandercom/pact)
 
 Pact is a multi-agent software engineering framework where the architecture is decided before a single line of implementation is written. Tasks are decomposed into components, each component gets a typed interface contract, and each contract gets executable tests. Only then do agents implement -- independently, in parallel, even competitively -- with no way to ship code that doesn't honor its contract. Generates Python, TypeScript, or JavaScript.
 
@@ -40,7 +40,7 @@ Tested on 5 ICPC World Finals competitive programming problems (212 test cases t
 
 Pact's contract-first pipeline solves problems that iterative prompting cannot. On **Trailing Digits** (2020 World Finals), Claude Code scores 31/47 even with 5 retry iterations and full test feedback -- the naive algorithm times out on large inputs. Pact's interview and decomposition phases force upfront mathematical analysis, producing the correct O(log n) approach on the first implementation attempt.
 
-Full results: [icpc_official/RESULTS.md](https://github.com/jmcentire/pact/blob/main/benchmarks/icpc_official/RESULTS.md) in the benchmark directory.
+Full results: [icpc_official/RESULTS.md](https://github.com/wandercom/pact/blob/main/benchmarks/icpc_official/RESULTS.md) in the benchmark directory.
 
 ## Philosophy: Contracts Are the Product
 
@@ -53,7 +53,7 @@ This inverts the traditional relationship between code and tests. Code is cheap 
 ## Quick Start
 
 ```bash
-git clone https://github.com/jmcentire/pact.git
+git clone https://github.com/wandercom/pact.git
 cd pact
 make
 source .venv/bin/activate
@@ -711,7 +711,7 @@ When adopting or analyzing a codebase, Pact can leverage external tools for rich
 | **universal-ctags** | Symbol index (functions, classes, members, scope, signatures) | `brew install universal-ctags` |
 | **cscope** | Cross-references and call graph (best for C/C++) | `brew install cscope` |
 | **tree-sitter** | Full CST, error-tolerant parsing, cross-language (preferred for Python/TS/JS) | `pip install pact-agents[analysis]` |
-| **kindex** | Existing project knowledge from the knowledge graph | [kindex](https://github.com/jmcentire/kindex) |
+| **kindex** | Existing project knowledge from the knowledge graph | [kindex](https://github.com/wandercom/kindex) |
 
 Tree-sitter is preferred over cscope for Python, TypeScript, and JavaScript codebases. Both `pact adopt` and green-field workflows benefit -- agents receive enriched context about symbol hierarchies, class structure, and existing project knowledge.
 
@@ -802,8 +802,8 @@ the ideas in [Beyond Code: Context, Constraints, and the New Craft of Software](
 
 ## Related
 
-- [Baton](https://jmcentire.github.io/baton/) -- Circuit orchestration for contract-first components
-- [Sentinel](https://github.com/jmcentire/sentinel) -- Production attribution and contract tightening
+- [Baton](https://wandercom.github.io/baton/) -- Circuit orchestration for contract-first components
+- [Sentinel](https://github.com/wandercom/sentinel) -- Production attribution and contract tightening
 
 ## License
 

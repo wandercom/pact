@@ -2,7 +2,7 @@
 
 **Canonical reference for PACT key format and usage across the stack.**
 
-Cross-referenced from: [Sentinel](https://github.com/jmcentire/sentinel), [Cartographer](https://github.com/jmcentire/cartographer)
+Cross-referenced from: [Sentinel](https://github.com/wandercom/sentinel), [Cartographer](https://github.com/wandercom/cartographer)
 
 ## Format
 
