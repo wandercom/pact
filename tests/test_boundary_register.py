@@ -581,3 +581,108 @@ class TestPrompts:
             assert "Never invent or assume one" in prompt
             assert "boundary-register/1" in prompt
             assert "open question" in prompt
+            assert "pact boundary cite" in prompt
+
+
+# ── producing records: pact boundary cite ─────────────────────────────
+
+
+class TestCite:
+    def test_file_record_round_trips_through_verifier(self, tmp_path):
+        from pact.boundary_register import cite_record
+
+        _write(tmp_path, "ops/platform.yaml", "# header\nlevel_field: severity\n")
+        _write(tmp_path, "app/logging.py", 'FORMAT = {"severity": record.levelname}\n')
+        entry = {
+            "id": "log-level-field", "kind": "field", "relation": "equal",
+            "description": "The log platform reads severity from this key",
+            "sides": [
+                {"party": "external:cloud-logging", "role": "defines", "value": "severity",
+                 "records": [cite_record(tmp_path, kind="file", path="ops/platform.yaml", value="severity")]},
+                {"party": "api", "role": "consumes", "value": "severity",
+                 "records": [cite_record(tmp_path, kind="file", path="app/logging.py", value="severity", line=1)]},
+            ],
+        }
+        assert verify_entries([entry], tmp_path) == []
+
+    def test_line_auto_detect_uses_first_token_match(self, tmp_path):
+        from pact.boundary_register import cite_record
+
+        _write(tmp_path, "infra/svc.tf", 'a = "mea-auth-runtime"\nb = "mea-auth"\nc = "mea-auth"\n')
+        record = cite_record(tmp_path, kind="file", path="infra/svc.tf", value="mea-auth")
+        assert record["line"] == 2
+        assert record["sha256"] == hashlib.sha256((tmp_path / "infra/svc.tf").read_bytes()).hexdigest()
+
+    def test_refuses_when_value_absent_or_not_on_line(self, tmp_path):
+        from pact.boundary_register import CiteError, cite_record
+
+        _write(tmp_path, "infra/svc.tf", 'a = "mea-auth-runtime"\nb = "other"\n')
+        with pytest.raises(CiteError, match="does not occur as a token"):
+            cite_record(tmp_path, kind="file", path="infra/svc.tf", value="mea-auth")
+        with pytest.raises(CiteError, match="line 2 does not contain"):
+            cite_record(tmp_path, kind="file", path="infra/svc.tf", value="other-x", line=2)
+        with pytest.raises(CiteError, match="does not contain"):
+            cite_record(tmp_path, kind="observation", path="infra/svc.tf", value="mea-auth", command="cat infra/svc.tf")
+
+    def test_refuses_path_escape(self, tmp_path):
+        from pact.boundary_register import CiteError, cite_record
+
+        with pytest.raises(CiteError, match="must not contain '..'"):
+            cite_record(tmp_path, kind="file", path="../x", value="v")
+
+    def test_observation_needs_command_and_stamps_utc(self, tmp_path):
+        from pact.boundary_register import CiteError, cite_record
+
+        _write(tmp_path, "obs/uptime.json", '{"type": "cloud_run_revision"}\n')
+        with pytest.raises(CiteError, match="--command"):
+            cite_record(tmp_path, kind="observation", path="obs/uptime.json", value="cloud_run_revision")
+        record = cite_record(
+            tmp_path, kind="observation", path="obs/uptime.json", value="cloud_run_revision",
+            command="gcloud monitoring uptime list-configs --format json",
+        )
+        assert record["observed_at"].endswith("Z")
+        entry = _equal_entry(tmp_path, producer_value="cloud_run_revision", reader_value="cloud_run_revision")
+        entry["sides"][0]["records"] = [record]
+        assert verify_entries([entry], tmp_path) == []
+
+    def test_cli_prints_json_and_exits_1_on_refusal(self, tmp_path, monkeypatch, capsys):
+        import json
+
+        from pact.cli import main
+
+        _write(tmp_path, "ops/platform.yaml", "level_field: severity\n")
+        monkeypatch.setattr("sys.argv", [
+            "pact", "boundary", "cite", "--kind", "file", "--path", "ops/platform.yaml",
+            "--value", "severity", str(tmp_path),
+        ])
+        main()
+        record = json.loads(capsys.readouterr().out)
+        assert record == {
+            "kind": "file", "path": "ops/platform.yaml", "line": 1,
+            "sha256": hashlib.sha256(b"level_field: severity\n").hexdigest(),
+        }
+
+        monkeypatch.setattr("sys.argv", [
+            "pact", "boundary", "cite", "--kind", "file", "--path", "ops/platform.yaml",
+            "--value", "level", str(tmp_path),
+        ])
+        with pytest.raises(SystemExit) as exc:
+            main()
+        assert exc.value.code == 1
+        assert "Refusing to cite" in capsys.readouterr().err
+
+    def test_cli_observation_with_command(self, tmp_path, monkeypatch, capsys):
+        import json
+
+        from pact.cli import main
+
+        _write(tmp_path, "obs/uptime.json", '{"type": "cloud_run_revision"}\n')
+        monkeypatch.setattr("sys.argv", [
+            "pact", "boundary", "cite", "--kind", "observation", "--path", "obs/uptime.json",
+            "--value", "cloud_run_revision", "--command", "gcloud monitoring uptime list-configs",
+            str(tmp_path),
+        ])
+        main()
+        record = json.loads(capsys.readouterr().out)
+        assert record["command"] == "gcloud monitoring uptime list-configs"
+        assert record["kind"] == "observation" and record["observed_at"].endswith("Z")

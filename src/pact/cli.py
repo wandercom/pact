@@ -30,6 +30,7 @@ Commands:
   pact incident <project-dir> <id>     Show incident details + diagnostic report
   pact production <subcommand> ...     Manage production-readiness artifact pack
   pact boundary verify [project-dir]   Verify the boundary register against its records
+  pact boundary cite --kind ... [dir]  Produce a verified record for a literal (JSON)
   pact agent <subcommand> ...          Run constrained Pact agents
   pact ci <project-dir>               Generate GitHub Actions CI workflow
   pact deploy <project-dir>           Generate baton.yaml topology config
@@ -318,6 +319,18 @@ def main() -> None:
         help="Verify boundary_register.yaml and contract boundary_identifiers (exit 1 on any error)",
     )
     p_boundary_verify.add_argument(
+        "project_dir", nargs="?", default=".", help="Project directory path (default: .)",
+    )
+    p_boundary_cite = boundary_sub.add_parser(
+        "cite",
+        help="Produce a verified record (sha256, line) for a literal; prints JSON, exit 1 if not found",
+    )
+    p_boundary_cite.add_argument("--kind", required=True, choices=["file", "observation"])
+    p_boundary_cite.add_argument("--path", required=True, help="File path relative to the project root")
+    p_boundary_cite.add_argument("--value", required=True, help="Exact literal the record must contain")
+    p_boundary_cite.add_argument("--line", type=int, default=None, help="1-based line (file kind; auto-detected if omitted)")
+    p_boundary_cite.add_argument("--command", dest="record_command", default=None, help="Exact command/query that produced the observation file")
+    p_boundary_cite.add_argument(
         "project_dir", nargs="?", default=".", help="Project directory path (default: .)",
     )
 
@@ -2456,11 +2469,27 @@ def cmd_boundary(args: argparse.Namespace) -> None:
     boundary_identifiers against the cited records, and (when contracts exist)
     that every cross-boundary usage the contracts declare is registered.
     """
-    from pact.boundary_register import REGISTER_FILENAME, load_register
+    from pact.boundary_register import REGISTER_FILENAME, CiteError, cite_record, load_register
     from pact.contracts import validate_boundary_register
 
-    if getattr(args, "boundary_command", "") != "verify":
-        raise SystemExit("Usage: pact boundary verify [project-dir]")
+    subcommand = getattr(args, "boundary_command", "")
+    if subcommand == "cite":
+        try:
+            record = cite_record(
+                Path(args.project_dir).resolve(),
+                kind=args.kind,
+                path=args.path,
+                value=args.value,
+                line=args.line,
+                command=args.record_command,
+            )
+        except CiteError as exc:
+            print(f"Refusing to cite: {exc}", file=sys.stderr)
+            raise SystemExit(1) from None
+        print(json.dumps(record, indent=2))
+        return
+    if subcommand != "verify":
+        raise SystemExit("Usage: pact boundary {verify,cite} ...")
 
     project_dir = Path(args.project_dir).resolve()
     if not project_dir.is_dir():

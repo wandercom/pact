@@ -31,7 +31,7 @@ from __future__ import annotations
 
 import hashlib
 import re
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Any
 
@@ -543,6 +543,75 @@ def _check_absent(label: str, sides: list, well_formed: list, files: _FileCache)
     return errors
 
 
+# ── Producing records (pact boundary cite) ───────────────────────────
+
+
+class CiteError(ValueError):
+    """The literal is not where the record would claim; no record is produced."""
+
+
+def cite_record(
+    project_root: str | Path,
+    *,
+    kind: str,
+    path: str,
+    value: str,
+    line: int | None = None,
+    command: str | None = None,
+    now: datetime | None = None,
+) -> dict:
+    """Produce a record from the source so nobody types a digest or line.
+
+    Reads ``path`` under ``project_root`` with the verifier's path safety,
+    hashes the whole file, and confirms ``value`` is where the record will
+    claim: on the given line, or (``line`` omitted) on the first line that
+    contains it as a token; for observations, anywhere in the file. The
+    returned record round-trips through ``verify_entries``. Raises
+    ``CiteError`` instead of producing a record that would not verify.
+    """
+    if kind not in RECORD_KINDS:
+        raise CiteError(f"kind must be one of {sorted(RECORD_KINDS)} (got {kind!r})")
+    if not isinstance(value, str) or not value:
+        raise CiteError("value must be the exact non-empty literal")
+    if is_placeholder(value):
+        raise CiteError(f"value {value!r} is a placeholder; cite the real literal")
+    if kind == "observation" and (not command or not command.strip()):
+        raise CiteError("observation records need --command: the exact command or query that produced the file")
+
+    data, reason = _FileCache(Path(project_root)).read(path)
+    if data is None:
+        raise CiteError(reason)
+    digest = hashlib.sha256(data).hexdigest()
+    text = data.decode("utf-8", errors="replace")
+
+    if kind == "file":
+        lines = text.split("\n")
+        if line is None:
+            for number, content in enumerate(lines, start=1):
+                if contains_token(content.rstrip("\r"), value):
+                    line = number
+                    break
+            else:
+                raise CiteError(f"{value!r} does not occur as a token on any line of '{path}'")
+        else:
+            if line < 1 or line > len(lines):
+                raise CiteError(f"line {line} is outside '{path}' ({len(lines)} lines)")
+            if not contains_token(lines[line - 1].rstrip("\r"), value):
+                raise CiteError(f"'{path}' line {line} does not contain {value!r} as a token")
+        return {"kind": "file", "path": path, "line": line, "sha256": digest}
+
+    if not contains_token(text, value):
+        raise CiteError(f"observation '{path}' does not contain {value!r} as a token")
+    stamp = (now or datetime.now(timezone.utc)).astimezone(timezone.utc)
+    return {
+        "kind": "observation",
+        "path": path,
+        "sha256": digest,
+        "command": command.strip(),
+        "observed_at": stamp.strftime("%Y-%m-%dT%H:%M:%SZ"),
+    }
+
+
 # ── Rendering for implementers ────────────────────────────────────────
 
 
@@ -592,7 +661,10 @@ boundary_identifiers) with: id, kind, relation (equal, or absent for isolation),
 description, and one side per party (party = component id or external:<system>;
 role = defines|grants|consumes|presents|denies; value = the exact literal),
 each side citing a record (kind file: path, line, sha256; or kind observation:
-path, sha256, command, observed_at) that proves the value. If you cannot cite a
+path, sha256, command, observed_at) that proves the value. Records are produced
+by `pact boundary cite --kind file|observation --path <rel> --value <literal>
+[--line N] [--command "<cmd>"]`, never typed: never write a digest or line
+number by hand. If you cannot cite a
 record for a value, do not guess and do not write a placeholder: raise it as an
 open question for the owner of that system."""
 

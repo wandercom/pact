@@ -337,6 +337,14 @@ unaffected. Contract and interview prompts tell the model to raise an open
 question rather than guess; registered literals are rendered into every
 implementer handoff. Run `pact boundary verify [project]` to check on its own.
 
+Records are produced, never typed. `pact boundary cite --kind file|observation
+--path <rel> --value <literal> [--line N] [--command "<cmd>"] [project]` reads
+the file under the project root (same path safety as the verifier), hashes the
+whole file, finds the first line containing the value as a token (or confirms
+`--line`), and for observations requires `--command` and stamps `observed_at`
+in UTC. It prints the record as JSON and exits 1, writing nothing, when the
+literal is not where the record would claim.
+
 ## Audit Repo Separation
 
 Pact supports a two-repo separation-of-privilege model where the coding agent and auditing agent operate in different repositories:
@@ -435,6 +443,7 @@ Either, neither, or both. Defaults: both off (sequential, single-attempt).
 | `pact production fingerprint <project>` | Print the current source fingerprint for production evidence |
 | `pact production validate <project>` | Validate a Pact-managed production gate and exit non-zero on blockers |
 | `pact boundary verify [project]` | Verify the boundary register against its records; exit non-zero on any error |
+| `pact boundary cite --kind file\|observation --path <rel> --value <literal> [project]` | Produce a verified record (sha256, line or observed_at) as JSON; exit 1 if the literal is not there |
 | `pact spec apply <project> <file>` | Apply an AI-authored JSON/YAML build spec |
 | `pact spec show <file>` | Normalize and inspect an AI-authored build spec |
 | `pact agent spec-author [--apply]` | Run one constrained spec-author agent |

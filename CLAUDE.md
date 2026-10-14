@@ -21,6 +21,7 @@ pact production init <project-dir> # Scaffold optional production-readiness pack
 pact production fingerprint <project-dir> # Print the source fingerprint for evidence
 pact production validate <project-dir> # Validate production-readiness gate for a Pact-managed project
 pact boundary verify [project-dir]  # Verify boundary register records (exit 1 on any error)
+pact boundary cite --kind file --path <rel> --value <literal> [--line N] [project-dir] # Produce a record (JSON)
 pact assess <directory>            # Architectural assessment (any codebase)
 pact export-tasks <project-dir>    # Export TASKS.md
 pact handoff <project-dir> <id>    # Render/validate handoff brief
@@ -107,7 +108,10 @@ A stale digest means refresh the register from the source, never hand-edit it.
 Prompts (interview, shaper, contract author) share `BOUNDARY_RULE_PROMPT`:
 cite the record or raise an open question. Implementer handoffs render the
 registered literals in tier 1. `pact boundary verify [project]` exits non-zero
-on any error; `pact validate` now exits 1 on a failed gate.
+on any error; `pact validate` now exits 1 on a failed gate. Records come from
+`pact boundary cite --kind file|observation --path <rel> --value <literal>
+[--line N] [--command "<cmd>"] [project]` (JSON out; exit 1 if the literal is
+not where the record would claim), never typed by hand.
 
 ### Production-Ready Minimalism
 
