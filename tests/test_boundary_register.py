@@ -169,11 +169,32 @@ class TestTokenRule:
     def test_later_occurrence_can_match(self):
         assert contains_token("mea-auth-runtime and mea-auth", "mea-auth")
 
-    @pytest.mark.parametrize("value", ["TODO", "TBD", "<service-name>", "???", "unknown", "assumed", "svc-TODO"])
+    @pytest.mark.parametrize(("haystack", "value", "expected"), [
+        ("metric foo.bar.baz", "foo.bar", False),
+        ("a.foo.bar", "foo.bar", False),
+        ("type=foo.bar.", "foo.bar", True),
+        ("GET /health/ready", "/health", False),
+        ("GET /health HTTP/1.1", "/health", True),
+        ("entry.severity = level", "severity", True),
+        ('"level": "INFO"', "level", True),
+        ("svc-auth-runtime", "svc-auth", False),
+        ("serviceAccount:svc-auth@p.iam", "svc-auth", True),
+    ])
+    def test_shared_format_vectors(self, haystack, value, expected):
+        """boundary-register/1 token vectors shared with the factory and Constrain."""
+        assert contains_token(haystack, value) is expected
+
+    @pytest.mark.parametrize("value", [
+        "TODO", "tbd", "TBC", "assumed", "Placeholder", "changeme", "xxx", "XXXX",
+        "?", "???", " todo ", "<service-name>", "svc-<env>",
+    ])
     def test_placeholders_detected(self, value):
         assert is_placeholder(value)
 
-    @pytest.mark.parametrize("value", ["severity", "cloud_run_revision", "roles/run.invoker"])
+    @pytest.mark.parametrize("value", [
+        "severity", "cloud_run_revision", "roles/run.invoker",
+        "unknown", "none", "null", "n/a", "UNKNOWN", "xx", "todo-list", "a < b",
+    ])
     def test_real_values_are_not_placeholders(self, value):
         assert not is_placeholder(value)
 
@@ -289,7 +310,7 @@ class TestEqualRelation:
         errors = verify_entries([entry], tmp_path)
         assert any("defines or grants" in e for e in errors), errors
 
-    @pytest.mark.parametrize("value", ["TODO", "<table-name>", "???", "unknown", "assumed"])
+    @pytest.mark.parametrize("value", ["TODO", "<table-name>", "???", "changeme", "assumed"])
     def test_placeholder_value_fails(self, tmp_path, value):
         entry = _equal_entry(tmp_path)
         entry["sides"][1]["value"] = value
@@ -582,6 +603,7 @@ class TestPrompts:
             assert "boundary-register/1" in prompt
             assert "open question" in prompt
             assert "pact boundary cite" in prompt
+            assert "denies side's value names the" in prompt
 
 
 # ── producing records: pact boundary cite ─────────────────────────────

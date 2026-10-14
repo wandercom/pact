@@ -59,13 +59,14 @@ RFC3339_RE = re.compile(
 )
 EXTERNAL_PREFIX = "external:"
 
-# A value nobody can cite. "unknown"/"assumed"/"placeholder" are refused as the
-# whole value; TODO/TBD/FIXME as a word anywhere; <...> and ??? anywhere.
-_PLACEHOLDER_WHOLE_RE = re.compile(
-    r"^\s*(?:unknown|assumed|placeholder|n/?a|tbd|todo|fixme|\?+|\.\.\.)\s*$",
+# A value nobody looked up (boundary-register/1 shared rule, parity with the
+# factory and Constrain): the whole value is a stand-in word, or it contains an
+# angle placeholder. "unknown", "none", "null", "n/a" are real enum members.
+_PLACEHOLDER_RE = re.compile(
+    r"^(?:todo|tbd|tbc|assumed|placeholder|changeme|x{3,}|\?+)$",
     re.IGNORECASE,
 )
-_PLACEHOLDER_PART_RE = re.compile(r"(?:\b(?:TODO|TBD|FIXME)\b|<[^<>]*>|\?\?\?)", re.IGNORECASE)
+_ANGLE_PLACEHOLDER_RE = re.compile(r"<[^<>\s]+>")
 
 _TOKEN_CHARS = frozenset("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_-")
 _SEPARATORS_RE = re.compile(r"[-_.\s]")
@@ -120,31 +121,47 @@ class BoundaryRegister(BaseModel):
 
 
 def contains_token(haystack: str, value: str) -> bool:
-    """True if ``value`` occurs in ``haystack`` as a token.
+    """True if ``value`` occurs in ``haystack`` as a whole token.
 
-    A token occurrence is a substring occurrence whose neighbours are not
-    identifier characters ([A-Za-z0-9_-]) on whichever end of ``value`` is
-    itself an identifier character. So ``mea-auth`` does not match inside
-    ``mea-auth-runtime``, while ``level`` matches inside ``"level":``.
+    A value that begins (ends) with an identifier character ([A-Za-z0-9_-]) must
+    not be preceded (followed) by one, so ``svc-auth`` is not found inside
+    ``svc-auth-runtime`` and ``level`` is found inside ``"level":``. A value that
+    itself contains ``.`` or ``/`` is dotted or path-shaped, so that separator
+    followed by an identifier character continues it: ``foo.bar`` is not found
+    inside ``foo.bar.baz``, nor ``/health`` inside ``/health/ready``. An undotted
+    name still matches after an attribute dot (``entry.severity``). An edge that
+    is punctuation in the value matches unconditionally at that edge.
     """
     if not value:
         return False
-    check_start = value[0] in _TOKEN_CHARS
-    check_end = value[-1] in _TOKEN_CHARS
-    start = haystack.find(value)
-    while start != -1:
-        end = start + len(value)
-        ok_start = not check_start or start == 0 or haystack[start - 1] not in _TOKEN_CHARS
-        ok_end = not check_end or end == len(haystack) or haystack[end] not in _TOKEN_CHARS
-        if ok_start and ok_end:
+    joiners = {char for char in "./" if char in value}
+
+    def continues(at: int, step: int) -> bool:
+        if not 0 <= at < len(haystack):
+            return False
+        char = haystack[at]
+        if char in _TOKEN_CHARS:
             return True
-        start = haystack.find(value, start + 1)
-    return False
+        beyond = at + step
+        return char in joiners and 0 <= beyond < len(haystack) and haystack[beyond] in _TOKEN_CHARS
+
+    start = 0
+    while True:
+        index = haystack.find(value, start)
+        if index < 0:
+            return False
+        end = index + len(value)
+        before = value[0] not in _TOKEN_CHARS or not continues(index - 1, -1)
+        after = value[-1] not in _TOKEN_CHARS or not continues(end, 1)
+        if before and after:
+            return True
+        start = index + 1
 
 
 def is_placeholder(value: str) -> bool:
-    """True if ``value`` is a stand-in rather than a cited literal."""
-    return bool(_PLACEHOLDER_WHOLE_RE.match(value) or _PLACEHOLDER_PART_RE.search(value))
+    """True if ``value`` is a stand-in for a literal nobody looked up."""
+    text = value.strip()
+    return bool(_PLACEHOLDER_RE.match(text) or _ANGLE_PLACEHOLDER_RE.search(text))
 
 
 def near_miss(a: str, b: str) -> str:
@@ -661,7 +678,9 @@ boundary_identifiers) with: id, kind, relation (equal, or absent for isolation),
 description, and one side per party (party = component id or external:<system>;
 role = defines|grants|consumes|presents|denies; value = the exact literal),
 each side citing a record (kind file: path, line, sha256; or kind observation:
-path, sha256, command, observed_at) that proves the value. Records are produced
+path, sha256, command, observed_at) that proves the value. For relation absent,
+the presents side's value is the subject, and each denies side's value names the
+policy or resource whose record must exclude the subject. Records are produced
 by `pact boundary cite --kind file|observation --path <rel> --value <literal>
 [--line N] [--command "<cmd>"]`, never typed: never write a digest or line
 number by hand. If you cannot cite a
