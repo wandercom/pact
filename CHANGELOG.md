@@ -1,5 +1,34 @@
 # Changelog
 
+## v1.3.0 - 2026-10-14
+
+### Added
+
+- Boundary register (`boundary_register.yaml`, format `boundary-register/1`,
+  shared with the factory and Constrain) plus `ComponentContract.boundary_identifiers`.
+  Every cross-boundary identifier (service name, audience, credential, principal,
+  grant/role, table/column, metric type, log field, env/config key, header,
+  claim) must cite file or observation records bound by SHA-256. Verification
+  is mechanical: exact `equal` values with near-miss hints, `absent` isolation
+  proofs, token matching, stale-digest detection, placeholder refusal, and
+  project-root path confinement.
+- `pact boundary verify [project]` verifies the register and exits non-zero on
+  any error.
+- `pact boundary cite --kind file|observation --path <rel> --value <literal>`
+  produces a verified record (sha256, line or observed_at) as JSON and refuses
+  when the literal is not where the record would claim.
+- Interview, shaper, and contract-author prompts require citing a record or
+  raising an open question; implementer handoffs render registered literals.
+
+### Changed
+
+- `validate_all_contracts` now fails when a contract uses a cross-boundary
+  dependency (`external:` names, `network_call`, `database_*`/`http_*`/
+  `external_*` data-access side effects) that the register does not cover, or
+  when any register entry fails verification. Projects with no cross-boundary
+  usage are unaffected.
+- `pact validate` now exits 1 when the contract gate fails.
+
 ## v1.2.0 - 2026-07-17
 
 ### Added

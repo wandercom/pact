@@ -29,6 +29,8 @@ Commands:
   pact incidents <project-dir>         List active/recent incidents
   pact incident <project-dir> <id>     Show incident details + diagnostic report
   pact production <subcommand> ...     Manage production-readiness artifact pack
+  pact boundary verify [project-dir]   Verify the boundary register against its records
+  pact boundary cite --kind ... [dir]  Produce a verified record for a literal (JSON)
   pact agent <subcommand> ...          Run constrained Pact agents
   pact ci <project-dir>               Generate GitHub Actions CI workflow
   pact deploy <project-dir>           Generate baton.yaml topology config
@@ -306,6 +308,32 @@ def main() -> None:
     )
     p_production_fingerprint.add_argument("project_dir", help="Project directory path")
 
+    # boundary register (cross-boundary identifiers backed by records)
+    p_boundary = subparsers.add_parser(
+        "boundary",
+        help="Verify cross-boundary identifiers against their records",
+    )
+    boundary_sub = p_boundary.add_subparsers(dest="boundary_command")
+    p_boundary_verify = boundary_sub.add_parser(
+        "verify",
+        help="Verify boundary_register.yaml and contract boundary_identifiers (exit 1 on any error)",
+    )
+    p_boundary_verify.add_argument(
+        "project_dir", nargs="?", default=".", help="Project directory path (default: .)",
+    )
+    p_boundary_cite = boundary_sub.add_parser(
+        "cite",
+        help="Produce a verified record (sha256, line) for a literal; prints JSON, exit 1 if not found",
+    )
+    p_boundary_cite.add_argument("--kind", required=True, choices=["file", "observation"])
+    p_boundary_cite.add_argument("--path", required=True, help="File path relative to the project root")
+    p_boundary_cite.add_argument("--value", required=True, help="Exact literal the record must contain")
+    p_boundary_cite.add_argument("--line", type=int, default=None, help="1-based line (file kind; auto-detected if omitted)")
+    p_boundary_cite.add_argument("--command", dest="record_command", default=None, help="Exact command/query that produced the observation file")
+    p_boundary_cite.add_argument(
+        "project_dir", nargs="?", default=".", help="Project directory path (default: .)",
+    )
+
     # directive
     p_directive = subparsers.add_parser("directive", help="Send structured directive to daemon")
     p_directive.add_argument("project_dir", help="Project directory path")
@@ -544,6 +572,8 @@ def main() -> None:
         cmd_checklist(args)
     elif args.command == "production":
         cmd_production(args)
+    elif args.command == "boundary":
+        cmd_boundary(args)
     elif args.command == "directive":
         cmd_directive(args)
     elif args.command == "export-tasks":
@@ -1596,7 +1626,7 @@ def cmd_validate(args: argparse.Namespace) -> None:
     contracts = project.load_all_contracts()
     test_suites = project.load_all_test_suites()
 
-    gate = validate_all_contracts(tree, contracts, test_suites)
+    gate = validate_all_contracts(tree, contracts, test_suites, project.project_dir)
 
     if gate.passed:
         print("Validation PASSED")
@@ -1604,6 +1634,7 @@ def cmd_validate(args: argparse.Namespace) -> None:
         print(f"Validation FAILED: {gate.reason}")
         for detail in gate.details:
             print(f"  - {detail}")
+        raise SystemExit(1)
 
 
 def cmd_design(args: argparse.Namespace) -> None:
@@ -2024,7 +2055,9 @@ def cmd_doctor(args: argparse.Namespace) -> None:
             if contracts:
                 from pact.contracts import validate_all_contracts
                 test_suites = project.load_all_test_suites()
-                gate = validate_all_contracts(tree, contracts, test_suites)
+                gate = validate_all_contracts(
+                    tree, contracts, test_suites, project.project_dir,
+                )
                 if gate.passed:
                     checks.append(("OK", "All contracts validated", ""))
                 else:
@@ -2429,6 +2462,57 @@ def cmd_production(args: argparse.Namespace) -> None:
     raise SystemExit("Usage: pact production {init,status,validate,fingerprint} ...")
 
 
+def cmd_boundary(args: argparse.Namespace) -> None:
+    """Verify the boundary register mechanically; exit non-zero on any error.
+
+    Checks every entry in boundary_register.yaml and every contract's
+    boundary_identifiers against the cited records, and (when contracts exist)
+    that every cross-boundary usage the contracts declare is registered.
+    """
+    from pact.boundary_register import REGISTER_FILENAME, CiteError, cite_record, load_register
+    from pact.contracts import validate_boundary_register
+
+    subcommand = getattr(args, "boundary_command", "")
+    if subcommand == "cite":
+        try:
+            record = cite_record(
+                Path(args.project_dir).resolve(),
+                kind=args.kind,
+                path=args.path,
+                value=args.value,
+                line=args.line,
+                command=args.record_command,
+            )
+        except CiteError as exc:
+            print(f"Refusing to cite: {exc}", file=sys.stderr)
+            raise SystemExit(1) from None
+        print(json.dumps(record, indent=2))
+        return
+    if subcommand != "verify":
+        raise SystemExit("Usage: pact boundary {verify,cite} ...")
+
+    project_dir = Path(args.project_dir).resolve()
+    if not project_dir.is_dir():
+        raise SystemExit(f"Not a directory: {project_dir}")
+    project = ProjectManager(project_dir)
+    tree = project.load_tree()
+    contracts = project.load_all_contracts()
+    file_entries, _ = load_register(project_dir)
+    embedded = sum(len(c.boundary_identifiers) for c in contracts.values())
+
+    errors = validate_boundary_register(contracts, project_dir, tree)
+    total = len(file_entries) + embedded
+    if errors:
+        print(f"Boundary register FAILED: {len(errors)} error(s) across {total} entr{'y' if total == 1 else 'ies'}")
+        for error in errors:
+            print(f"  - {error}")
+        raise SystemExit(1)
+    if total == 0:
+        print(f"Boundary register PASSED: no {REGISTER_FILENAME} entries and no cross-boundary usage declared")
+    else:
+        print(f"Boundary register PASSED: {total} entr{'y' if total == 1 else 'ies'} verified against records")
+
+
 def cmd_assess(args: argparse.Namespace) -> None:
     """Assess codebase architecture for structural friction."""
     from pathlib import Path
@@ -2615,6 +2699,7 @@ def cmd_handoff(args: argparse.Namespace) -> None:
     """Render and optionally validate the handoff brief for a component."""
     import json as json_mod
 
+    from pact.boundary_register import load_register_entries
     from pact.interface_stub import render_handoff_brief
     from pact.project import ProjectManager
 
@@ -2678,6 +2763,7 @@ def cmd_handoff(args: argparse.Namespace) -> None:
         learnings=learnings,
         standards_brief=standards_brief,
         max_context_tokens=args.max_tokens,
+        boundary_entries=load_register_entries(project.project_dir),
     )
 
     if args.validate:

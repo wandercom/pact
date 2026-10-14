@@ -165,6 +165,7 @@ async def author_code(
     language: str = "python",
     strategic_context: str = "",
     processing_register: str = "",
+    boundary_entries: list | None = None,
 ) -> ImplementationResult:
     """Generate implementation code following the Research-First Protocol.
 
@@ -269,6 +270,7 @@ async def author_code(
         log_key_preamble=log_preamble,
         strategic_context=strategic_context,
         processing_register=processing_register,
+        boundary_entries=boundary_entries,
     )
 
     # The handoff brief is the largest cacheable block

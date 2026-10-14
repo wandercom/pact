@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import ast
 import logging
+import re
 from pathlib import Path
 
 from pact.schemas import (
@@ -404,6 +405,7 @@ def validate_all_contracts(
     tree: DecompositionTree,
     contracts: dict[str, ComponentContract],
     test_suites: dict[str, ContractTestSuite],
+    project_dir: str | Path | None = None,
 ) -> GateResult:
     """Full mechanical validation gate. No LLM, no persuasion.
 
@@ -413,6 +415,9 @@ def validate_all_contracts(
     3. Dependency graph is acyclic
     4. All contracts have test suites
     5. Test code parses
+    6. Boundary register: every cross-boundary usage is registered and every
+       registered side verifies against its records (``project_dir`` is the
+       root that ``boundary_register.yaml`` and record paths resolve against)
     """
     all_errors: list[str] = []
 
@@ -475,6 +480,9 @@ def validate_all_contracts(
                     "(not in decomposition tree, skipping validation)",
                     cid, dep_id,
                 )
+
+    # Boundary register — hard errors (never assume an identifier)
+    all_errors.extend(validate_boundary_register(contracts, project_dir, tree))
 
     # Cross-component interface compatibility (warnings, not blocking)
     interface_warnings = validate_cross_component_interfaces(contracts)
@@ -954,3 +962,152 @@ def validate_decomposition_coverage(
                 )
 
     return warnings
+
+
+# ── Boundary register gate ───────────────────────────────────────────
+#
+# A boundary that is used must be registered, and every registered side must
+# cite a record that still verifies. Mechanical; no LLM; errors, never warnings.
+
+# DataAccessSideEffect.type prefixes that cross a process/system boundary.
+_BOUNDARY_SIDE_EFFECT_RE = re.compile(
+    r"^(?:database|db|http|https|external|network|api|rpc|grpc|queue|topic|"
+    r"pubsub|bucket|storage|secret|auth|iam)[_-]",
+    re.IGNORECASE,
+)
+
+
+def find_boundary_usages(contract: ComponentContract) -> list[tuple[str, str]]:
+    """List the cross-boundary usages a contract declares.
+
+    Returns ``(external_party_or_empty, description)`` pairs. A usage that
+    names ``external:<system>`` must be covered by an entry naming both this
+    component and that system; any other usage must be covered by an entry in
+    which this component is a party opposite some other party.
+    """
+    from pact.boundary_register import is_external_party
+
+    cid = contract.component_id
+    usages: list[tuple[str, str]] = []
+
+    def _ext(text: str) -> str:
+        text = (text or "").strip()
+        return text if is_external_party(text) else ""
+
+    for dep in contract.dependencies:
+        if _ext(dep):
+            usages.append((dep.strip(), f"'{cid}' depends on '{dep.strip()}'"))
+    for dep in contract.dependency_contracts:
+        if _ext(dep):
+            usages.append((dep.strip(), f"'{cid}' dependency_contracts names '{dep.strip()}'"))
+    for req in contract.requires:
+        if _ext(req):
+            usages.append((req.strip(), f"'{cid}' requires '{req.strip()}'"))
+
+    for func in contract.functions:
+        for se in func.structured_side_effects:
+            kind = str(se.kind)
+            target = se.target.strip()
+            if _ext(target):
+                usages.append((
+                    target,
+                    f"'{cid}'.{func.name} side effect {kind} targets '{target}'",
+                ))
+            elif kind == "network_call":
+                usages.append((
+                    "",
+                    f"'{cid}'.{func.name} side effect network_call"
+                    + (f" on '{target}'" if target else ""),
+                ))
+
+    for se in contract.data_access.side_effects:
+        se_type = (se.type or "").strip()
+        if _ext(se_type):
+            usages.append((se_type, f"'{cid}' data_access side effect '{se_type}'"))
+        elif _BOUNDARY_SIDE_EFFECT_RE.match(se_type):
+            fields = f" (fields: {', '.join(se.fields)})" if se.fields else ""
+            usages.append(("", f"'{cid}' data_access side effect '{se_type}'{fields}"))
+
+    seen: set[tuple[str, str]] = set()
+    unique: list[tuple[str, str]] = []
+    for usage in usages:
+        if usage not in seen:
+            seen.add(usage)
+            unique.append(usage)
+    return unique
+
+
+def _entry_parties(entry: object) -> set[str]:
+    sides = entry.get("sides") if isinstance(entry, dict) else None
+    if not isinstance(sides, list):
+        return set()
+    return {
+        s.get("party") for s in sides
+        if isinstance(s, dict) and isinstance(s.get("party"), str)
+    }
+
+
+def validate_boundary_register(
+    contracts: dict[str, ComponentContract],
+    project_dir: str | Path | None,
+    tree: DecompositionTree | None = None,
+) -> list[str]:
+    """Verify the boundary register and that every used boundary is registered.
+
+    Sources: ``boundary_register.yaml`` at the project root plus every
+    contract's ``boundary_identifiers``. Every entry is verified against its
+    records (see ``pact.boundary_register.verify_entries``). Every usage found
+    by ``find_boundary_usages`` must be covered by an entry. A project with no
+    register and no cross-boundary usage passes untouched.
+    """
+    from pact.boundary_register import (
+        REGISTER_FILENAME,
+        load_register,
+        verify_entries,
+    )
+
+    errors: list[str] = []
+    file_entries: list = []
+    if project_dir is not None:
+        file_entries, load_errors = load_register(project_dir)
+        errors.extend(load_errors)
+
+    contract_entries: list[tuple[str, list]] = []
+    for cid, contract in contracts.items():
+        if contract.boundary_identifiers:
+            contract_entries.append((
+                cid,
+                [e.model_dump(by_alias=True, exclude_none=True) for e in contract.boundary_identifiers],
+            ))
+
+    known: set[str] | None = None
+    if tree is not None and tree.nodes:
+        known = set(tree.nodes.keys()) | set(contracts.keys())
+    elif contracts:
+        known = set(contracts.keys())
+
+    # Verify all entries together so ids are unique across file and contracts.
+    all_entries = list(file_entries)
+    for _, entries in contract_entries:
+        all_entries.extend(entries)
+    if all_entries:
+        errors.extend(verify_entries(all_entries, project_dir, known_components=known))
+
+    # Coverage: a boundary that is used must be registered.
+    party_sets = [_entry_parties(e) for e in all_entries]
+    for cid, contract in contracts.items():
+        for external, description in find_boundary_usages(contract):
+            if external:
+                covered = any(cid in ps and external in ps for ps in party_sets)
+                need = f"an entry with sides for both '{cid}' and '{external}'"
+            else:
+                covered = any(cid in ps and len(ps) > 1 for ps in party_sets)
+                need = f"an entry in which '{cid}' is a party opposite another party"
+            if not covered:
+                errors.append(
+                    f"UNREGISTERED boundary: {description}, but no boundary register "
+                    f"entry covers it (need {need} in {REGISTER_FILENAME} or the "
+                    f"contract's boundary_identifiers, each side citing a verifiable record). "
+                    f"Never assume an identifier; cite the record"
+                )
+    return errors

@@ -12,6 +12,7 @@ import logging
 from typing import TYPE_CHECKING
 
 from pact.agents.base import AgentBase
+from pact.boundary_register import BOUNDARY_RULE_PROMPT
 from pact.readiness import ReadinessProfile
 from pact.agents.research import plan_and_evaluate, research_phase
 from pact.schemas import (
@@ -46,7 +47,9 @@ Every contract MUST include:
   classification and affected fields.
 - authority: declare data domain patterns this component owns (empty list if none).
   If domains is non-empty, rationale is required explaining why this component is
-  authoritative for those domains."""
+  authoritative for those domains.
+
+""" + BOUNDARY_RULE_PROMPT
 
 
 async def author_contract(
@@ -62,8 +65,13 @@ async def author_contract(
     processing_register: str = "",
     type_registry: "TypeRegistry | None" = None,
     readiness_profile: ReadinessProfile | None = None,
+    boundary_register_context: str = "",
 ) -> tuple[ComponentContract, ResearchReport, PlanEvaluation]:
     """Generate a ComponentContract following the Research-First Protocol.
+
+    ``boundary_register_context`` is the rendered project boundary register
+    (see ``pact.boundary_register.render_register_for_prompt``): the only
+    source of identifier values the author may cite.
 
     Returns:
         Tuple of (contract, research_report, plan_evaluation).
@@ -172,6 +180,8 @@ async def author_contract(
         cache_parts.append(dep_stubs)
     if decisions_summary:
         cache_parts.append(decisions_summary)
+    if boundary_register_context:
+        cache_parts.append(boundary_register_context)
     cache_prefix = "\n\n".join(cache_parts)
 
     # Dynamic prompt (component-specific)
@@ -202,7 +212,14 @@ Requirements:
   (not vague phrases like "handles data" — describe the exact data and purpose),
   and list side_effects with type, classification, fields, and rationale
 - authority: set domains this component owns (empty list if non-authoritative),
-  with rationale if domains is non-empty"""
+  with rationale if domains is non-empty
+- boundary_identifiers: for every identifier this component shares with another
+  party (other components or external:<system>), add a boundary-register/1 entry
+  whose sides cite verifiable records. Use only values you can cite from the
+  context above; never invent one. If you cannot cite it, do not guess: leave
+  the entry out (the validation gate then refuses the unregistered boundary until
+  a human supplies the record) and state what is missing in an invariant that
+  starts with 'OPEN QUESTION:'"""
 
     contract, in_tok, out_tok = await agent.assess_cached(
         ComponentContract, prompt, CONTRACT_SYSTEM, cache_prefix=cache_prefix,
