@@ -212,7 +212,7 @@ class PactMCPServer:
             contracts = pm.load_all_contracts()
             test_suites = pm.load_all_test_suites()
 
-            gate = validate_all_contracts(tree, contracts, test_suites)
+            gate = validate_all_contracts(tree, contracts, test_suites, pm.project_dir)
             return {
                 "passed": gate.passed,
                 "reason": gate.reason,

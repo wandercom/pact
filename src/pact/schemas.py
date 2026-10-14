@@ -15,6 +15,7 @@ import json as _json
 
 from pydantic import BaseModel, Field, field_validator, model_validator
 
+from pact.boundary_register import BoundaryEntry
 from pact.readiness import ReadinessProfile
 
 
@@ -208,6 +209,10 @@ class ComponentContract(BaseModel):
     processing_register: str = ""
     data_access: DataAccessDeclaration = DataAccessDeclaration()
     authority: AuthorityDeclaration = AuthorityDeclaration()
+    # Cross-boundary identifiers this component defines/consumes, each backed by
+    # verifiable records (format: boundary-register/1 entries). See
+    # pact.boundary_register; validated mechanically by validate_all_contracts.
+    boundary_identifiers: list[BoundaryEntry] = []
 
 
 # ── Preflight Models ─────────────────────────────────────────────────

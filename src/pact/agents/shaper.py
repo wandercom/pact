@@ -16,6 +16,7 @@ from __future__ import annotations
 import logging
 
 from pact.agents.base import AgentBase
+from pact.boundary_register import BOUNDARY_RULE_PROMPT
 from pact.schemas_shaping import (
     Appetite,
     ShapingPitch,
@@ -294,7 +295,12 @@ class Shaper:
         await self._agent.close()
 
 
-SYSTEM_PROMPT = "You are a product shaper following Shape Up methodology."
+SYSTEM_PROMPT = (
+    "You are a product shaper following Shape Up methodology.\n\n"
+    + BOUNDARY_RULE_PROMPT
+    + "\nTreat every uncited boundary identifier as a rabbit hole: name it and "
+    "the system that owns it, never fill it in."
+)
 
 SYSTEM_PROMPT_ENRICHMENT = (
     "You are a product shaper performing deep analysis. "

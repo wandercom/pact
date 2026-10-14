@@ -20,6 +20,7 @@ pact checklist <project-dir>       # Requirements quality checklist
 pact production init <project-dir> # Scaffold optional production-readiness pack
 pact production fingerprint <project-dir> # Print the source fingerprint for evidence
 pact production validate <project-dir> # Validate production-readiness gate for a Pact-managed project
+pact boundary verify [project-dir]  # Verify boundary register records (exit 1 on any error)
 pact assess <directory>            # Architectural assessment (any codebase)
 pact export-tasks <project-dir>    # Export TASKS.md
 pact handoff <project-dir> <id>    # Render/validate handoff brief
@@ -86,6 +87,27 @@ The manifest fingerprint and bounded validation age prevent stale evidence from
 passing after source or Pact artifact changes, or after the evidence ages out.
 This is a deployment gate, not a runtime substitute; `live_validation.yaml`
 must still prove the running environment matches the evidence being claimed.
+
+### Boundary Register (never assume an identifier; cite the record)
+
+Every identifier two parties must agree on (service name, audience, credential,
+principal, grant/role, table/column, metric type, log field, env/config key,
+header, claim) lives in `boundary_register.yaml` (format `boundary-register/1`,
+shared with the factory and Constrain) or a contract's `boundary_identifiers`.
+Each side (`party`: component id or `external:<system>`; `role`:
+defines|grants|consumes|presents|denies; exact `value`) cites >=1 record: a
+`file` record (path, line, sha256 of the whole file) or an `observation` record
+(path, sha256, command, observed_at). `src/pact/boundary_register.py` verifies
+them mechanically (token match, digest, placeholders, path containment,
+`equal` vs `absent` relations); `validate_boundary_register()` in
+`contracts.py` runs inside `validate_all_contracts()` as hard errors and also
+fails any contract that uses an unregistered boundary (`external:` names,
+`network_call`, `database_*`/`http_*`/`external_*` data-access side effects).
+A stale digest means refresh the register from the source, never hand-edit it.
+Prompts (interview, shaper, contract author) share `BOUNDARY_RULE_PROMPT`:
+cite the record or raise an open question. Implementer handoffs render the
+registered literals in tier 1. `pact boundary verify [project]` exits non-zero
+on any error; `pact validate` now exits 1 on a failed gate.
 
 ### Production-Ready Minimalism
 
@@ -271,6 +293,7 @@ src/pact/
   mcp_server.py        # MCP server (FastMCP transport + PactMCPServer handlers)
   tool_index.py        # External tool enrichment (ctags, cscope, tree-sitter, kindex)
   production.py        # Optional production-readiness pack scaffold + validation
+  boundary_register.py # boundary-register/1: cross-boundary identifiers verified against records
   schemas_production.py # Production-readiness artifact schemas
 
   # Spec-kit capabilities (task list, analysis, checklist)

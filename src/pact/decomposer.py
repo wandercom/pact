@@ -26,6 +26,11 @@ from pact.agents.test_author import (
     author_tests,
     generate_emission_compliance_test,
 )
+from pact.boundary_register import (
+    BOUNDARY_RULE_PROMPT,
+    load_register_entries,
+    render_register_for_prompt,
+)
 from pact.contracts import validate_all_contracts, validate_decomposition_coverage
 from pact.project import ProjectManager
 from pact.readiness import (
@@ -98,7 +103,9 @@ INTERVIEW_SYSTEM = """You are starting fresh on this review with no prior contex
 
 You are a cynical senior architect reviewing a task specification.
 Find risks, ambiguities, and missing decisions BEFORE any work begins.
-Focus on issues that would cause implementation failures."""
+Focus on issues that would cause implementation failures.
+
+""" + BOUNDARY_RULE_PROMPT
 
 
 async def run_interview(
@@ -150,6 +157,12 @@ Identify:
    verifiable — not vague qualities but observable outcomes. If the task
    spec already states acceptance criteria, extract them. If it doesn't,
    propose what "done" should mean based on the task description.
+6. Boundary identifiers: every name, endpoint, credential, principal, grant,
+   role, table, metric/log field, env/config key, header or claim this task
+   shares with another component or an external system. For each one the task
+   or SOPs do not cite with a verifiable record, ask a question naming the
+   identifier and the system that owns it. Never list a boundary identifier as
+   an assumption: an assumed identifier is the defect this step exists to stop.
 
 Be specific and actionable. Focus on issues that would cause
 different engineers to implement incompatible solutions."""
@@ -598,6 +611,11 @@ async def decompose_and_contract(
                 f"{len(coverage_warnings)} warnings: {'; '.join(coverage_warnings[:3])}",
             )
 
+    # Boundary register — the only citable source of cross-boundary identifiers
+    boundary_register_context = render_register_for_prompt(
+        load_register_entries(project.project_dir),
+    )
+
     # Generate or load type registry — canonical shared types
     type_registry = project.load_type_registry()
     if type_registry is None:
@@ -652,6 +670,7 @@ async def decompose_and_contract(
                 processing_register=processing_register,
                 type_registry=type_registry,
                 readiness_profile=readiness_profile,
+                boundary_register_context=boundary_register_context,
             )
 
             # Mechanical correction: replace shared types with registry versions.
@@ -785,7 +804,9 @@ async def decompose_and_contract(
             project.append_audit("type_reconciliation", f"{reconciled} contracts reconciled")
 
     # Validate (mechanical gate)
-    gate = validate_all_contracts(decomp_tree, contracts, test_suites)
+    gate = validate_all_contracts(
+        decomp_tree, contracts, test_suites, project.project_dir,
+    )
     project.append_audit(
         "validation",
         f"{'PASSED' if gate.passed else 'FAILED'}: {gate.reason}",

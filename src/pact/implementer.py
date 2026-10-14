@@ -25,6 +25,7 @@ from pathlib import Path
 from pact.agents.base import AgentBase
 from pact.agents.code_author import author_code
 from pact.backends.agent_runtime import provider_for_backend, session_id_for_project
+from pact.boundary_register import load_register_entries
 from pact.interface_stub import get_required_exports
 from pact.project import ProjectManager
 from pact.resolution import ScoredAttempt, format_resolution_summary, select_winner
@@ -631,6 +632,7 @@ async def implement_component(
             strategic_context=_build_strategic_context(project, contract),
             language=language,
             processing_register=contract.processing_register,
+            boundary_entries=load_register_entries(project.project_dir),
         )
 
         # Save implementation files
@@ -799,6 +801,7 @@ async def implement_component_iterative(
         strategic_context=strategic_ctx,
         processing_register=contract.processing_register,
         include_test_code=False,  # Agent reads test file directly
+        boundary_entries=load_register_entries(project.project_dir),
     )
 
     # Write test file so the agent can run it
@@ -1018,6 +1021,7 @@ async def implement_component_interactive(
         strategic_context=strategic_ctx,
         processing_register=contract.processing_register,
         include_test_code=False,  # Agent reads test file directly
+        boundary_entries=load_register_entries(project.project_dir),
     )
 
     # Write test file so the agent can run it
@@ -1154,6 +1158,7 @@ async def _run_one_competitor(
             language=language,
             strategic_context=_build_strategic_context(project, contract),
             processing_register=contract.processing_register,
+            boundary_entries=load_register_entries(project.project_dir),
         )
 
         # Save to attempt directory (not main src)

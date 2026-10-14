@@ -1267,8 +1267,15 @@ macro_rules! pact_log {{
 def render_dependency_map(
     component_id: str,
     contracts: dict[str, ComponentContract],
+    boundary_entries: list | None = None,
+    include_boundaries: bool = True,
 ) -> str:
     """Render a compact reference of all dependencies' interfaces.
+
+    Also renders the registered boundary identifiers this component is a party
+    to (from ``boundary_entries``, i.e. the project's boundary_register.yaml,
+    plus every contract's ``boundary_identifiers``), so the implementer uses the
+    registered literal rather than a plausible-looking guess.
 
     This gives agents working on `component_id` a quick reference for
     every function they can call on their dependencies, without seeing
@@ -1319,7 +1326,31 @@ def render_dependency_map(
 
         lines.append("")
 
+    if include_boundaries:
+        boundary_block = _render_component_boundaries(component_id, contracts, boundary_entries)
+        if boundary_block:
+            lines.append(boundary_block)
+            lines.append("")
+
     return "\n".join(lines)
+
+
+def _render_component_boundaries(
+    component_id: str,
+    contracts: dict[str, ComponentContract],
+    boundary_entries: list | None = None,
+) -> str:
+    """Registered boundary literals for ``component_id`` (register + contracts)."""
+    from pact.boundary_register import render_boundary_identifiers
+
+    entries: list = list(boundary_entries or [])
+    seen_ids = {getattr(e, "id", None) or (e.get("id") if isinstance(e, dict) else None) for e in entries}
+    for c in contracts.values():
+        for entry in c.boundary_identifiers:
+            if entry.id not in seen_ids:
+                entries.append(entry)
+                seen_ids.add(entry.id)
+    return render_boundary_identifiers(component_id, entries)
 
 
 def render_compact_deps(contracts: dict[str, ComponentContract]) -> str:
@@ -1454,6 +1485,7 @@ def render_handoff_brief(
     max_context_tokens: int = 0,
     tool_index_context: str = "",
     language: str = "python",
+    boundary_entries: list | None = None,
 ) -> str:
     """Render a complete handoff document for a fresh agent.
 
@@ -1509,6 +1541,16 @@ def render_handoff_brief(
         tier1_lines.append("```")
         tier1_lines.append("")
 
+    # Registered boundary identifiers are part of the contract: the literal a
+    # peer or external system expects. Tier 1 so compression never drops them.
+    boundary_block = _render_component_boundaries(component_id, contracts, boundary_entries)
+    if boundary_block:
+        tier1_lines.append("Registered boundary identifiers you must use verbatim:")
+        tier1_lines.append("```")
+        tier1_lines.append(boundary_block)
+        tier1_lines.append("```")
+        tier1_lines.append("")
+
     tier1 = "\n".join(tier1_lines)
     used_tokens = _estimate_tokens(tier1)
 
@@ -1526,11 +1568,13 @@ def render_handoff_brief(
         tier2_lines.append(tool_index_context)
         tier2_lines.append("")
 
-    # Dependencies
+    # Dependencies (boundary identifiers are rendered in tier 1, never trimmed)
     if contract.dependencies:
         tier2_lines.append("Your available dependencies:")
         tier2_lines.append("```")
-        tier2_lines.append(render_dependency_map(component_id, contracts))
+        tier2_lines.append(render_dependency_map(
+            component_id, contracts, boundary_entries, include_boundaries=False,
+        ))
         tier2_lines.append("```")
         tier2_lines.append("")
 

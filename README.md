@@ -291,6 +291,52 @@ types:
 
 Tests automatically verify both acceptance and rejection: valid instances pass, invalid inputs fail with appropriate errors, and boundary values behave correctly. Implementations render these as Pydantic models (Python), Zod schemas (TypeScript), or class constructors with validation (JavaScript).
 
+### Boundary Register: Never Assume an Identifier
+
+Names, tokens, roles, grants, metric types, log fields, headers and service
+names that two parties must agree on are boundary identifiers. Pact never
+assumes one. Each is entered in `boundary_register.yaml` at the project root
+(format `boundary-register/1`, shared with the factory and Constrain), or in a
+contract's `boundary_identifiers`, and every side cites a record that the gate
+re-verifies mechanically:
+
+```yaml
+schema: "boundary-register/1"
+entries:
+  - id: log-level-field
+    kind: field            # name|endpoint|credential|audience|principal|grant|role|table|column|field|metric|label|env|config-key|topic|queue|bucket|secret|service|header|claim|enum|other
+    relation: equal        # equal | absent (isolation: the subject must NOT appear)
+    description: The log platform only derives severity from this JSON key
+    sides:
+      - party: external:cloud-logging      # component id or external:<system>
+        role: defines                      # defines|grants|consumes|presents|denies
+        value: severity                    # exact literal, case-sensitive
+        records:
+          - {kind: observation, path: evidence/log_entry.json, sha256: <hex>,
+             command: "gcloud logging read ... --limit 1 --format json",
+             observed_at: "2026-10-14T12:00:00Z"}
+      - party: api
+        role: consumes
+        value: severity
+        records:
+          - {kind: file, path: src/api/logging.py, line: 12, sha256: <hex>}
+```
+
+Every violation is an error, never a warning: mismatched values (with a
+"near-miss" note when they differ only by case or separators), a side with no
+records (UNVERIFIED), a stale digest (refresh the register from the source;
+never hand-edit it to fit), a cited line that does not contain the value as a
+token (`mea-auth` does not match `mea-auth-runtime`), a placeholder value, a
+path outside the project root, and, for `absent`, a denies record that
+contains the subject. A boundary that is used must be registered: contracts
+that declare `external:<system>` dependencies/requires/targets, `network_call`
+side effects, or `database_*`/`http_*`/`external_*` data-access side effects
+fail `pact validate` (and the decomposer gate and MCP `pact_validate`) until a
+register entry covers them. Projects with no cross-boundary usage are
+unaffected. Contract and interview prompts tell the model to raise an open
+question rather than guess; registered literals are rendered into every
+implementer handoff. Run `pact boundary verify [project]` to check on its own.
+
 ## Audit Repo Separation
 
 Pact supports a two-repo separation-of-privilege model where the coding agent and auditing agent operate in different repositories:
@@ -388,6 +434,7 @@ Either, neither, or both. Defaults: both off (sequential, single-attempt).
 | `pact production status <project>` | Show production-readiness status without blocking |
 | `pact production fingerprint <project>` | Print the current source fingerprint for production evidence |
 | `pact production validate <project>` | Validate a Pact-managed production gate and exit non-zero on blockers |
+| `pact boundary verify [project]` | Verify the boundary register against its records; exit non-zero on any error |
 | `pact spec apply <project> <file>` | Apply an AI-authored JSON/YAML build spec |
 | `pact spec show <file>` | Normalize and inspect an AI-authored build spec |
 | `pact agent spec-author [--apply]` | Run one constrained spec-author agent |
